@@ -1,19 +1,8 @@
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const mix = require('laravel-mix');
-const postcss = require('postcss');
-const {get, escapeRegExp} = require('lodash');
-const {basename, sep} = require('path');
-/**
- * Internal dependencies
- */
-const {dependencies} = require('./package');
-
-const WORDPRESS_NAMESPACE = '@gutenblocks/';
-
-const gutenbergPackages = Object.keys(dependencies)
-    .filter((packageName) => packageName.startsWith(WORDPRESS_NAMESPACE))
-    .map((packageName) => packageName.replace(WORDPRESS_NAMESPACE, ''));
+const { escapeRegExp } = require('lodash');
+const { sep } = require('path');
 
 /*
  |--------------------------------------------------------------------------
@@ -37,7 +26,7 @@ mix
         devtool: '#source-map',
         output: {
             chunkFilename: 'build/[name].js?id=[chunkhash]',
-            publicPath: "/app/plugins/glutenblocks/",
+            publicPath: '/app/plugins/glutenblocks/',
         },
         plugins: [
             new CleanWebpackPlugin({
@@ -51,7 +40,7 @@ mix
                     test: new RegExp(`([\\w-]+)${escapeRegExp(sep)}index\\.php$`),
                     to: './build/glutenblocks_registers.php',
                     ignore: ['**/example/index.php'],
-                    transform(content) {
+                    transform (content) {
                         content = content.toString();
 
                         // Within content, search for any function definitions. For
