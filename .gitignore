@@ -5,3 +5,7 @@ composer.lock
 .idea/
 phpunit.xml
 Thumbs.db
+build/*
+node_modules
+vendor
+mix-manifest.json
