@@ -16,7 +16,7 @@
         "start": "cross-env ENABLE_BROWSERSYNC=true npm run watch",
         "rmdist": "rimraf dist",
         "lint": "npm run -s lint:scripts && npm run -s lint:styles",
-        "lint:scripts": "eslint packages/src",
+        "lint:scripts": "eslint packages/",
         "lint:styles": "stylelint \"packages/src/**/*.{css,sass,scss,sss,less}\"",
         "test": "npm run -s lint"
     },
