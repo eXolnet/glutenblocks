@@ -35,7 +35,7 @@ mix
             }),
             new CopyWebpackPlugin([
                 {
-                    from: './packages/src/**/index.php',
+                    from: './packages/**/index.php',
                     test: new RegExp(`([\\w-]+)${_escapeRegExp(sep)}index\\.php$`),
                     to: './build/glutenblocks_registers.php',
                     ignore: ['**/example/index.php'],
@@ -71,9 +71,9 @@ mix
             ]),
         ],
     })
-    .js('packages/src/index.js', 'build/glutenblocks.bundle.js')
-    .sass('packages/src/style.scss', 'build/glutenblocks.style.css')
-    .sass('packages/src/editor.scss', 'build/glutenblocks.editor.css')
+    .js('packages/index.js', 'build/glutenblocks.bundle.js')
+    .sass('packages/style.scss', 'build/glutenblocks.style.css')
+    .sass('packages/editor.scss', 'build/glutenblocks.editor.css')
     .version();
 
 if (process.env.ENABLE_BUNDLE_ANALYZER) {

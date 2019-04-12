@@ -22,8 +22,8 @@
         "squizlabs/php_codesniffer": "^3.4"
     },
     "scripts": {
-        "lint": "vendor/bin/phpcs -p --standard=PSR2 --extensions=php packages/src",
-        "lint-fix": "vendor/bin/phpcbf -p --standard=PSR2 --extensions=php packages/src",
+        "lint": "vendor/bin/phpcs -p --standard=PSR2 --extensions=php packages/",
+        "lint-fix": "vendor/bin/phpcbf -p --standard=PSR2 --extensions=php packages/",
         "build-plugin-assets" : "yarn install && yarn production",
         "post-update-cmd": [
             "composer run-script build-plugin-assets"
