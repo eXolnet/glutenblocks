@@ -12,7 +12,7 @@ Collection of Wordpress blocks for the Gutenberg editor.
 
 ## Usage
 
-Explain how to use your package.
+If you need to create a new Block, please use the `packages/src/example` as the skeleton of your new block.
 
 ## Testing
 
