@@ -5,8 +5,13 @@
  * @package glutenblocks
  */
 
-function glutenblocks_register_blocks () {
-    include_once dirname(__FILE__) . '/../build/glutenblocks_registers.php';
+function glutenblocks_register_blocks()
+{
+    $file = dirname(__FILE__) . '/../build/glutenblocks_registers.php';
+    if (!file_exists($file)) {
+        return;
+    }
+    include_once $file;
 }
 
 add_action('plugins_loaded', 'glutenblocks_register_blocks');
@@ -16,6 +21,10 @@ function glutenblocks_register_block_assets()
     $script = '../build/glutenblocks.bundle.js';
     $style = '../build/glutenblocks.style.css';
     $editorStyle = '../build/glutenblocks.editor.css';
+
+    if (!file_exists(plugin_dir_path(__FILE__) . $script)) {
+        return;
+    }
 
     wp_register_script(
         'glutenblocks',
@@ -27,7 +36,7 @@ function glutenblocks_register_block_assets()
             'wp-element',
             'wp-components',
         ],
-        filemtime( plugin_dir_path( __FILE__ ) . $script )
+        filemtime(plugin_dir_path(__FILE__) . $script)
     );
 
     wp_enqueue_style(
@@ -36,14 +45,14 @@ function glutenblocks_register_block_assets()
         [
             'wp-edit-blocks'
         ],
-        filemtime( plugin_dir_path( __FILE__ ) . $editorStyle )
+        filemtime(plugin_dir_path(__FILE__) . $editorStyle)
     );
 
     wp_enqueue_style(
         'glutenblocks-style',
         plugins_url($style, __FILE__),
         [],
-        filemtime( plugin_dir_path( __FILE__ ) . $style )
+        filemtime(plugin_dir_path(__FILE__) . $style)
     );
 }
 
