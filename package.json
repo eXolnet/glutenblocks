@@ -1,7 +1,7 @@
 {
     "name": "glutenblocks",
     "version": "1.0.0",
-    "main": "./packages/src/index.js",
+    "main": "packages/index.js",
     "author": "Exolnet <info@exolnet.com>",
     "license": "MIT",
     "scripts": {
@@ -17,7 +17,7 @@
         "rmdist": "rimraf dist",
         "lint": "npm run -s lint:scripts && npm run -s lint:styles",
         "lint:scripts": "eslint packages/",
-        "lint:styles": "stylelint \"packages/src/**/*.{css,sass,scss,sss,less}\"",
+        "lint:styles": "stylelint \"packages/**/*.{css,sass,scss,sss,less}\"",
         "test": "npm run -s lint"
     },
     "devDependencies": {

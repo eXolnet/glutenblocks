@@ -8,12 +8,11 @@
 Collection of Wordpress blocks for the Gutenberg editor.
 
 ## Installation
-
-Explain how to install the package.
+`composer require exolnet/glutenblocks`
 
 ## Usage
 
-Explain how to use your package.
+If you need to create a new Block, please use the `packages/src/example` as the skeleton of your new block.
 
 ## Testing
 
