@@ -1,8 +1,6 @@
-'use strict';
-const { Component } = wp.element;
-const {registerBlockType} = wp.blocks;
-const {InnerBlocks, InspectorControls, MediaUpload, MediaPlaceholder} = wp.editor;
-const {__} = wp.i18n;
+const { registerBlockType } = wp.blocks;
+const { InnerBlocks, MediaUpload } = wp.editor;
+const { __ } = wp.i18n;
 const { Button } = wp.components;
 
 class Hero {
@@ -11,20 +9,19 @@ class Hero {
     category = 'layout';
 
     attributes = {
-        image : {
+        image: {
             type: 'object',
             default: null, // no image by default!
         },
-        content : {
+        content: {
             type: 'string',
             default: null, // no image by default!
-        }
+        },
     };
 
-    edit = ({attributes, setAttributes, className}) => {
-
+    edit = ({ attributes, setAttributes, className }) => {
         const getImageButton = (openEvent) => {
-            if(attributes.image) {
+            if (attributes.image) {
                 return (
                     <img
                         src={ attributes.image.url }
@@ -32,8 +29,7 @@ class Hero {
                         className="image"
                     />
                 );
-            }
-            else {
+            } else {
                 return (
                     <div className="button-container">
                         <Button
@@ -47,21 +43,24 @@ class Hero {
             }
         };
 
-        const {backgroundImage} = attributes;
-
-        return [
-            <MediaUpload
-                onSelect={ media => { setAttributes({ image: media }); } }
-                type="image"
-                value={ attributes.image?.id }
-                render={ ({ open }) => getImageButton(open) }
-            />,
-            <InnerBlocks/>,
-        ];
+        return (
+            <div>
+                <MediaUpload
+                    key={ attributes }
+                    onSelect={ media => {
+                        setAttributes({ image: media });
+                    } }
+                    type="image"
+                    value={ attributes.image?.id }
+                    render={ ({ open }) => getImageButton(open) }
+                />
+                <InnerBlocks/>
+            </div>
+        );
     };
 
-    save = ({attributes, className}) => {
-        const {image} = attributes;
+    save = ({ attributes, className }) => {
+        const { image } = attributes;
         return (
             <div className="hero full-width">
                 <div className="hero__image">

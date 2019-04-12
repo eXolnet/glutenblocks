@@ -17,6 +17,13 @@ Explain how to use your package.
 
 ## Testing
 
+### Lint
+To run linter tests (project guidelines), please use : 
+``` bash
+yarn lint
+composer lint
+```
+### Unit Tests
 To run the phpUnit tests, please use:
 
 ``` bash
