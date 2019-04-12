@@ -2,9 +2,12 @@
  * Internal dependencies
  */
 
+// Import blocks here
+
 /**
  * WordPress dependencies
  */
+
 const {
     registerBlockType,
     unstable__bootstrapServerSideBlockDefinitions, // eslint-disable-line camelcase
@@ -14,8 +17,9 @@ const {
  * Function to register core blocks provided by the block editor.
  */
 
-const registerGlutenblocks = () => {
+(function registerGlutenblocks() {
     [
+        // Empty for now since there is no blocks in the package
     ].forEach((block) => {
         if (!block) {
             return;
@@ -26,6 +30,4 @@ const registerGlutenblocks = () => {
         }
         registerBlockType(name, settings);
     });
-};
-
-registerGlutenblocks();
+})();

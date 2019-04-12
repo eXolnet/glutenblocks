@@ -1,0 +1,10 @@
+{
+    "extends": [
+        "@exolnet/eslint-config-react"
+    ],
+    "globals": {
+        "__webpack_public_path__": true,
+        "wp": true,
+        "React": true
+    }
+}

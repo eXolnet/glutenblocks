@@ -1,7 +1,7 @@
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const mix = require('laravel-mix');
-const { escapeRegExp } = require('lodash');
+const _escapeRegExp = require('lodash/escapeRegExp');
 const { sep } = require('path');
 
 /*
@@ -25,8 +25,7 @@ mix
     .webpackConfig({
         devtool: '#source-map',
         output: {
-            chunkFilename: 'build/[name].js?id=[chunkhash]',
-            publicPath: '/app/plugins/glutenblocks/',
+            chunkFilename: 'build/[name].[chunkhash].js',
         },
         plugins: [
             new CleanWebpackPlugin({
@@ -37,10 +36,10 @@ mix
             new CopyWebpackPlugin([
                 {
                     from: './packages/src/**/index.php',
-                    test: new RegExp(`([\\w-]+)${escapeRegExp(sep)}index\\.php$`),
+                    test: new RegExp(`([\\w-]+)${_escapeRegExp(sep)}index\\.php$`),
                     to: './build/glutenblocks_registers.php',
                     ignore: ['**/example/index.php'],
-                    transform (content) {
+                    transform(content) {
                         content = content.toString();
 
                         // Within content, search for any function definitions. For
