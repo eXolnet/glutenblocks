@@ -21,10 +21,8 @@ function glutenblocks_wordpress_version_notice()
 {
     echo '<div class="error"><p>';
     /* translators: %s: Minimum required version */
-    printf(__( 'Glutenblocks required plugin Gutenberg to be enabled.', 'glutenblocks'));
+    printf(__('Glutenblocks requires WordPress %s or later to function properly. Please upgrade WordPress before activating Glutenblocks.', 'glutenblocks'), '5.0.0');
     echo '</p></div>';
-
-    deactivate_plugins(['glutenblocks/glutenblocks.php']);
 }
 
 /**
@@ -34,10 +32,15 @@ function glutenblocks_wordpress_version_notice()
  */
 function glutenblocks_pre_init()
 {
-    if (! is_plugin_active( 'gutenberg/gutenberg.php' ) ) {
-        add_action('admin_notices', 'glutenblocks_wordpress_version_notice');
+    // Get unmodified $wp_version.
+    include ABSPATH . WPINC . '/version.php';
+    // Strip '-src' from the version string. Messes up version_compare().
+    $version = str_replace('-src', '', $wp_version);
+    if (version_compare($version, '5.0.0', '<')) {
+        add_action('admin_notices', 'gutenberg_wordpress_version_notice');
         return;
     }
+
 
     require_once dirname(__FILE__) .'/lib/load.php';
 }
