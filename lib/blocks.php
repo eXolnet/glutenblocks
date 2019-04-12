@@ -57,3 +57,18 @@ function glutenblocks_register_block_assets()
 }
 
 add_action('init', 'glutenblocks_register_block_assets');
+
+function glutenblocks_block_category($categories)
+{
+    return array_merge(
+        $categories,
+        [
+            [
+                'slug'  => 'glutenblocks',
+                'title' => __('Glutenblocks', 'glutenblocks'),
+            ],
+        ]
+    );
+}
+
+add_filter('block_categories', 'glutenblocks_block_category', 10, 2);
