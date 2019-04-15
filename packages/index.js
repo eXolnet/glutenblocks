@@ -3,6 +3,8 @@
  */
 
 // Import blocks here
+const row = require('./row');
+const column = require('./column');
 
 /**
  * WordPress dependencies
@@ -10,8 +12,17 @@
 
 const {
     registerBlockType,
+    unregisterBlockType,
     unstable__bootstrapServerSideBlockDefinitions, // eslint-disable-line camelcase
 } = wp.blocks;
+
+/**
+ * This array define the list of blocks to unregister.
+ */
+const BLOCKS_TO_UNREGISTER = [
+    // 'core/column',
+    // 'core/columns',
+];
 
 /**
  * Function to register core blocks provided by the block editor.
@@ -19,7 +30,8 @@ const {
 
 (function registerGlutenblocks() {
     [
-        // Empty for now since there is no blocks in the package
+        row,
+        column,
     ].forEach((block) => {
         if (!block) {
             return;
@@ -31,3 +43,11 @@ const {
         registerBlockType(name, settings);
     });
 })();
+
+/**
+ * Unregister core blocks.
+ */
+
+window.addEventListener('load', function unregisterBlocks() {
+    BLOCKS_TO_UNREGISTER.forEach(unregisterBlockType);
+});
