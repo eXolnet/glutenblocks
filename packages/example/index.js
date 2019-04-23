@@ -17,7 +17,7 @@ export const settings = {
     title: __('Example', 'glutenblocks'),
     description: __('A Glutenblock example'),
     icon: 'slides',
-    category: 'layout',
+    category: 'glutenblocks',
     attributes: blockAttributes,
     edit,
     save() {
