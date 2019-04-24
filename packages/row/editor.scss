@@ -63,7 +63,7 @@
                         margin-left: -1px;
                     }
 
-                    > div  > .editor-inner-blocks {
+                    > div > .editor-inner-blocks {
                         margin-top: -28px;
                         margin-bottom: -28px;
                     }
@@ -103,7 +103,7 @@
             }
         }
 
-        .editor-block-list__block[data-align="full"] &  > .editor-inner-blocks {
+        .editor-block-list__block[data-align="full"] & > .editor-inner-blocks {
             padding-left: 60px;
             padding-right: 60px;
         }
