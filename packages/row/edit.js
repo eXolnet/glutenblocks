@@ -433,12 +433,48 @@ export default compose(
                 // Update self...
                 dispatch('core/editor').updateBlockAttributes(clientId, {
                     columns: nextColumns,
-                    colLayout: 'equal',
+                    colLayout: '6-6',
                     firstColumnWidth: undefined,
                     secondColumnWidth: undefined,
-                    tabletLayout: 'inherit',
-                    mobileLayout: 'row',
+                    tabletLayout: '6-6',
+                    mobileLayout: '12-12',
                 });
+
+                if (nextColumns === 1) {
+                    this.updateColLayout('12', 1);
+                    this.updateTabletLayout('12', 1);
+                    this.updateMobileLayout('12', 1);
+                }
+
+                if (nextColumns === 2) {
+                    this.updateColLayout('6-6', 2);
+                    this.updateTabletLayout('6-6', 2);
+                    this.updateMobileLayout('12-12', 2);
+                }
+
+                if (nextColumns === 3) {
+                    this.updateColLayout('4-4-4', 3);
+                    this.updateTabletLayout('4-4-4', 3);
+                    this.updateMobileLayout('12-12-12', 3);
+                }
+
+                if (nextColumns === 4) {
+                    this.updateColLayout('3-3-3-3', 4);
+                    this.updateTabletLayout('3-3-3-3', 4);
+                    this.updateMobileLayout('12-12-12-12', 4);
+                }
+
+                if (nextColumns === 5) {
+                    this.updateColLayout('2-2-2-2-2', 5);
+                    this.updateTabletLayout('2-2-2-2-2', 5);
+                    this.updateMobileLayout('12-12-12-12-12', 5);
+                }
+
+                if (nextColumns === 6) {
+                    this.updateColLayout('2-2-2-2-2-2', 6);
+                    this.updateTabletLayout('2-2-2-2-2-2', 6);
+                    this.updateMobileLayout('12-12-12-12-12-12', 6);
+                }
             },
 
             updateColLayout(layout, columns) {
