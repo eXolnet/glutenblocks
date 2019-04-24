@@ -1,0 +1,20 @@
+// Put your styles that will only be applied in the editor.
+.wp-block-glutenblocks-hero {
+    position: relative;
+
+    .gb-hero-background,
+    .gb-hero-overlay {
+        top: -16px;
+        bottom: -16px;
+        left: 0;
+        position: absolute;
+        height: auto;
+        width: 100%;
+    }
+
+    .gb-hero-background {
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-attachment: scroll;
+    }
+}

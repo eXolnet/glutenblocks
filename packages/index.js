@@ -5,6 +5,7 @@
 // Import blocks here
 const row = require('./row');
 const column = require('./column');
+const hero = require('./hero');
 
 /**
  * WordPress dependencies
@@ -32,6 +33,7 @@ const BLOCKS_TO_UNREGISTER = [
     [
         row,
         column,
+        hero,
     ].forEach((block) => {
         if (!block) {
             return;
