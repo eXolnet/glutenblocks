@@ -1,22 +1,20 @@
 <?php
 /**
- * Server-side rendering of the `glutenblocks/row` block.
+ * Server-side rendering of the `glutenblocks/hero` block.
  * phpcs:disable
  */
 
 /**
- * Registers the `glutenblocks/row` block on server.
+ * Registers the `glutenblocks/hero` block on server.
  */
-function glutenblocksregister_block_glutenblocks_row()
-{
+function glutenblocksregister_block_glutenblocks_hero() {
     register_block_type(
-        'glutenblocks/row',
+        'glutenblocks/hero',
         [
             'style' => 'glutenblocks-style',
             'editor_script' => 'glutenblocks',
-            'editor_style' => 'glutenblocks-editor',
+            'editor_style'  => 'glutenblocks-editor',
         ]
     );
 }
-
-add_action('init', 'glutenblocksregister_block_glutenblocks_row');
+add_action( 'init', 'glutenblocksregister_block_glutenblocks_hero' );

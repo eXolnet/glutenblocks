@@ -10,9 +10,8 @@ const attributes = {
         type: 'string',
         default: '',
     },
-    bgImgID: {
-        type: 'string',
-        default: '',
+    bgImgId: {
+        type: 'number',
     },
     bgImgAlt: {
         type: 'string',

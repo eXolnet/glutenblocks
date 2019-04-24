@@ -24,7 +24,7 @@ const overlayOpacityOutput = memoize((opacity) => {
 
 class GlutenblocksHeroSave extends Component {
     render() {
-        const { attributes: { bgColor, bgImg, bgImgAlt, bgImgWidth,bgImgHeight, bgImgSize, overlay, overlayBgImg, currentOverlayTab, overlayBgImgSize, overlayBgImgPosition, overlayBgImgRepeat, overlayBgImgAttachment, overlayBlendMode, overlayOpacity, overlayGradType, overlayGradAngle, overlayGradLoc, overlaySecond, overlayGradLocSecond } } = this.props;
+        const { attributes: { bgColor, bgImg, bgImgId, bgImgAlt, bgImgWidth,bgImgHeight, bgImgSize, overlay, overlayBgImg, currentOverlayTab, overlayBgImgSize, overlayBgImgPosition, overlayBgImgRepeat, overlayBgImgAttachment, overlayBlendMode, overlayOpacity, overlayGradType, overlayGradAngle, overlayGradLoc, overlaySecond, overlayGradLocSecond } } = this.props;
 
         const hasBG = (bgColor || bgImg || overlay || overlayBgImg ? 'gb-hero-has-bg' : '');
         const overlayType = (!currentOverlayTab || 'grad' !== currentOverlayTab ? 'normal' : 'gradient');
@@ -43,6 +43,7 @@ class GlutenblocksHeroSave extends Component {
                             style={{
                                 objectFit: bgImgSize,
                             }}
+                            className={`wp-image-${bgImgId}`}
                         />
                     </figure>
                 )}

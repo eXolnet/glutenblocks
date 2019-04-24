@@ -21,13 +21,13 @@ class GlutenblocksHeroEdit extends Component {
     }
 
     render() {
-        const { attributes: { bgColor, bgImg, bgImgID, bgImgSize, overlayOpacity, overlayBgImg, overlayBgImgAttachment, overlayBgImgID, overlayBgImgPosition, overlayBgImgRepeat, overlayBgImgSize, currentOverlayTab, overlayBlendMode, overlayGradAngle, overlayGradLoc, overlayGradLocSecond, overlayGradType, overlay, overlaySecond }, className, setAttributes } = this.props;
+        const { attributes: { bgColor, bgImg, bgImgId, bgImgSize, overlayOpacity, overlayBgImg, overlayBgImgAttachment, overlayBgImgID, overlayBgImgPosition, overlayBgImgRepeat, overlayBgImgSize, currentOverlayTab, overlayBlendMode, overlayGradAngle, overlayGradLoc, overlayGradLocSecond, overlayGradType, overlay, overlaySecond }, className, setAttributes } = this.props;
 
         const overlayType = (!currentOverlayTab || 'grad' !== currentOverlayTab ? 'normal' : 'gradient');
 
         const onSelectImage = img => {
             setAttributes({
-                bgImgID: img.id,
+                bgImgId: img.id,
                 bgImg: img.url,
                 bgImgAlt: img.alt,
                 bgImgWidth: img.width,
@@ -43,7 +43,7 @@ class GlutenblocksHeroEdit extends Component {
 
         const onRemoveImage = () => {
             setAttributes({
-                bgImgID: null,
+                bgImgId: null,
                 bgImg: null,
                 bgImgAlt: null,
                 bgImgWidth: null,
@@ -301,7 +301,7 @@ class GlutenblocksHeroEdit extends Component {
                         <MediaUpload
                             onSelect={ onSelectImage }
                             type="image"
-                            value={ bgImgID }
+                            value={ bgImgId }
                             render={ ({ open }) => (
                                 <Button
                                     className={ 'components-button components-icon-button gb-hero-cta-upload-btn' }
