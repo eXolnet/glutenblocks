@@ -59,6 +59,13 @@ function glutenblocks_enqueue_block_editor_assets()
         filemtime(plugin_dir_path(__FILE__) . $script)
     );
 
+    $phpVars = [];
+    $themeColorsOption = get_theme_support('glutenblocks-colors');
+    if ($themeColorsOption && $themeColorsOption !== '') {
+        $phpVars['themeColors'] = $themeColorsOption[0];
+    }
+    wp_localize_script('glutenblocks', 'php_vars', $phpVars);
+
     wp_enqueue_style(
         'glutenblocks-editor',
         plugins_url($editorStyle, __FILE__),

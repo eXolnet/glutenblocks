@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import memoize from 'memize';
 import map from 'lodash/map';
 import icons from '../globals/icons';
+import utils from '../globals/utils';
 import classnames from 'classnames';
 
 const { __ } = wp.i18n;
@@ -90,6 +91,7 @@ class GlutenblocksHeroEdit extends Component {
                 />
                 <p>{ __('Overlay Color') }</p>
                 <ColorPalette
+                    colors={ utils.themeColors() }
                     value={ overlay }
                     onChange={ value => setAttributes({ overlay: value }) }
                 />
@@ -203,6 +205,7 @@ class GlutenblocksHeroEdit extends Component {
                 />
                 <p>{ __('Color') }</p>
                 <ColorPalette
+                    colors={ utils.themeColors() }
                     value={ overlay }
                     onChange={ value => setAttributes({ overlay: value }) }
                 />
@@ -219,6 +222,7 @@ class GlutenblocksHeroEdit extends Component {
                 />
                 <p>{ __('Second Color') }</p>
                 <ColorPalette
+                    colors={ utils.themeColors() }
                     value={ overlaySecond }
                     onChange={ value => setAttributes({ overlaySecond: value }) }
                 />
@@ -309,6 +313,7 @@ class GlutenblocksHeroEdit extends Component {
                     >
                         <p>{ __('Background Color') }</p>
                         <ColorPalette
+                            colors={ utils.themeColors() }
                             value={ bgColor }
                             onChange={ value => setAttributes({ bgColor: value }) }
                         />
