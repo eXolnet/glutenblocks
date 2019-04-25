@@ -7,7 +7,7 @@
 /**
  * Registers the `glutenblocks/hero` block on server.
  */
-function glutenblocksregister_block_glutenblocks_hero() {
+function register_block_glutenblocks_hero() {
     register_block_type(
         'glutenblocks/hero',
         [
@@ -17,4 +17,4 @@ function glutenblocksregister_block_glutenblocks_hero() {
         ]
     );
 }
-add_action( 'init', 'glutenblocksregister_block_glutenblocks_hero' );
+add_action( 'init', 'register_block_glutenblocks_hero' );

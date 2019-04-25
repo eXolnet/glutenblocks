@@ -1,0 +1,64 @@
+// Put your styles that will only be applied in the editor.
+.wp-block-glutenblocks-hero {
+    position: relative;
+
+    &.gb-hero--theme-light {
+        color: white !important;
+    }
+
+    .gb-hero__background,
+    .gb-hero__overlay {
+        top: -16px;
+        bottom: -16px;
+        left: 0;
+        position: absolute;
+        height: auto;
+        width: 100%;
+    }
+
+    .gb-hero__background {
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-attachment: scroll;
+    }
+}
+
+.gb-hero__panel-body {
+    .components-button-group,
+    .components-tab-panel__tabs {
+        margin-bottom: 15px;
+    }
+
+    .components-color-palette {
+        margin-bottom: 25px;
+    }
+
+    .components-tab-panel__tabs {
+        border-bottom: 4px solid #ddd;
+
+        button {
+            background: transparent;
+            border: 1px solid #eee;
+            border-bottom: 4px solid transparent;
+            padding: 10px 16px 6px;
+            margin-bottom: -4px;
+            outline: 0;
+            color: #575757;
+            width: 50%;
+            font-size: 14px;
+            font-weight: bold;
+            justify-content: center;
+
+            &.active-tab {
+                background: #402c8a;
+                color: white;
+            }
+        }
+    }
+
+    &.gb-hero__sizing .gb-hero__spacing-range-control {
+        label {
+            width: 30px;
+        }
+    }
+}

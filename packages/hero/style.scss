@@ -1,0 +1,35 @@
+.wp-block-glutenblocks-hero {
+    position: relative;
+
+    &.gb-hero--theme-light {
+        color: white;
+    }
+
+    .gb-hero__overlay,
+    .gb-hero__background {
+        top: 0;
+        bottom: 0;
+        left: 0;
+        position: absolute;
+        height: auto;
+        width: 100%;
+    }
+
+    .gb-hero__background {
+        height: 100%;
+        margin: 0;
+        overflow: hidden;
+        text-align: center;
+        z-index: -1;
+
+        img {
+            height: 100%;
+            width: 100%;
+        }
+    }
+
+    .gb-hero__content {
+        position: relative;
+        z-index: 1;
+    }
+}
