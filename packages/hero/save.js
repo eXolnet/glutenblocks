@@ -24,17 +24,25 @@ const overlayOpacityOutput = memoize((opacity) => {
 
 class GlutenblocksHeroSave extends Component {
     render() {
-        const { attributes: { bgColor, bgImg, bgImgId, bgImgAlt, bgImgWidth,bgImgHeight, bgImgSize, overlay, overlayBgImg, currentOverlayTab, overlayBgImgSize, overlayBgImgPosition, overlayBgImgRepeat, overlayBgImgAttachment, overlayBlendMode, overlayOpacity, overlayGradType, overlayGradAngle, overlayGradLoc, overlaySecond, overlayGradLocSecond } } = this.props;
+        const { attributes: { bgColor, bgImg, bgImgId, bgImgAlt, bgImgWidth,bgImgHeight, bgImgSize, overlay, overlayBgImg, currentOverlayTab, overlayBgImgSize, overlayBgImgPosition, overlayBgImgRepeat, overlayBgImgAttachment, overlayBlendMode, overlayOpacity, overlayGradType, overlayGradAngle, overlayGradLoc, overlaySecond, overlayGradLocSecond, paddingUnit, paddingTop, paddingRight, paddingBottom, paddingLeft, marginUnit, marginTop, marginBottom, minHeightUnit, minHeight, maxWidthUnit, maxWidth, colorTheme } } = this.props;
 
-        const hasBG = (bgColor || bgImg || overlay || overlayBgImg ? 'gb-hero-has-bg' : '');
+        const hasBG = (bgColor || bgImg || overlay || overlayBgImg ? 'gb-hero--has-bg' : '');
         const overlayType = (!currentOverlayTab || 'grad' !== currentOverlayTab ? 'normal' : 'gradient');
 
-        const classes = classnames(`gb-hero ${hasBG}`);
+        const classes = classnames(`gb-hero ${hasBG} gb-hero--theme-${colorTheme}`);
 
         return (
-            <div className={classes}>
+            <div className={classes} style={{
+                paddingTop: (paddingTop ? paddingTop + paddingUnit : undefined),
+                paddingRight: (paddingRight ? paddingRight + paddingUnit : undefined),
+                paddingBottom: (paddingBottom ? paddingBottom + paddingUnit : undefined),
+                paddingLeft: (paddingLeft ? paddingLeft + paddingUnit : undefined),
+                marginTop: (marginTop ? marginTop + marginUnit : undefined),
+                marginBottom: (marginBottom ? marginBottom + marginUnit : undefined),
+                minHeight: (minHeight ? minHeight + minHeightUnit : undefined),
+            }}>
                 {(hasBG !== '') && (
-                    <figure className={'gb-hero-background'}>
+                    <figure className={'gb-hero__background'}>
                         <img
                             src={ bgImg }
                             alt={ bgImgAlt }
@@ -43,12 +51,12 @@ class GlutenblocksHeroSave extends Component {
                             style={{
                                 objectFit: bgImgSize,
                             }}
-                            className={`wp-image-${bgImgId}`}
+                            className={`gb-hero__background-image wp-image-${bgImgId}`}
                         />
                     </figure>
                 )}
                 {((overlay || overlayBgImg) && overlayType === 'normal') && (
-                    <div className={`gb-hero-overlay gb-hero-overlay-${overlayType}`} style={{
+                    <div className={`gb-hero__overlay gb-hero__overlay--${overlayType}`} style={{
                         backgroundColor: (overlay ? overlay : undefined),
                         backgroundImage: (overlayBgImg ? `url(${overlayBgImg})` : undefined),
                         backgroundSize: overlayBgImgSize,
@@ -60,13 +68,15 @@ class GlutenblocksHeroSave extends Component {
                     }}/>
                 )}
                 {((overlay || overlayBgImg) && overlayType !== 'normal') && (
-                    <div className={`gb-hero-overlay gb-hero-overlay-${overlayType}`} style={{
+                    <div className={`gb-hero__overlay gb-hero__overlay--${overlayType}`} style={{
                         backgroundImage: ('radial' === overlayGradType ? `radial-gradient(at ${overlayBgImgPosition}, ${overlay} ${overlayGradLoc}%, ${overlaySecond} ${overlayGradLocSecond}%)` : `linear-gradient(${overlayGradAngle}deg, ${overlay} ${overlayGradLoc}%, ${overlaySecond} ${overlayGradLocSecond}%)`),
                         mixBlendMode: overlayBlendMode,
                         opacity: overlayOpacityOutput(overlayOpacity),
                     }}/>
                 )}
-                <div className={'gb-hero-content'}>
+                <div className={'gb-hero__content'} style={{
+                    maxWidth: (maxWidth ? maxWidth + maxWidthUnit : undefined),
+                }}>
                     <InnerBlocks.Content/>
                 </div>
             </div>

@@ -1,8 +1,11 @@
 import PropTypes from 'prop-types';
 import memoize from 'memize';
+import map from 'lodash/map';
+import icons from '../globals/icons';
+import classnames from 'classnames';
 
 const { __ } = wp.i18n;
-const { Button, Dashicon, PanelBody, RangeControl, Tooltip, TabPanel, SelectControl } = wp.components;
+const { Button, ButtonGroup, Dashicon, PanelBody, RangeControl, Tooltip, TabPanel, SelectControl } = wp.components;
 const { Component, Fragment } = wp.element;
 const { InspectorControls, InnerBlocks, MediaUpload, ColorPalette } = wp.editor;
 
@@ -21,7 +24,18 @@ class GlutenblocksHeroEdit extends Component {
     }
 
     render() {
-        const { attributes: { bgColor, bgImg, bgImgId, bgImgSize, overlayOpacity, overlayBgImg, overlayBgImgAttachment, overlayBgImgID, overlayBgImgPosition, overlayBgImgRepeat, overlayBgImgSize, currentOverlayTab, overlayBlendMode, overlayGradAngle, overlayGradLoc, overlayGradLocSecond, overlayGradType, overlay, overlaySecond }, className, setAttributes } = this.props;
+        const { attributes: { bgColor, bgImg, bgImgId, bgImgSize, overlayOpacity, overlayBgImg, overlayBgImgAttachment, overlayBgImgID, overlayBgImgPosition, overlayBgImgRepeat, overlayBgImgSize, currentOverlayTab, overlayBlendMode, overlayGradAngle, overlayGradLoc, overlayGradLocSecond, overlayGradType, overlay, overlaySecond, paddingUnit, paddingTop, paddingRight, paddingBottom, paddingLeft, marginUnit, marginTop, marginBottom, minHeightUnit, minHeight, maxWidthUnit, maxWidth, colorTheme }, className, setAttributes } = this.props;
+
+        const marginUnits = [
+            { key: 'px', name: __('px') },
+            { key: 'em', name: __('em') },
+            { key: '%', name: __('%') },
+            { key: 'vh', name: __('vh') },
+        ];
+
+        const paddingUnits = marginUnits;
+        const maxWidthUnits = marginUnits;
+        const minHeightUnits = marginUnits;
 
         const overlayType = (!currentOverlayTab || 'grad' !== currentOverlayTab ? 'normal' : 'gradient');
 
@@ -85,7 +99,7 @@ class GlutenblocksHeroEdit extends Component {
                     value={ overlayBgImgID }
                     render={ ({ open }) => (
                         <Button
-                            className={ 'components-button components-icon-button gb-hero-cta-upload-btn' }
+                            className={ 'components-button components-icon-button gb-hero__cta-upload-btn' }
                             onClick={ open }
                         >
                             <Dashicon icon="format-image" />
@@ -96,7 +110,7 @@ class GlutenblocksHeroEdit extends Component {
                 { overlayBgImg && (
                     <Tooltip text={ __('Remove Image') }>
                         <Button
-                            className={ 'components-button components-icon-button gb-hero-remove-img gb-hero-cta-upload-btn' }
+                            className={ 'components-button components-icon-button gb-hero__remove-img gb-hero__cta-upload-btn' }
                             onClick={ onRemoveOverlayImage }
                         >
                             <Dashicon icon="no-alt" />
@@ -289,8 +303,9 @@ class GlutenblocksHeroEdit extends Component {
             <Fragment>
                 <InspectorControls>
                     <PanelBody
-                        title={ __('Background Settings') }
+                        title={ __('Background') }
                         initialOpen={ false }
+                        className={'gb-hero__panel-body'}
                     >
                         <p>{ __('Background Color') }</p>
                         <ColorPalette
@@ -304,7 +319,7 @@ class GlutenblocksHeroEdit extends Component {
                             value={ bgImgId }
                             render={ ({ open }) => (
                                 <Button
-                                    className={ 'components-button components-icon-button gb-hero-cta-upload-btn' }
+                                    className={ 'components-button components-icon-button gb-hero__cta-upload-btn' }
                                     onClick={ open }
                                 >
                                     <Dashicon icon="format-image" />
@@ -315,7 +330,7 @@ class GlutenblocksHeroEdit extends Component {
                         { bgImg && (
                             <Tooltip text={ __('Remove Image') }>
                                 <Button
-                                    className={ 'components-button components-icon-button gb-hero-remove-img gb-hero-cta-upload-btn' }
+                                    className={ 'components-button components-icon-button gb-hero__remove-img gb-hero__cta-upload-btn' }
                                     onClick={ onRemoveImage }
                                 >
                                     <Dashicon icon="no-alt" />
@@ -334,10 +349,26 @@ class GlutenblocksHeroEdit extends Component {
                         />
                     </PanelBody>
                     <PanelBody
-                        title={ __('Background Overlay Settings') }
+                        title={ __('Color Theme') }
                         initialOpen={ false }
+                        className={'gb-hero__panel-body gb-hero__color-theme'}
                     >
-                        <TabPanel className="gb-hero-inspect-tabs gb-hero-gradient-tabs"
+                        <SelectControl
+                            label={ __('Color Theme') }
+                            value={ colorTheme }
+                            options={ [
+                                { value: 'dark', label: __('Dark') },
+                                { value: 'light', label: __('Light') },
+                            ] }
+                            onChange={ value => setAttributes({ colorTheme: value }) }
+                        />
+                    </PanelBody>
+                    <PanelBody
+                        title={ __('Background Overlay') }
+                        initialOpen={ false }
+                        className={'gb-hero__panel-body'}
+                    >
+                        <TabPanel className="gb-hero__inspect-tabs gb-hero__gradient-tabs"
                             activeClass="active-tab"
                             initialTabName={ currentOverlayTab }
                             onSelect={ onOverlayTabSelect }
@@ -345,12 +376,12 @@ class GlutenblocksHeroEdit extends Component {
                                 {
                                     name: 'normal',
                                     title: __('Normal'),
-                                    className: 'gb-hero-over-normal',
+                                    className: 'gb-hero__overlay--normal',
                                 },
                                 {
                                     name: 'grad',
                                     title: __('Gradient'),
-                                    className: 'gb-hero-over-grad',
+                                    className: 'gb-hero__overlay--grad',
                                 },
                             ] }>
                             {
@@ -368,17 +399,180 @@ class GlutenblocksHeroEdit extends Component {
                             }
                         </TabPanel>
                     </PanelBody>
+                    <PanelBody
+                        title={ __('Sizing') }
+                        initialOpen={ false }
+                        className={'gb-hero__panel-body gb-hero__sizing'}
+                    >
+                        <h2>{ __('Padding') }</h2>
+                        <ButtonGroup aria-label={ __('Padding Unit') }>
+                            { map(paddingUnits, ({ name, key }) => (
+                                <Button
+                                    key={ key }
+                                    isSmall
+                                    isPrimary={ paddingUnit === key }
+                                    aria-pressed={ paddingUnit === key }
+                                    onClick={ () => setAttributes({ paddingUnit: key }) }
+                                >
+                                    { name }
+                                </Button>
+                            )) }
+                        </ButtonGroup>
+                        <RangeControl
+                            label={ icons.spacingTop }
+                            value={ paddingTop }
+                            className={'gb-hero__spacing-range-control'}
+                            onChange={ (value) => {
+                                setAttributes({
+                                    paddingTop: value,
+                                });
+                            } }
+                            min={ 0 }
+                            max={ 500 }
+                        />
+                        <RangeControl
+                            label={ icons.spacingRight }
+                            value={ paddingRight }
+                            className={'gb-hero__spacing-range-control'}
+                            onChange={ (value) => {
+                                setAttributes({
+                                    paddingRight: value,
+                                });
+                            } }
+                            min={ 0 }
+                            max={ 500 }
+                        />
+                        <RangeControl
+                            label={ icons.spacingBottom }
+                            value={ paddingBottom }
+                            className={'gb-hero__spacing-range-control'}
+                            onChange={ (value) => {
+                                setAttributes({
+                                    paddingBottom: value,
+                                });
+                            } }
+                            min={ 0 }
+                            max={ 500 }
+                        />
+                        <RangeControl
+                            label={ icons.spacingLeft }
+                            value={ paddingLeft }
+                            className={'gb-hero__spacing-range-control'}
+                            onChange={ (value) => {
+                                setAttributes({
+                                    paddingLeft: value,
+                                });
+                            } }
+                            min={ 0 }
+                            max={ 500 }
+                        />
+                        <h2>{ __('Margin') }</h2>
+                        <ButtonGroup aria-label={ __('Margin Unit') }>
+                            { map(marginUnits, ({ name, key }) => (
+                                <Button
+                                    key={ key }
+                                    isSmall
+                                    isPrimary={ marginUnit === key }
+                                    aria-pressed={ marginUnit === key }
+                                    onClick={ () => setAttributes({ marginUnit: key }) }
+                                >
+                                    { name }
+                                </Button>
+                            )) }
+                        </ButtonGroup>
+                        <RangeControl
+                            label={ icons.spacingTop }
+                            value={ marginTop }
+                            className={'gb-hero__spacing-range-control'}
+                            onChange={ (value) => {
+                                setAttributes({
+                                    marginTop: value,
+                                });
+                            } }
+                            min={ -500 }
+                            max={ 500 }
+                        />
+                        <RangeControl
+                            label={ icons.spacingBottom }
+                            value={ marginBottom }
+                            className={'gb-hero__spacing-range-control'}
+                            onChange={ (value) => {
+                                setAttributes({
+                                    marginBottom: value,
+                                });
+                            } }
+                            min={ -500 }
+                            max={ 500 }
+                        />
+                        <h2>{ __('Minimium Height') }</h2>
+                        <ButtonGroup aria-label={ __('Minimium Height Unit') }>
+                            { map(minHeightUnits, ({ name, key }) => (
+                                <Button
+                                    key={ key }
+                                    isSmall
+                                    isPrimary={ minHeightUnit === key }
+                                    aria-pressed={ minHeightUnit === key }
+                                    onClick={ () => setAttributes({ minHeightUnit: key }) }
+                                >
+                                    { name }
+                                </Button>
+                            )) }
+                        </ButtonGroup>
+                        <RangeControl
+                            value={ minHeight }
+                            className={'gb-hero__spacing-range-control'}
+                            onChange={ (value) => {
+                                setAttributes({
+                                    minHeight: value,
+                                });
+                            } }
+                            min={ 0 }
+                            max={ 500 }
+                        />
+                        <h2>{ __('Content Max Width') }</h2>
+                        <ButtonGroup aria-label={ __('Content Max Width Unit') }>
+                            { map(maxWidthUnits, ({ name, key }) => (
+                                <Button
+                                    key={ key }
+                                    isSmall
+                                    isPrimary={ maxWidthUnit === key }
+                                    aria-pressed={ maxWidthUnit === key }
+                                    onClick={ () => setAttributes({ maxWidthUnit: key }) }
+                                >
+                                    { name }
+                                </Button>
+                            )) }
+                        </ButtonGroup>
+                        <RangeControl
+                            value={ maxWidth }
+                            className={'gb-hero__spacing-range-control'}
+                            onChange={ (value) => {
+                                setAttributes({
+                                    maxWidth: value,
+                                });
+                            } }
+                            min={ 0 }
+                            max={ 500 }
+                        />
+                    </PanelBody>
                 </InspectorControls>
-                <div className={ className } >
+                <div className={ classnames(className, `gb-hero--theme-${colorTheme}`) } style={{
+                    paddingTop: (paddingTop ? paddingTop + paddingUnit : undefined),
+                    paddingRight: (paddingRight ? paddingRight + paddingUnit : undefined),
+                    paddingBottom: (paddingBottom ? paddingBottom + paddingUnit : undefined),
+                    paddingLeft: (paddingLeft ? paddingLeft + paddingUnit : undefined),
+                    marginTop: (marginTop && marginTop > 0 ? marginTop + marginUnit : undefined),
+                    marginBottom: (marginBottom && marginTop > 0 ? marginBottom + marginUnit : undefined),
+                }} >
                     <div
-                        className={'gb-hero-background'}
+                        className={'gb-hero__background'}
                         style={{
                             backgroundColor: (bgColor ? bgColor : undefined),
                             backgroundImage: (bgImg ? `url(${bgImg})` : undefined),
                             backgroundSize: bgImgSize,
                         }}/>
                     {((overlay || overlayBgImg) && overlayType === 'normal') && (
-                        <div className={`gb-hero-overlay gb-hero-overlay-${overlayType}`} style={{
+                        <div className={`gb-hero__overlay gb-hero__overlay--${overlayType}`} style={{
                             backgroundColor: (overlay ? overlay : undefined),
                             backgroundImage: (overlayBgImg ? `url(${overlayBgImg})` : undefined),
                             backgroundSize: overlayBgImgSize,
@@ -390,13 +584,17 @@ class GlutenblocksHeroEdit extends Component {
                         }}/>
                     )}
                     {((overlay || overlayBgImg) && overlayType !== 'normal') && (
-                        <div className={`gb-hero-overlay gb-hero-overlay-${overlayType}`} style={{
+                        <div className={`gb-hero__overlay gb-hero__overlay--${overlayType}`} style={{
                             backgroundImage: ('radial' === overlayGradType ? `radial-gradient(at ${overlayBgImgPosition}, ${overlay} ${overlayGradLoc}%, ${overlaySecond} ${overlayGradLocSecond}%)` : `linear-gradient(${overlayGradAngle}deg, ${overlay} ${overlayGradLoc}%, ${overlaySecond} ${overlayGradLocSecond}%)`),
                             mixBlendMode: overlayBlendMode,
                             opacity: overlayOpacityOutput(overlayOpacity),
                         }}/>
                     )}
-                    <InnerBlocks templateLock={ false } />
+                    <div className={'gb-hero__content'} style={{
+                        maxWidth: (maxWidth ? maxWidth + maxWidthUnit : undefined),
+                    }}>
+                        <InnerBlocks templateLock={ false } />
+                    </div>
                 </div>
             </Fragment>
         );

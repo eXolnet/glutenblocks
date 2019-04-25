@@ -11,7 +11,7 @@ const attributes = {
         default: '',
     },
     bgImgId: {
-        type: 'number',
+        type: 'Number',
     },
     bgImgAlt: {
         type: 'string',
@@ -40,11 +40,11 @@ const attributes = {
         default: '#00B5E2',
     },
     overlayGradLoc: {
-        type: 'number',
+        type: 'Number',
         default: 0,
     },
     overlayGradLocSecond: {
-        type: 'number',
+        type: 'Number',
         default: 100,
     },
     overlayGradType: {
@@ -52,7 +52,7 @@ const attributes = {
         default: 'linear',
     },
     overlayGradAngle: {
-        type: 'number',
+        type: 'Number',
         default: 180,
     },
     overlayBgImg: {
@@ -80,12 +80,64 @@ const attributes = {
         default: 'no-repeat',
     },
     overlayOpacity: {
-        type: 'number',
+        type: 'Number',
         default: 30,
     },
     overlayBlendMode: {
         type: 'string',
         default: 'none',
     },
+    paddingUnit: {
+        type: 'String',
+        default: 'px',
+    },
+    paddingTop: {
+        type: 'Number',
+        default: null,
+    },
+    paddingRight: {
+        type: 'Number',
+        default: null,
+    },
+    paddingBottom: {
+        type: 'Number',
+        default: null,
+    },
+    paddingLeft: {
+        type: 'Number',
+        default: null,
+    },
+    marginUnit: {
+        type: 'String',
+        default: 'px',
+    },
+    marginTop: {
+        type: 'Number',
+        default: null,
+    },
+    marginBottom: {
+        type: 'Number',
+        default: null,
+    },
+    minHeightUnit: {
+        type: 'String',
+        default: 'px',
+    },
+    minHeight: {
+        type: 'Number',
+        default: null,
+    },
+    maxWidthUnit: {
+        type: 'String',
+        default: 'px',
+    },
+    maxWidth: {
+        type: 'Number',
+        default: null,
+    },
+    colorTheme: {
+        type: 'String',
+        default: 'dark'
+    }
 };
 export default attributes;

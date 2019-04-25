@@ -204,4 +204,28 @@ icons.hero = <svg width="20px" height="20px" viewBox="0 0 48 48" xmlns="http://w
     <circle cx="24" cy="35.905" r="7.31" fill="#402C8A" stroke="#fff"></circle>
     <path d="M23.502,39.088l0,-2.356l-2.338,0l0,-0.984l2.338,0l0,-2.338l0.996,0l0,2.338l2.338,0l0,0.984l-2.338,0l0,2.356l-0.996,0Z" fill="#fff" fillRule="nonzero"></path>
 </svg>;
+icons.spacingTop = <svg width="20px" height="20px" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" fillRule="evenodd" clipRule="evenodd" strokeLinejoin="round" strokeMiterlimit="1.414">
+    <rect x="2.714" y="5.492" width="1.048" height="9.017" fill="#555d66" />
+    <rect x="16.265" y="5.498" width="1.023" height="9.003" fill="#555d66" />
+    <rect x="5.518" y="2.186" width="8.964" height="2.482" fill="#272b2f" />
+    <rect x="5.487" y="16.261" width="9.026" height="1.037" fill="#555d66" />
+</svg>;
+icons.spacingRight = <svg width="20px" height="20px" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" fillRule="evenodd" clipRule="evenodd" strokeLinejoin="round" strokeMiterlimit="1.414">
+    <rect x="2.714" y="5.492" width="1.046" height="9.017" fill="#555d66" />
+    <rect x="15.244" y="5.498" width="2.518" height="9.003" fill="#272b2f" />
+    <rect x="5.518" y="2.719" width="8.964" height="0.954" fill="#555d66" />
+    <rect x="5.487" y="16.308" width="9.026" height="0.99" fill="#555d66" />
+</svg>;
+icons.spacingBottom = <svg width="20px" height="20px" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" fillRule="evenodd" clipRule="evenodd" strokeLinejoin="round" strokeMiterlimit="1.414">
+    <rect x="2.714" y="5.492" width="1" height="9.017" fill="#555d66" />
+    <rect x="16.261" y="5.498" width="1.027" height="9.003" fill="#555d66" />
+    <rect x="5.518" y="2.719" width="8.964" height="0.968" fill="#555d66" />
+    <rect x="5.487" y="15.28" width="9.026" height="2.499" fill="#272b2f" />
+</svg>;
+icons.spacingLeft = <svg width="20px" height="20px" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" fillRule="evenodd" clipRule="evenodd" strokeLinejoin="round" strokeMiterlimit="1.414">
+    <rect x="2.202" y="5.492" width="2.503" height="9.017" fill="#272b2f" />
+    <rect x="16.276" y="5.498" width="1.012" height="9.003" fill="#555d66" />
+    <rect x="5.518" y="2.719" width="8.964" height="0.966" fill="#555d66" />
+    <rect x="5.487" y="16.303" width="9.026" height="0.995" fill="#555d66" />
+</svg>;
 export default icons;
