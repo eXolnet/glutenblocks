@@ -1,0 +1,116 @@
+// Put your styles that will only be applied in the editor.
+
+@mixin flex-full-height() {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.wp-block-glutenblocks-row {
+    display: block;
+
+    [data-type="glutenblocks/column"] {
+        //pointer-events: none;
+
+        &.is-hovered {
+            > .editor-block-list__block-edit:before {
+                content: none;
+            }
+
+            .editor-block-list__breadcrumb {
+                display: none;
+            }
+        }
+    }
+
+    .editor-block-list__layout {
+        margin-left: 0;
+        margin-right: 0;
+
+        .editor-block-list__block {
+            max-width: none;
+        }
+    }
+
+    > .editor-inner-blocks {
+        > .editor-block-list__layout {
+            display: flex;
+            flex-wrap: wrap;
+
+            > [data-type="glutenblocks/column"] {
+                display: flex;
+                flex-direction: column;
+                flex: 1;
+                padding-left: 0;
+                padding-right: 0;
+                margin-left: -14px;
+                margin-right: -14px;
+                min-width: 0;
+                word-break: break-word;
+                overflow-wrap: break-word;
+                flex-basis: 100%;
+
+                > .editor-block-list__block-edit {
+                    margin-top: 0;
+                    margin-bottom: 0;
+
+                    &:before {
+                        left: 0;
+                        right: 0;
+                    }
+
+                    > .editor-block-contextual-toolbar {
+                        margin-left: -1px;
+                    }
+
+                    > div > .editor-inner-blocks {
+                        margin-top: -28px;
+                        margin-bottom: -28px;
+                    }
+                }
+            }
+        }
+    }
+
+    /* stylelint-disable */
+    .editor-block-list__block[data-align="full"] > .editor-block-list__layout > .editor-inner-blocks {
+        padding-left: 14px;
+        padding-right: 14px;
+    }
+    /* stylelint-enable */
+}
+
+@media (min-width: 600px) {
+    .wp-block-glutenblocks-row {
+        .editor-inner-blocks > .editor-block-list__layout {
+            flex-wrap: nowrap;
+
+            > [data-type="glutenblocks/column"] {
+                margin-left: 14px;
+                margin-right: 14px;
+                flex-basis: 50%;
+                flex-grow: 0;
+
+                &:nth-child(odd),
+                &:not(:last-child) {
+                    margin-right: 32px;
+                }
+
+                &:nth-child(even),
+                &:not(:first-child) {
+                    margin-left: 32px;
+                }
+            }
+        }
+
+        .editor-block-list__block[data-align="full"] & > .editor-inner-blocks {
+            padding-left: 60px;
+            padding-right: 60px;
+        }
+    }
+}
+
+.gb-inspect-tabs .components-button-group .components-button,
+.gb-inspect-tabs .components-button-group svg {
+    width: 45px;
+}
