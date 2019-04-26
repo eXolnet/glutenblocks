@@ -1,0 +1,43 @@
+import GenIcon from '../globals/genicon';
+
+/**
+ * BLOCK: Glutenblock Button
+ */
+
+const {
+    Component,
+} = wp.element;
+
+import PropTypes from 'prop-types';
+import FaIco from '../globals/faicons';
+import Ico from '../globals/svgicons';
+
+class GlutenblocksButtonSave extends Component {
+    render() {
+        const { attributes: { theme, link, target, noFollow, text, icon, iconSide } } = this.props;
+
+        let relAttr = 'noopener noreferrer';
+
+        if (noFollow) {
+            relAttr = relAttr + ' nofollow';
+        }
+
+        return (
+            <a href={ (link ? link : '#') } target={ (target ? target : undefined) } className={`gb-button__btn gb-button__btn--${theme}`} rel={ relAttr }>
+                { icon && 'left' === iconSide && (
+                    <GenIcon className={ `gb-button__svg-icon gb-button__svg-icon--${ icon } gb-button__svg-icon--${ iconSide }` } name={ icon } icon={ ('fa' === icon.substring(0, 2) ? FaIco[ icon ] : Ico[ icon ]) } />
+                ) }
+                { text }
+                { icon && 'left' !== iconSide && (
+                    <GenIcon className={ `gb-button__svg-icon gb-button__svg-icon--${ icon } gb-button__svg-icon--${ iconSide }` } name={ icon } icon={ ('fa' === icon.substring(0, 2) ? FaIco[ icon ] : Ico[ icon ]) } />
+                ) }
+            </a>
+        );
+    }
+}
+
+GlutenblocksButtonSave.propTypes = {
+    attributes: PropTypes.object
+};
+
+export default GlutenblocksButtonSave;

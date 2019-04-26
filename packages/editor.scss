@@ -1,4 +1,6 @@
 //Import editor styles of blocks here
-
+@import '~@fonticonpicker/react-fonticonpicker/dist/fonticonpicker.base-theme.react.css';
+@import '~@fonticonpicker/react-fonticonpicker/dist/fonticonpicker.material-theme.react.css';
 @import "row/editor";
 @import "hero/editor";
+@import "button/editor";

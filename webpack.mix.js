@@ -28,11 +28,6 @@ mix
             chunkFilename: 'build/[name].[chunkhash].js',
         },
         plugins: [
-            new CleanWebpackPlugin({
-                cleanOnceBeforeBuildPatterns: [
-                    'build/*',
-                ],
-            }),
             new CopyWebpackPlugin([
                 {
                     from: './packages/**/index.php',
@@ -69,6 +64,10 @@ mix
                     },
                 },
             ]),
+            new CopyWebpackPlugin([{
+                from: 'node_modules/@fonticonpicker/react-fonticonpicker/dist/assets',
+                to: 'build/assets'
+            }])
         ],
     })
     .js('packages/index.js', 'build/glutenblocks.bundle.js')

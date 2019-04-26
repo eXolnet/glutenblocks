@@ -16,4 +16,12 @@ utils.themeColors = () => {
     return colors;
 };
 
+utils.themeStyles = () => {
+    if (typeof window.php_vars === 'undefined') {
+        return [];
+    }
+
+    return window.php_vars.themeStyles;
+};
+
 export default utils;
