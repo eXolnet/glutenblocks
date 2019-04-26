@@ -237,4 +237,12 @@ icons.button = <svg viewBox='0 0 48 48' xmlns='http://www.w3.org/2000/svg' fillR
         />
     </g>
 </svg>;
+icons.media = <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" role="img" aria-hidden="true" focusable="false">
+    <path d="M13 17h8v-2h-8v2zM3 19h8V5H3v14zM13 9h8V7h-8v2zm0 4h8v-2h-8v2z" fill='#402C8A'></path>
+</svg>;
+icons.mediaContainer = <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M18 2l2 4h-2l-2-4h-3l2 4h-2l-2-4h-1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V2zm2 12H10V4.4L11.8 8H20z" />
+    <path d="M14 20H4V10h3V8H4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-3h-2z" fill='#402C8A'/>
+    <path d="M5 19h8l-1.59-2H9.24l-.84 1.1L7 16.3 5 19z" fill='#402C8A'/>
+</svg>;
 export default icons;

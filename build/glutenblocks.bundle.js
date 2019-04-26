@@ -34464,6 +34464,30 @@ icons.button = React.createElement("svg", {
 }), React.createElement("path", {
   d: "M40.471,26.364l-32.942,0c-0.493,0 -0.898,0.406 -0.898,0.899c0,0.493 0.405,0.898 0.898,0.898l32.942,0c0.493,0 0.898,-0.405 0.898,-0.898c0,-0.493 -0.405,-0.899 -0.898,-0.899Z"
 })));
+icons.media = React.createElement("svg", {
+  width: "24",
+  height: "24",
+  xmlns: "http://www.w3.org/2000/svg",
+  viewBox: "0 0 24 24",
+  role: "img",
+  "aria-hidden": "true",
+  focusable: "false"
+}, React.createElement("path", {
+  d: "M13 17h8v-2h-8v2zM3 19h8V5H3v14zM13 9h8V7h-8v2zm0 4h8v-2h-8v2z",
+  fill: "#402C8A"
+}));
+icons.mediaContainer = React.createElement("svg", {
+  xmlns: "http://www.w3.org/2000/svg",
+  viewBox: "0 0 24 24"
+}, React.createElement("path", {
+  d: "M18 2l2 4h-2l-2-4h-3l2 4h-2l-2-4h-1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V2zm2 12H10V4.4L11.8 8H20z"
+}), React.createElement("path", {
+  d: "M14 20H4V10h3V8H4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-3h-2z",
+  fill: "#402C8A"
+}), React.createElement("path", {
+  d: "M5 19h8l-1.59-2H9.24l-.84 1.1L7 16.3 5 19z",
+  fill: "#402C8A"
+}));
 /* harmony default export */ __webpack_exports__["default"] = (icons);
 
 /***/ }),
@@ -43459,6 +43483,8 @@ var column = __webpack_require__(/*! ./column */ "./packages/column/index.js");
 var hero = __webpack_require__(/*! ./hero */ "./packages/hero/index.js");
 
 var button = __webpack_require__(/*! ./button */ "./packages/button/index.js");
+
+var media = __webpack_require__(/*! ./media */ "./packages/media/index.js");
 /**
  * WordPress dependencies
  */
@@ -43480,7 +43506,7 @@ var BLOCKS_TO_UNREGISTER = [// 'core/column',
  */
 
 (function registerGlutenblocks() {
-  [row, column, hero, button].forEach(function (block) {
+  [row, column, hero, button, media].forEach(function (block) {
     if (!block) {
       return;
     }
@@ -43504,6 +43530,822 @@ var BLOCKS_TO_UNREGISTER = [// 'core/column',
 window.addEventListener('load', function unregisterBlocks() {
   BLOCKS_TO_UNREGISTER.forEach(unregisterBlockType);
 });
+
+/***/ }),
+
+/***/ "./packages/media/attributes.js":
+/*!**************************************!*\
+  !*** ./packages/media/attributes.js ***!
+  \**************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/**
+ * BLOCK: Glutenblock media Attributes
+ */
+var attributes = {
+  align: {
+    'type': 'string',
+    'default': 'wide'
+  },
+  mediaAlt: {
+    'type': 'string',
+    'source': 'attribute',
+    'selector': 'figure img',
+    'attribute': 'alt',
+    'default': ''
+  },
+  mediaPosition: {
+    'type': 'string',
+    'default': 'left'
+  },
+  mediaId: {
+    'type': 'number'
+  },
+  mediaUrl: {
+    'type': 'string',
+    'source': 'attribute',
+    'selector': 'figure video,figure img',
+    'attribute': 'src'
+  },
+  mediaType: {
+    'type': 'string'
+  },
+  mediaWidth: {
+    'type': 'number',
+    'default': 50
+  },
+  mediaHeight: {
+    'type': 'number',
+    'default': 50
+  },
+  width: {
+    'type': 'number',
+    'default': 50
+  },
+  height: {
+    'type': 'number',
+    'default': 50
+  },
+  isStackedOnMobile: {
+    'type': 'boolean',
+    'default': false
+  },
+  verticalAlignment: {
+    'type': 'string',
+    "default": 'middle'
+  },
+  imageFill: {
+    'type': 'boolean'
+  },
+  focalPoint: {
+    'type': 'object'
+  }
+};
+/* harmony default export */ __webpack_exports__["default"] = (attributes);
+
+/***/ }),
+
+/***/ "./packages/media/edit.js":
+/*!********************************!*\
+  !*** ./packages/media/edit.js ***!
+  \********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var lodash_get__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! lodash/get */ "./node_modules/lodash/get.js");
+/* harmony import */ var lodash_get__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lodash_get__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _media_container__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./media-container */ "./packages/media/media-container.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _globals_icons__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../globals/icons */ "./packages/globals/icons.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+/**
+ * External dependencies
+ */
+
+
+/**
+ * WordPress dependencies
+ */
+
+var _wp$i18n = wp.i18n,
+    __ = _wp$i18n.__,
+    _x = _wp$i18n._x;
+var _wp$editor = wp.editor,
+    BlockControls = _wp$editor.BlockControls,
+    InnerBlocks = _wp$editor.InnerBlocks,
+    InspectorControls = _wp$editor.InspectorControls;
+var _wp$element = wp.element,
+    Component = _wp$element.Component,
+    Fragment = _wp$element.Fragment;
+var _wp$components = wp.components,
+    PanelBody = _wp$components.PanelBody,
+    TextareaControl = _wp$components.TextareaControl,
+    ToggleControl = _wp$components.ToggleControl,
+    Toolbar = _wp$components.Toolbar,
+    ExternalLink = _wp$components.ExternalLink,
+    Button = _wp$components.Button,
+    ButtonGroup = _wp$components.ButtonGroup,
+    TextControl = _wp$components.TextControl,
+    Tooltip = _wp$components.Tooltip;
+/**
+ * Internal dependencies
+ */
+
+
+
+
+/**
+ * Constants
+ */
+
+var ALLOWED_BLOCKS = ['core/button', 'core/paragraph', 'core/heading', 'core/list'];
+var TEMPLATE = [['core/paragraph', {
+  fontSize: 'large',
+  placeholder: _x('Content…', 'content placeholder')
+}]];
+
+var MediaEdit =
+/*#__PURE__*/
+function (_Component) {
+  _inherits(MediaEdit, _Component);
+
+  function MediaEdit() {
+    var _this;
+
+    _classCallCheck(this, MediaEdit);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(MediaEdit).apply(this, arguments));
+    _this.onSelectMedia = _this.onSelectMedia.bind(_assertThisInitialized(_this));
+    _this.onWidthChange = _this.onWidthChange.bind(_assertThisInitialized(_this));
+    _this.commitWidthChange = _this.commitWidthChange.bind(_assertThisInitialized(_this));
+    _this.updateWidth = _this.updateWidth.bind(_assertThisInitialized(_this));
+    _this.updateHeight = _this.updateHeight.bind(_assertThisInitialized(_this));
+    _this.updateDimensions = _this.updateDimensions.bind(_assertThisInitialized(_this));
+    _this.state = {
+      mediaWidth: null
+    };
+    return _this;
+  }
+
+  _createClass(MediaEdit, [{
+    key: "onSelectMedia",
+    value: function onSelectMedia(media) {
+      var setAttributes = this.props.setAttributes;
+      var mediaType;
+      var src; // for media selections originated from a file upload.
+
+      if (media.media_type) {
+        if (media.media_type === 'image') {
+          mediaType = 'image';
+        } else {
+          // only images and videos are accepted so if the media_type is not an image we can assume it is a video.
+          // video contain the media type of 'file' in the object returned from the rest api.
+          mediaType = 'video';
+        }
+      } else {
+        // for media selections originated from existing files in the media library.
+        mediaType = media.type;
+      }
+
+      if (mediaType === 'image') {
+        // Try the "large" size URL, falling back to the "full" size URL below.
+        src = lodash_get__WEBPACK_IMPORTED_MODULE_1___default()(media, ['sizes', 'large', 'url']) || lodash_get__WEBPACK_IMPORTED_MODULE_1___default()(media, ['media_details', 'sizes', 'large', 'source_url']);
+      }
+
+      setAttributes({
+        mediaAlt: media.alt,
+        mediaId: media.id,
+        mediaWidth: media.width,
+        width: media.width,
+        height: media.height,
+        mediaHeight: media.height,
+        mediaType: mediaType,
+        mediaUrl: src || media.url,
+        imageFill: undefined,
+        focalPoint: undefined
+      });
+    }
+  }, {
+    key: "onWidthChange",
+    value: function onWidthChange(width) {
+      this.setState({
+        mediaWidth: width
+      });
+    }
+  }, {
+    key: "commitWidthChange",
+    value: function commitWidthChange(width) {
+      var setAttributes = this.props.setAttributes;
+      setAttributes({
+        mediaWidth: width
+      });
+      this.setState({
+        mediaWidth: null
+      });
+    }
+  }, {
+    key: "renderMediaArea",
+    value: function renderMediaArea() {
+      var attributes = this.props.attributes;
+      var mediaAlt = attributes.mediaAlt,
+          mediaId = attributes.mediaId,
+          mediaPosition = attributes.mediaPosition,
+          mediaType = attributes.mediaType,
+          mediaUrl = attributes.mediaUrl,
+          mediaWidth = attributes.mediaWidth,
+          width = attributes.width,
+          height = attributes.height;
+      return React.createElement(_media_container__WEBPACK_IMPORTED_MODULE_2__["default"], _extends({
+        className: "block-library-media-text__media-container",
+        onSelectMedia: this.onSelectMedia,
+        onWidthChange: this.onWidthChange,
+        commitWidthChange: this.commitWidthChange
+      }, {
+        mediaAlt: mediaAlt,
+        mediaId: mediaId,
+        mediaType: mediaType,
+        mediaUrl: mediaUrl,
+        mediaPosition: mediaPosition,
+        mediaWidth: mediaWidth,
+        width: width,
+        height: height
+      }));
+    }
+  }, {
+    key: "updateWidth",
+    value: function updateWidth(width) {
+      this.props.setAttributes({
+        width: parseInt(width, 10)
+      });
+    }
+  }, {
+    key: "updateHeight",
+    value: function updateHeight(height) {
+      this.props.setAttributes({
+        height: parseInt(height, 10)
+      });
+    }
+  }, {
+    key: "updateDimensions",
+    value: function updateDimensions() {
+      var _this2 = this;
+
+      var width = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.props.attributes.mediaWidth;
+      var height = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : this.props.attributes.mediaHeight;
+      return function () {
+        _this2.props.setAttributes({
+          width: width,
+          height: height
+        });
+      };
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this3 = this;
+
+      var _this$props = this.props,
+          _this$props$attribute = _this$props.attributes,
+          isStackedOnMobile = _this$props$attribute.isStackedOnMobile,
+          mediaAlt = _this$props$attribute.mediaAlt,
+          mediaPosition = _this$props$attribute.mediaPosition,
+          mediaType = _this$props$attribute.mediaType,
+          mediaWidth = _this$props$attribute.mediaWidth,
+          mediaHeight = _this$props$attribute.mediaHeight,
+          width = _this$props$attribute.width,
+          height = _this$props$attribute.height,
+          verticalAlignment = _this$props$attribute.verticalAlignment,
+          className = _this$props.className,
+          isSelected = _this$props.isSelected,
+          setAttributes = _this$props.setAttributes;
+      var classNames = classnames__WEBPACK_IMPORTED_MODULE_0___default()(className, _defineProperty({
+        'has-media-on-the-right': 'right' === mediaPosition,
+        'is-selected': isSelected,
+        'is-stacked-on-mobile': isStackedOnMobile
+      }, "gb-media--aligned-".concat(verticalAlignment), verticalAlignment));
+      var style = {
+        gridTemplateColumns: 'right' === mediaPosition ? 'auto 50%' : '50%  auto'
+      };
+      var toolbarControls = [{
+        icon: 'align-pull-left',
+        title: __('Show media on left'),
+        isActive: mediaPosition === 'left',
+        onClick: function onClick() {
+          return setAttributes({
+            mediaPosition: 'left'
+          });
+        }
+      }, {
+        icon: 'align-pull-right',
+        title: __('Show media on right'),
+        isActive: mediaPosition === 'right',
+        onClick: function onClick() {
+          return setAttributes({
+            mediaPosition: 'right'
+          });
+        }
+      }];
+
+      var onMediaAltChange = function onMediaAltChange(newMediaAlt) {
+        setAttributes({
+          mediaAlt: newMediaAlt
+        });
+      };
+
+      var mediaTextGeneralSettings = React.createElement(PanelBody, {
+        title: __('Media & Text Settings')
+      }, React.createElement(ToggleControl, {
+        label: __('Stack on mobile'),
+        checked: isStackedOnMobile,
+        onChange: function onChange() {
+          return setAttributes({
+            isStackedOnMobile: !isStackedOnMobile
+          });
+        }
+      }), mediaType === 'image' && React.createElement(TextareaControl, {
+        label: __('Alt Text (Alternative Text)'),
+        value: mediaAlt,
+        onChange: onMediaAltChange,
+        help: React.createElement(Fragment, null, React.createElement(ExternalLink, {
+          href: "https://www.w3.org/WAI/tutorials/images/decision-tree"
+        }, __('Describe the purpose of the image')), __('Leave empty if the image is purely decorative.'))
+      }), mediaType === 'image' && React.createElement("div", {
+        className: "block-library-image__dimensions"
+      }, React.createElement("p", {
+        className: "block-library-image__dimensions__row"
+      }, __('Image Dimensions')), React.createElement("div", {
+        className: "block-library-image__dimensions__row"
+      }, React.createElement(TextControl, {
+        type: "number",
+        className: "block-library-image__dimensions__width",
+        label: __('Width'),
+        value: width,
+        min: 1,
+        onChange: this.updateWidth
+      }), React.createElement(TextControl, {
+        type: "number",
+        className: "block-library-image__dimensions__height",
+        label: __('Height'),
+        value: height,
+        min: 1,
+        onChange: this.updateHeight
+      })), React.createElement("div", {
+        className: "block-library-image__dimensions__row"
+      }, React.createElement(ButtonGroup, {
+        "aria-label": __('Image Size')
+      }, [25, 50, 75, 100].map(function (scale) {
+        var scaledWidth = Math.round(mediaWidth * (scale / 100));
+        var scaledHeight = Math.round(mediaHeight * (scale / 100));
+        var isCurrent = width === scaledWidth && height === scaledHeight;
+        return React.createElement(Button, {
+          key: scale,
+          isSmall: true,
+          isPrimary: isCurrent,
+          "aria-pressed": isCurrent,
+          onClick: _this3.updateDimensions(scaledWidth, scaledHeight)
+        }, scale, "%");
+      })), React.createElement(Button, {
+        isSmall: true,
+        onClick: this.updateDimensions()
+      }, __('Reset')))));
+      return React.createElement(Fragment, null, React.createElement(BlockControls, null, React.createElement(Toolbar, null, React.createElement(Tooltip, {
+        text: __('Vertical Align Top')
+      }, React.createElement(Button, {
+        className: classnames__WEBPACK_IMPORTED_MODULE_0___default()('components-icon-button', 'components-toolbar__control', {
+          'is-active': verticalAlignment === 'top'
+        }),
+        onClick: function onClick() {
+          return setAttributes({
+            verticalAlignment: 'top'
+          });
+        }
+      }, _globals_icons__WEBPACK_IMPORTED_MODULE_4__["default"].aligntop))), React.createElement(Toolbar, null, React.createElement(Tooltip, {
+        text: __('Vertical Align Middle')
+      }, React.createElement(Button, {
+        className: classnames__WEBPACK_IMPORTED_MODULE_0___default()('components-icon-button', 'components-toolbar__control', {
+          'is-active': verticalAlignment === 'middle'
+        }),
+        onClick: function onClick() {
+          return setAttributes({
+            verticalAlignment: 'middle'
+          });
+        }
+      }, _globals_icons__WEBPACK_IMPORTED_MODULE_4__["default"].alignmiddle))), React.createElement(Toolbar, null, React.createElement(Tooltip, {
+        text: __('Vertical Align Bottom')
+      }, React.createElement(Button, {
+        className: classnames__WEBPACK_IMPORTED_MODULE_0___default()('components-icon-button', 'components-toolbar__control', {
+          'is-active': verticalAlignment === 'bottom'
+        }),
+        onClick: function onClick() {
+          return setAttributes({
+            verticalAlignment: 'bottom'
+          });
+        }
+      }, _globals_icons__WEBPACK_IMPORTED_MODULE_4__["default"].alignbottom)))), React.createElement(InspectorControls, null, mediaTextGeneralSettings), React.createElement(BlockControls, null, React.createElement(Toolbar, {
+        controls: toolbarControls
+      })), React.createElement("div", {
+        className: classNames,
+        style: style
+      }, this.renderMediaArea(), React.createElement(InnerBlocks, {
+        allowedBlocks: ALLOWED_BLOCKS,
+        template: TEMPLATE,
+        templateInsertUpdatesSelection: false
+      })));
+    }
+  }]);
+
+  return MediaEdit;
+}(Component);
+
+MediaEdit.propTypes = {
+  attributes: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.object,
+  clientId: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.string,
+  className: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.string,
+  setAttributes: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.func,
+  isSelected: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.bool
+};
+/* harmony default export */ __webpack_exports__["default"] = (MediaEdit);
+
+/***/ }),
+
+/***/ "./packages/media/index.js":
+/*!*********************************!*\
+  !*** ./packages/media/index.js ***!
+  \*********************************/
+/*! exports provided: name, settings */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "name", function() { return name; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "settings", function() { return settings; });
+/* harmony import */ var _edit__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./edit */ "./packages/media/edit.js");
+/* harmony import */ var _save__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./save */ "./packages/media/save.js");
+/* harmony import */ var _globals_icons__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../globals/icons */ "./packages/globals/icons.js");
+/* harmony import */ var _attributes__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./attributes */ "./packages/media/attributes.js");
+/**
+ * Internal dependencies
+ */
+
+
+
+
+/**
+ * WordPress dependencies
+ */
+
+var __ = wp.i18n.__;
+var name = 'glutenblocks/media';
+var settings = {
+  title: __('Media Text', 'glutenblocks'),
+  description: __('A Glutenblock media'),
+  icon: _globals_icons__WEBPACK_IMPORTED_MODULE_2__["default"].media,
+  category: 'glutenblocks',
+  attributes: _attributes__WEBPACK_IMPORTED_MODULE_3__["default"],
+  supports: {
+    align: ['full', 'wide'],
+    html: false
+  },
+  edit: _edit__WEBPACK_IMPORTED_MODULE_0__["default"],
+  save: _save__WEBPACK_IMPORTED_MODULE_1__["default"]
+};
+
+/***/ }),
+
+/***/ "./packages/media/media-container.js":
+/*!*******************************************!*\
+  !*** ./packages/media/media-container.js ***!
+  \*******************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _globals_icons__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../globals/icons */ "./packages/globals/icons.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+/**
+ * WordPress dependencies
+ */
+
+var _wp$components = wp.components,
+    IconButton = _wp$components.IconButton,
+    Toolbar = _wp$components.Toolbar;
+var _wp$editor = wp.editor,
+    BlockControls = _wp$editor.BlockControls,
+    BlockIcon = _wp$editor.BlockIcon,
+    MediaPlaceholder = _wp$editor.MediaPlaceholder,
+    MediaUpload = _wp$editor.MediaUpload;
+var _wp$element = wp.element,
+    Component = _wp$element.Component,
+    Fragment = _wp$element.Fragment;
+var __ = wp.i18n.__;
+/**
+ * Internal dependencies
+ */
+
+
+/**
+ * Constants
+ */
+
+var ALLOWED_MEDIA_TYPES = ['image', 'video'];
+
+var MediaContainer =
+/*#__PURE__*/
+function (_Component) {
+  _inherits(MediaContainer, _Component);
+
+  function MediaContainer() {
+    _classCallCheck(this, MediaContainer);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(MediaContainer).apply(this, arguments));
+  }
+
+  _createClass(MediaContainer, [{
+    key: "renderToolbarEditButton",
+    value: function renderToolbarEditButton() {
+      var _this$props = this.props,
+          mediaId = _this$props.mediaId,
+          onSelectMedia = _this$props.onSelectMedia;
+      return React.createElement(BlockControls, null, React.createElement(Toolbar, null, React.createElement(MediaUpload, {
+        onSelect: onSelectMedia,
+        allowedTypes: ALLOWED_MEDIA_TYPES,
+        value: mediaId,
+        render: function render(_ref) {
+          var open = _ref.open;
+          return React.createElement(IconButton, {
+            className: "components-toolbar__control",
+            label: __('Edit media'),
+            icon: "edit",
+            onClick: open
+          });
+        }
+      })));
+    }
+  }, {
+    key: "renderImage",
+    value: function renderImage() {
+      var _this$props2 = this.props,
+          mediaAlt = _this$props2.mediaAlt,
+          width = _this$props2.width,
+          height = _this$props2.height,
+          mediaUrl = _this$props2.mediaUrl,
+          className = _this$props2.className;
+      return React.createElement(Fragment, null, this.renderToolbarEditButton(), React.createElement("figure", {
+        className: className
+      }, React.createElement("img", {
+        src: mediaUrl,
+        alt: mediaAlt,
+        width: width,
+        height: height
+      })));
+    }
+  }, {
+    key: "renderVideo",
+    value: function renderVideo() {
+      var _this$props3 = this.props,
+          mediaUrl = _this$props3.mediaUrl,
+          className = _this$props3.className;
+      return React.createElement(Fragment, null, this.renderToolbarEditButton(), React.createElement("figure", {
+        className: className
+      }, React.createElement("video", {
+        controls: true,
+        src: mediaUrl
+      })));
+    }
+  }, {
+    key: "renderPlaceholder",
+    value: function renderPlaceholder() {
+      var _this$props4 = this.props,
+          onSelectMedia = _this$props4.onSelectMedia,
+          className = _this$props4.className;
+      return React.createElement(MediaPlaceholder, {
+        icon: React.createElement(BlockIcon, {
+          icon: _globals_icons__WEBPACK_IMPORTED_MODULE_1__["default"].mediaContainer
+        }),
+        labels: {
+          title: __('Media area')
+        },
+        className: className,
+        onSelect: onSelectMedia,
+        accept: "image/*,video/*",
+        allowedTypes: ALLOWED_MEDIA_TYPES
+      });
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this$props5 = this.props,
+          mediaUrl = _this$props5.mediaUrl,
+          mediaType = _this$props5.mediaType;
+
+      if (mediaType && mediaUrl) {
+        var mediaElement = null;
+
+        switch (mediaType) {
+          case 'image':
+            mediaElement = this.renderImage();
+            break;
+
+          case 'video':
+            mediaElement = this.renderVideo();
+            break;
+        }
+
+        return mediaElement;
+      }
+
+      return this.renderPlaceholder();
+    }
+  }]);
+
+  return MediaContainer;
+}(Component);
+
+MediaContainer.propTypes = {
+  attributes: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.object,
+  clientId: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.string,
+  className: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.string,
+  mediaPosition: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.string,
+  mediaId: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.number,
+  mediaUrl: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.string,
+  mediaWidth: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.number,
+  mediaHeight: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.number,
+  width: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.number,
+  height: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.number,
+  mediaType: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.string,
+  mediaAlt: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.string,
+  setAttributes: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.func,
+  onSelectMedia: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.func,
+  onWidthChange: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.func,
+  commitWidthChange: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.func
+};
+/* harmony default export */ __webpack_exports__["default"] = (MediaContainer);
+
+/***/ }),
+
+/***/ "./packages/media/save.js":
+/*!********************************!*\
+  !*** ./packages/media/save.js ***!
+  \********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+/**
+ * External dependencies
+ */
+
+var _lodashNoop = 'lodash/noop',
+    noop = _lodashNoop.noop;
+/**
+ * WordPress dependencies
+ */
+
+var Component = wp.element.Component;
+var InnerBlocks = wp.editor.InnerBlocks;
+/**
+ * Internal dependencies
+ */
+
+
+
+var GlutenblocksMediaSave =
+/*#__PURE__*/
+function (_Component) {
+  _inherits(GlutenblocksMediaSave, _Component);
+
+  function GlutenblocksMediaSave() {
+    _classCallCheck(this, GlutenblocksMediaSave);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(GlutenblocksMediaSave).apply(this, arguments));
+  }
+
+  _createClass(GlutenblocksMediaSave, [{
+    key: "render",
+    value: function render() {
+      var _this$props$attribute = this.props.attributes,
+          isStackedOnMobile = _this$props$attribute.isStackedOnMobile,
+          mediaAlt = _this$props$attribute.mediaAlt,
+          mediaPosition = _this$props$attribute.mediaPosition,
+          mediaType = _this$props$attribute.mediaType,
+          mediaUrl = _this$props$attribute.mediaUrl,
+          width = _this$props$attribute.width,
+          height = _this$props$attribute.height,
+          mediaId = _this$props$attribute.mediaId,
+          verticalAlignment = _this$props$attribute.verticalAlignment;
+      var mediaTypeRenders = {
+        image: function image() {
+          return React.createElement("img", {
+            src: mediaUrl,
+            alt: mediaAlt,
+            width: width,
+            height: height,
+            className: mediaId && mediaType === 'image' ? "gb-media__image wp-image-".concat(mediaId) : null
+          });
+        },
+        video: function video() {
+          return React.createElement("video", {
+            controls: true,
+            src: mediaUrl
+          });
+        }
+      };
+      var className = classnames__WEBPACK_IMPORTED_MODULE_0___default()(_defineProperty({
+        'gb-media gb-media--right': 'right' === mediaPosition,
+        'gb-media--stacked-on-mobile': isStackedOnMobile
+      }, "gb-media--aligned-".concat(verticalAlignment), verticalAlignment));
+      return React.createElement("div", {
+        className: className
+      }, React.createElement("figure", {
+        className: "wp-block-image gb-media__figure"
+      }, (mediaTypeRenders[mediaType] || noop)()), React.createElement("div", {
+        className: "gb-media__content"
+      }, React.createElement(InnerBlocks.Content, null)));
+    }
+  }]);
+
+  return GlutenblocksMediaSave;
+}(Component);
+
+GlutenblocksMediaSave.propTypes = {
+  attributes: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object
+};
+/* harmony default export */ __webpack_exports__["default"] = (GlutenblocksMediaSave);
 
 /***/ }),
 
