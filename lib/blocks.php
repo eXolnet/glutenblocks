@@ -64,6 +64,19 @@ function glutenblocks_enqueue_block_editor_assets()
     if ($themeColorsOption && $themeColorsOption !== '') {
         $phpVars['themeColors'] = $themeColorsOption[0];
     }
+
+    $themeStyles = get_theme_support('glutenblocks-styles');
+    if ($themeStyles && $themeStyles !== '') {
+        $encodedStyles = [];
+        foreach ($themeStyles[0] as $style){
+            $styleArr = [];
+            $styleArr['value'] = $style;
+            $styleArr['label'] = ucfirst($style);
+            $encodedStyles[] = $styleArr;
+        }
+
+        $phpVars['themeStyles'] = $encodedStyles;
+    }
     wp_localize_script('glutenblocks', 'php_vars', $phpVars);
 
     wp_enqueue_style(

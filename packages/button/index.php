@@ -7,7 +7,7 @@
 /**
  * Registers the `glutenblocks/button` block on server.
  */
-function glutenblocksregister_block_glutenblocks_button() {
+function register_block_glutenblocks_button() {
     register_block_type(
         'glutenblocks/button',
         [
@@ -17,4 +17,4 @@ function glutenblocksregister_block_glutenblocks_button() {
         ]
     );
 }
-add_action( 'init', 'glutenblocksregister_block_glutenblocks_button' );
+add_action( 'init', 'register_block_glutenblocks_button' );
