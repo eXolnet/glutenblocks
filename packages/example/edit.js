@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 
 const { Component } = wp.element;
 
-class ExampleEdit extends Component {
+class GlutenblocksExampleEdit extends Component {
     render() {
         const {
             className,
@@ -16,10 +16,10 @@ class ExampleEdit extends Component {
     }
 }
 
-ExampleEdit.propTypes = {
+GlutenblocksExampleEdit.propTypes = {
     className: PropTypes.string
 };
 
 export default (
-    ExampleEdit
+    GlutenblocksExampleEdit
 );
