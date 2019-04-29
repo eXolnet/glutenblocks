@@ -104,7 +104,7 @@ class GlutenblocksButtonEdit extends Component {
                 </InspectorControls>
                 <div className={ classnames(className, 'gb-button__area-wrap') } >
                     <span className={'gb-button__wrap'}>
-                        <span className={`gb-button__btn gb-button__btn--${theme}`}>
+                        <span className={`gb-button gb-button--${theme}`}>
                             { icon && 'left' === iconSide && (
                                 <GenIcon className={ `gb-button__svg-icon gb-button__svg-icon--${ icon } gb-button__svg-icon--${ iconSide }` } name={ icon } icon={ ('fa' === icon.substring(0, 2) ? FaIco[ icon ] : Ico[ icon ]) } />
                             ) }

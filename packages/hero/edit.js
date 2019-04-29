@@ -10,6 +10,17 @@ const { Button, ButtonGroup, Dashicon, PanelBody, RangeControl, Tooltip, TabPane
 const { Component, Fragment } = wp.element;
 const { InspectorControls, InnerBlocks, MediaUpload, ColorPalette } = wp.editor;
 
+const TEMPLATE = [
+    ['glutenblocks/row', {},[
+        ['glutenblocks/column', {}, [
+            ['core/paragraph']
+        ]],
+        ['glutenblocks/column', {}, [
+            ['core/paragraph']
+        ]],
+    ]],
+];
+
 const overlayOpacityOutput = memoize((opacity) => {
     if (opacity < 10) {
         return '0.0' + opacity;
@@ -598,7 +609,7 @@ class GlutenblocksHeroEdit extends Component {
                     <div className={'gb-hero__content'} style={{
                         maxWidth: (maxWidth ? maxWidth + maxWidthUnit : undefined),
                     }}>
-                        <InnerBlocks templateLock={ false } />
+                        <InnerBlocks templateLock={ false } template={TEMPLATE} />
                     </div>
                 </div>
             </Fragment>

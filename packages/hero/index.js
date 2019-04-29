@@ -20,7 +20,7 @@ export const settings = {
     category: 'glutenblocks',
     attributes: attributes,
     supports: {
-        align: ['full'],
+        align: ['full', 'wide'],
         html: false,
     },
     edit,
