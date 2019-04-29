@@ -252,4 +252,87 @@
 svg {
   vertical-align: middle;
 }
+
+.wp-block-glutenblocks-media {
+  display: grid;
+  grid-template-rows: auto;
+  align-items: center;
+  grid-template-areas: "media-text-media media-text-content" "resizer resizer";
+  grid-template-columns: 50% auto;
+}
+.wp-block-glutenblocks-media.gb-media--aligned-top {
+  align-items: flex-start;
+}
+.wp-block-glutenblocks-media.gb-media--aligned-middle {
+  align-items: center;
+}
+.wp-block-glutenblocks-media.gb-media--aligned-bottom {
+  align-items: flex-end;
+}
+.wp-block-glutenblocks-media.has-media-on-the-right {
+  grid-template-areas: "media-text-content media-text-media" "resizer resizer";
+  grid-template-columns: auto 50%;
+}
+.wp-block-glutenblocks-media .wp-block-glutenblocks-media__media {
+  grid-area: media-text-media;
+  margin: 0;
+}
+.wp-block-glutenblocks-media .wp-block-glutenblocks-media__content {
+  word-break: break-word;
+  grid-area: media-text-content;
+  padding: 0 8% 0 8%;
+}
+.wp-block-glutenblocks-media > figure > img,
+.wp-block-glutenblocks-media > figure > video {
+  max-width: unset;
+  vertical-align: middle;
+}
+.wp-block-glutenblocks-media > figure > video {
+  width: 100%;
+}
+.wp-block-glutenblocks-media .__resizable_base__ {
+  grid-area: resizer;
+}
+.wp-block-glutenblocks-media .editor-media-container__resizer {
+  grid-area: media-text-media;
+  align-self: center;
+  width: 100% !important;
+}
+.wp-block-glutenblocks-media .is-image-fill .editor-media-container__resizer {
+  height: 100% !important;
+}
+.wp-block-glutenblocks-media .editor-inner-blocks {
+  word-break: break-word;
+  grid-area: media-text-content;
+  text-align: initial;
+  padding: 0 8% 0 8%;
+}
+.wp-block-glutenblocks-media > .editor-inner-blocks > .editor-block-list__layout > .editor-block-list__block {
+  max-width: unset;
+}
+.wp-block-glutenblocks-media > .block-editor-inner-blocks > .block-editor-block-list__layout > .block-editor-block-list__block {
+  max-width: unset;
+}
+.wp-block-glutenblocks-media .block-editor-inner-blocks {
+  word-break: break-word;
+  grid-area: media-text-content;
+  text-align: initial;
+  padding: 0 8% 0 8%;
+}
+.wp-block-glutenblocks-media .block-library-media-text__media-container video {
+  vertical-align: middle;
+  width: 100%;
+}
+.wp-block-glutenblocks-media figure.block-library-media-text__media-container {
+  margin: 0;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+.wp-block-glutenblocks-media figure.block-library-media-text__media-container img {
+  display: flex;
+  align-self: center;
+}
 /*# sourceMappingURL=glutenblocks.editor.css.map*/

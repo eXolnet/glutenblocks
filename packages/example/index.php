@@ -1,6 +1,7 @@
 <?php
 /**
  * Server-side rendering of the `glutenblocks/example` block.
+ * phpcs:disable
  */
 
 /**

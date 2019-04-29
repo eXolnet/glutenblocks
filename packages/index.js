@@ -7,6 +7,7 @@ const row = require('./row');
 const column = require('./column');
 const hero = require('./hero');
 const button = require('./button');
+const media = require('./media');
 
 /**
  * WordPress dependencies
@@ -36,6 +37,7 @@ const BLOCKS_TO_UNREGISTER = [
         column,
         hero,
         button,
+        media,
     ].forEach((block) => {
         if (!block) {
             return;
