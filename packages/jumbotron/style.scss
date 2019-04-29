@@ -1,0 +1,21 @@
+// Put your styles that will only be applied in the editor.
+.gb-jumbotron {
+    position: relative;
+    height: auto;
+
+    &__call-to-action,
+    &__scroll-to {
+        position: absolute;
+        bottom: 0;
+        z-index: 100;
+    }
+
+    &__scroll-to {
+        transform: translateX(-50%);
+        left: 50%;
+    }
+
+    &__call-to-action {
+        right: 0;
+    }
+}

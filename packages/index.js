@@ -8,6 +8,7 @@ const column = require('./column');
 const hero = require('./hero');
 const button = require('./button');
 const media = require('./media');
+const jumbotron = require('./jumbotron');
 
 /**
  * WordPress dependencies
@@ -38,6 +39,7 @@ const BLOCKS_TO_UNREGISTER = [
         hero,
         button,
         media,
+        jumbotron,
     ].forEach((block) => {
         if (!block) {
             return;

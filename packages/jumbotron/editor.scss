@@ -1,0 +1,27 @@
+.wp-block-glutenblocks-jumbotron {
+    position: relative;
+    height: auto;
+
+    @extend .wp-block-glutenblocks-button;
+
+    > .editor-rich-text {
+        position: absolute;
+        bottom: 0;
+        z-index: 100;
+        transform: translateX(-50%);
+        left: 50%;
+        display: inline-block;
+    }
+
+    .gb-button__area-wrap {
+        position: absolute;
+        bottom: 0;
+        z-index: 100;
+        right: 0;
+    }
+
+    .blocks-button__inline-link {
+        left: inherit;
+        right: 0;
+    }
+}
