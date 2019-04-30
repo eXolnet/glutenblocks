@@ -111,7 +111,7 @@ JumbotronEdit.propTypes = {
     attributes: PropTypes.object,
     setAttributes: PropTypes.func,
     className: PropTypes.string,
-    isSelected: PropTypes.func,
+    isSelected: PropTypes.bool,
 };
 
 export default (
