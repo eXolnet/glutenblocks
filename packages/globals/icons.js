@@ -245,4 +245,7 @@ icons.mediaContainer = <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 2
     <path d="M14 20H4V10h3V8H4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-3h-2z" fill='#402C8A'/>
     <path d="M5 19h8l-1.59-2H9.24l-.84 1.1L7 16.3 5 19z" fill='#402C8A'/>
 </svg>;
+icons.card = <svg aria-hidden="true" role="img" focusable="false" className="dashicon dashicons-slides" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
+    <path d="M5 14V6h10v8H5zm-3-1V7h2v6H2zm4-6v6h8V7H6zm10 0h2v6h-2V7zm-3 2V8H7v1h6zm0 3v-2H7v2h6z" fill='#402C8A'/>
+</svg>;
 export default icons;
