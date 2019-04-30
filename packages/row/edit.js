@@ -155,7 +155,7 @@ export class GlutenBlocksRowEdit extends Component {
                             <p className="components-base-control__label">{__('Mobile Layout')}</p>
                             <ButtonGroup aria-label={__('Mobile Layout')}>
                                 {map(mobileLayoutOptions, ({ name, key, icon }) => (
-                                    <Tooltip text={name}>
+                                    <Tooltip key={key} text={name}>
                                         <Button
                                             key={key}
                                             className="gb-layout-btn"
@@ -182,7 +182,7 @@ export class GlutenBlocksRowEdit extends Component {
                             <p className="components-base-control__label">{__('Tablet Layout')}</p>
                             <ButtonGroup aria-label={__('Tablet Layout')}>
                                 {map(mobileLayoutOptions, ({ name, key, icon }) => (
-                                    <Tooltip text={name}>
+                                    <Tooltip key={key} text={name}>
                                         <Button
                                             key={key}
                                             className="gb-layout-btn"
@@ -208,6 +208,7 @@ export class GlutenBlocksRowEdit extends Component {
                         label={__('Columns')}
                         value={columns}
                         onChange={(nextColumns) => {
+                            setAttributes({ columns: nextColumns });
                             updateLayout(nextColumns);
                         }}
                         min={1}
@@ -218,7 +219,7 @@ export class GlutenBlocksRowEdit extends Component {
                             <p className="components-base-control__label">{__('Layout')}</p>
                             <ButtonGroup aria-label={__('Column Layout')}>
                                 {map(layoutOptions, ({ name, key, icon }) => (
-                                    <Tooltip text={name}>
+                                    <Tooltip key={key} text={name}>
                                         <Button
                                             key={key}
                                             className="gb-layout-btn"
@@ -393,6 +394,12 @@ function setChildColumnsDeviceClasses(layout, columns, type, childColumns, dispa
     });
 }
 
+function getChildColumns(clientId) {
+    const { getBlocksByClientId } = wp.data.select('core/editor');
+    const block = getBlocksByClientId(clientId)[0];
+    return  block ? block.innerBlocks : DEFAULT_EMPTY_ARRAY;
+}
+
 export default compose(
     /**
      * Selects the child column Blocks for this parent Column
@@ -440,44 +447,55 @@ export default compose(
                     mobileLayout: '12-12',
                 });
 
-                if (nextColumns === 1) {
-                    this.updateColLayout('12', 1);
-                    this.updateTabletLayout('12', 1);
-                    this.updateMobileLayout('12', 1);
-                }
+                setTimeout(function () {
+                    childColumns = getChildColumns(clientId);
 
-                if (nextColumns === 2) {
-                    this.updateColLayout('6-6', 2);
-                    this.updateTabletLayout('6-6', 2);
-                    this.updateMobileLayout('12-12', 2);
-                }
+                    if (nextColumns === 1) {
+                        this.updateColLayout('12', 1, childColumns);
+                        this.updateTabletLayout('12', 1, childColumns);
+                        this.updateMobileLayout('12', 1, childColumns);
+                    }
 
-                if (nextColumns === 3) {
-                    this.updateColLayout('4-4-4', 3);
-                    this.updateTabletLayout('4-4-4', 3);
-                    this.updateMobileLayout('12-12-12', 3);
-                }
+                    if (nextColumns === 2) {
+                        this.updateColLayout('6-6', 2, childColumns);
+                        this.updateTabletLayout('6-6', 2, childColumns);
+                        this.updateMobileLayout('12-12', 2, childColumns);
+                    }
 
-                if (nextColumns === 4) {
-                    this.updateColLayout('3-3-3-3', 4);
-                    this.updateTabletLayout('3-3-3-3', 4);
-                    this.updateMobileLayout('12-12-12-12', 4);
-                }
+                    if (nextColumns === 3) {
+                        this.updateColLayout('4-4-4', 3, childColumns);
+                        this.updateTabletLayout('4-4-4', 3, childColumns);
+                        this.updateMobileLayout('12-12-12', 3, childColumns);
+                    }
 
-                if (nextColumns === 5) {
-                    this.updateColLayout('2-2-2-2-2', 5);
-                    this.updateTabletLayout('2-2-2-2-2', 5);
-                    this.updateMobileLayout('12-12-12-12-12', 5);
-                }
+                    if (nextColumns === 4) {
+                        this.updateColLayout('3-3-3-3', 4, childColumns);
+                        this.updateTabletLayout('3-3-3-3', 4, childColumns);
+                        this.updateMobileLayout('12-12-12-12', 4, childColumns);
+                    }
 
-                if (nextColumns === 6) {
-                    this.updateColLayout('2-2-2-2-2-2', 6);
-                    this.updateTabletLayout('2-2-2-2-2-2', 6);
-                    this.updateMobileLayout('12-12-12-12-12-12', 6);
-                }
+                    if (nextColumns === 5) {
+                        this.updateColLayout('2-2-2-2-2', 5, childColumns);
+                        this.updateTabletLayout('2-2-2-2-2', 5, childColumns);
+                        this.updateMobileLayout('12-12-12-12-12', 5, childColumns);
+                    }
+
+                    if (nextColumns === 6) {
+                        this.updateColLayout('2-2-2-2-2-2', 6, childColumns);
+                        this.updateTabletLayout('2-2-2-2-2-2', 6, childColumns);
+                        this.updateMobileLayout('12-12-12-12-12-12', 6, childColumns);
+                    }
+
+
+                }.bind(this), 200);
             },
 
-            updateColLayout(layout, columns) {
+            updateColLayout(layout, columns, childColumns) {
+
+                if (!childColumns) {
+                    childColumns = getChildColumns(clientId);
+                }
+
                 // Update self...
                 dispatch('core/editor').updateBlockAttributes(clientId, {
                     colLayout: layout,
@@ -486,7 +504,7 @@ export default compose(
                 setChildColumnsDeviceClasses(layout, columns, 'desktop', childColumns, dispatch);
             },
 
-            updateTabletLayout(layout, columns) {
+            updateTabletLayout(layout, columns, childColumns) {
                 // Update self...
                 dispatch('core/editor').updateBlockAttributes(clientId, {
                     tabletLayout: layout,
@@ -495,7 +513,7 @@ export default compose(
                 setChildColumnsDeviceClasses(layout, columns, 'tablet', childColumns, dispatch);
             },
 
-            updateMobileLayout(layout, columns) {
+            updateMobileLayout(layout, columns, childColumns) {
                 // Update self...
                 dispatch('core/editor').updateBlockAttributes(clientId, {
                     mobileLayout: layout,
