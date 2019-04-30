@@ -34,7 +34,7 @@ import icons from '../globals/icons';
 /**
  * Constants
  */
-const ALLOWED_BLOCKS = ['core/button', 'core/paragraph', 'core/heading', 'core/list'];
+const ALLOWED_BLOCKS = ['core/button', 'core/paragraph', 'core/heading', 'core/list', 'glutenblocks/button'];
 const TEMPLATE = [
     ['core/paragraph', { fontSize: 'large', placeholder: _x('Content…', 'content placeholder') }],
 ];
