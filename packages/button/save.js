@@ -29,15 +29,17 @@ class GlutenblocksButtonSave extends Component {
         });
 
         return (
-            <a href={ (link ? link : '#') } target={ (target ? target : undefined) } className={classes} rel={ relAttr }>
-                { icon && 'left' === iconSide && (
-                    <GenIcon className={ `gb-button__svg-icon gb-button__svg-icon--${ icon } gb-button__svg-icon--${ iconSide }` } name={ icon } icon={ ('fa' === icon.substring(0, 2) ? FaIco[ icon ] : Ico[ icon ]) } />
-                ) }
-                { text }
-                { icon && 'left' !== iconSide && (
-                    <GenIcon className={ `gb-button__svg-icon gb-button__svg-icon--${ icon } gb-button__svg-icon--${ iconSide }` } name={ icon } icon={ ('fa' === icon.substring(0, 2) ? FaIco[ icon ] : Ico[ icon ]) } />
-                ) }
-            </a>
+            <div className={'wp-block-glutenblocks-button gb-button-wrapper'}>
+                <a href={ (link ? link : '#') } target={ (target ? target : undefined) } className={classes} rel={ relAttr }>
+                    { icon && 'left' === iconSide && (
+                        <GenIcon className={ `gb-button__svg-icon gb-button__svg-icon--${ icon } gb-button__svg-icon--${ iconSide }` } name={ icon } icon={ ('fa' === icon.substring(0, 2) ? FaIco[ icon ] : Ico[ icon ]) } />
+                    ) }
+                    { text }
+                    { icon && 'left' !== iconSide && (
+                        <GenIcon className={ `gb-button__svg-icon gb-button__svg-icon--${ icon } gb-button__svg-icon--${ iconSide }` } name={ icon } icon={ ('fa' === icon.substring(0, 2) ? FaIco[ icon ] : Ico[ icon ]) } />
+                    ) }
+                </a>
+            </div>
         );
     }
 }
