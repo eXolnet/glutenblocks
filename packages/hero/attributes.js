@@ -138,6 +138,10 @@ const attributes = {
     colorTheme: {
         type: 'String',
         default: 'dark'
-    }
+    },
+    verticalAlignment: {
+        type: 'string',
+        default: 'middle',
+    },
 };
 export default attributes;

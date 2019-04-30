@@ -6,9 +6,9 @@ import utils from '../globals/utils';
 import classnames from 'classnames';
 
 const { __ } = wp.i18n;
-const { Button, ButtonGroup, Dashicon, PanelBody, RangeControl, Tooltip, TabPanel, SelectControl } = wp.components;
+const { Button, ButtonGroup, Dashicon, PanelBody, RangeControl, Tooltip, TabPanel, SelectControl, Toolbar } = wp.components;
 const { Component, Fragment } = wp.element;
-const { InspectorControls, InnerBlocks, MediaUpload, ColorPalette } = wp.editor;
+const { InspectorControls, InnerBlocks, MediaUpload, ColorPalette, BlockControls } = wp.editor;
 
 const TEMPLATE = [
     ['glutenblocks/row', {},[
@@ -36,7 +36,7 @@ class GlutenblocksHeroEdit extends Component {
     }
 
     render() {
-        const { attributes: { bgColor, bgImg, bgImgId, bgImgSize, overlayOpacity, overlayBgImg, overlayBgImgAttachment, overlayBgImgID, overlayBgImgPosition, overlayBgImgRepeat, overlayBgImgSize, currentOverlayTab, overlayBlendMode, overlayGradAngle, overlayGradLoc, overlayGradLocSecond, overlayGradType, overlay, overlaySecond, paddingUnit, paddingTop, paddingRight, paddingBottom, paddingLeft, marginUnit, marginTop, marginBottom, minHeightUnit, minHeight, maxWidthUnit, maxWidth, colorTheme }, className, setAttributes } = this.props;
+        const { attributes: { bgColor, bgImg, bgImgId, bgImgSize, overlayOpacity, overlayBgImg, overlayBgImgAttachment, overlayBgImgID, overlayBgImgPosition, overlayBgImgRepeat, overlayBgImgSize, currentOverlayTab, overlayBlendMode, overlayGradAngle, overlayGradLoc, overlayGradLocSecond, overlayGradType, overlay, overlaySecond, paddingUnit, paddingTop, paddingRight, paddingBottom, paddingLeft, marginUnit, marginTop, marginBottom, minHeightUnit, minHeight, maxWidthUnit, maxWidth, colorTheme, verticalAlignment }, className, setAttributes } = this.props;
 
         const marginUnits = [
             { key: 'px', name: __('px') },
@@ -316,6 +316,50 @@ class GlutenblocksHeroEdit extends Component {
 
         return (
             <Fragment>
+                <BlockControls>
+                    <Toolbar>
+                        <Tooltip text={__('Vertical Align Top')}>
+                            <Button
+                                className={classnames(
+                                    'components-icon-button',
+                                    'components-toolbar__control',
+                                    { 'is-active': verticalAlignment === 'top' },
+                                )}
+                                onClick={ () => setAttributes({ verticalAlignment:'top' })}
+                            >
+                                {icons.aligntop}
+                            </Button>
+                        </Tooltip>
+                    </Toolbar>
+                    <Toolbar>
+                        <Tooltip text={__('Vertical Align Middle')}>
+                            <Button
+                                className={classnames(
+                                    'components-icon-button',
+                                    'components-toolbar__control',
+                                    { 'is-active': verticalAlignment === 'middle' },
+                                )}
+                                onClick={ () => setAttributes({ verticalAlignment:'middle' })}
+                            >
+                                {icons.alignmiddle}
+                            </Button>
+                        </Tooltip>
+                    </Toolbar>
+                    <Toolbar>
+                        <Tooltip text={__('Vertical Align Bottom')}>
+                            <Button
+                                className={classnames(
+                                    'components-icon-button',
+                                    'components-toolbar__control',
+                                    { 'is-active': verticalAlignment === 'bottom' },
+                                )}
+                                onClick={ () => setAttributes({ verticalAlignment:'bottom' })}
+                            >
+                                {icons.alignbottom}
+                            </Button>
+                        </Tooltip>
+                    </Toolbar>
+                </BlockControls>
                 <InspectorControls>
                     <PanelBody
                         title={ __('Background') }
@@ -606,7 +650,7 @@ class GlutenblocksHeroEdit extends Component {
                             opacity: overlayOpacityOutput(overlayOpacity),
                         }}/>
                     )}
-                    <div className={'gb-hero__content'} style={{
+                    <div className={`gb-hero__content gb-hero__content--valign-${verticalAlignment}`} style={{
                         maxWidth: (maxWidth ? maxWidth + maxWidthUnit : undefined),
                     }}>
                         <InnerBlocks templateLock={ false } template={TEMPLATE} />

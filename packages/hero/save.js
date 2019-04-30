@@ -24,7 +24,7 @@ const overlayOpacityOutput = memoize((opacity) => {
 
 class GlutenblocksHeroSave extends Component {
     render() {
-        const { attributes: { bgColor, bgImg, bgImgId, bgImgAlt, bgImgWidth,bgImgHeight, bgImgSize, overlay, overlayBgImg, currentOverlayTab, overlayBgImgSize, overlayBgImgPosition, overlayBgImgRepeat, overlayBgImgAttachment, overlayBlendMode, overlayOpacity, overlayGradType, overlayGradAngle, overlayGradLoc, overlaySecond, overlayGradLocSecond, paddingUnit, paddingTop, paddingRight, paddingBottom, paddingLeft, marginUnit, marginTop, marginBottom, minHeightUnit, minHeight, maxWidthUnit, maxWidth, colorTheme } } = this.props;
+        const { attributes: { bgColor, bgImg, bgImgId, bgImgAlt, bgImgWidth,bgImgHeight, bgImgSize, overlay, overlayBgImg, currentOverlayTab, overlayBgImgSize, overlayBgImgPosition, overlayBgImgRepeat, overlayBgImgAttachment, overlayBlendMode, overlayOpacity, overlayGradType, overlayGradAngle, overlayGradLoc, overlaySecond, overlayGradLocSecond, paddingUnit, paddingTop, paddingRight, paddingBottom, paddingLeft, marginUnit, marginTop, marginBottom, minHeightUnit, minHeight, maxWidthUnit, maxWidth, colorTheme, verticalAlignment } } = this.props;
 
         const hasBG = (bgColor || bgImg || overlay || overlayBgImg ? 'gb-hero--has-bg' : '');
         const overlayType = (!currentOverlayTab || 'grad' !== currentOverlayTab ? 'normal' : 'gradient');
@@ -74,7 +74,7 @@ class GlutenblocksHeroSave extends Component {
                         opacity: overlayOpacityOutput(overlayOpacity),
                     }}/>
                 )}
-                <div className={'gb-hero__content'} style={{
+                <div className={`gb-hero__content gb-hero__content--valign-${verticalAlignment}`} style={{
                     maxWidth: (maxWidth ? maxWidth + maxWidthUnit : undefined),
                 }}>
                     <InnerBlocks.Content/>

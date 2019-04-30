@@ -1,5 +1,6 @@
-.wp-block-glutenblocks-hero {
+.gb-hero {
     position: relative;
+    display: flex;
 
     &.gb-hero--theme-light {
         color: white;
@@ -31,5 +32,17 @@
     .gb-hero__content {
         position: relative;
         z-index: 1;
+
+        &--valign-top {
+            align-self: flex-start;
+        }
+
+        &--valign-middle {
+            align-self: center;
+        }
+
+        &--valign-bottom {
+            align-self: flex-end;
+        }
     }
 }
