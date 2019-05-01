@@ -40,8 +40,9 @@ class GlutenblocksHeroSave extends Component {
                 marginTop: (marginTop ? marginTop + marginUnit : undefined),
                 marginBottom: (marginBottom ? marginBottom + marginUnit : undefined),
                 minHeight: (minHeight ? minHeight + minHeightUnit : undefined),
+                backgroundColor: (bgColor ? bgColor : undefined),
             }}>
-                {(hasBG !== '') && (
+                {(bgImg !== '') && (
                     <figure className={'gb-hero__background'}>
                         <img
                             src={ bgImg }
