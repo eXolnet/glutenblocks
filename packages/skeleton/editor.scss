@@ -1,0 +1,31 @@
+.skeleton-body__line {
+    background-color: #dfe3e8;
+    height: 0.8rem;
+
+    &:last-child {
+        width: 80%;
+    }
+
+    & + & {
+        margin-top: 1.2rem;
+    }
+}
+
+.skeleton-image {
+    background-color: #dfe3e8;
+    max-width: 25rem;
+    position: relative;
+    margin-bottom: 1.2rem;
+
+    &--small {
+        height: 2.4rem;
+    }
+
+    &--medium {
+        height: 2.8rem;
+    }
+
+    &--large {
+        height: 3.6rem;
+    }
+}
