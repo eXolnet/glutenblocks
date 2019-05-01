@@ -25,10 +25,19 @@ class GlutenblocksJumbotronSave extends Component {
                 scrollToText,
                 scrollToTheme,
                 callToAction,
-                theme, text, link, target, noFollow, icon, iconSide
+                theme, text, link, target, noFollow, icon, iconSide,
+                supportButton,
+                supportTheme, supportText, supportLink, supportTarget, supportNoFollow
             },
         } = this.props;
         const classes = classnames('gb-jumbotron');
+
+        let relAttr = 'noopener noreferrer';
+
+        if (supportNoFollow) {
+            relAttr = relAttr + ' nofollow';
+        }
+
         return (
             <div className={classes}>
                 <InnerBlocks.Content/>
@@ -37,9 +46,18 @@ class GlutenblocksJumbotronSave extends Component {
                         {scrollTo && (
                             <a className={`gb-button gb-button--${scrollToTheme} gb-jumbotron__scroll-to`} href={scrollToAnchor} style={{ color : scrollToColor ? scrollToColor : undefined }}>{ scrollToText }</a>
                         )}
-                        {callToAction && (
-                            <Button className={'is-style-squared gb-jumbotron__call-to-action'} { ...{ attributes:{ theme, text, link, target, noFollow, icon, iconSide } } }/>
-                        )}
+                        <div className={'gb-button-wrapper'}>
+                            {supportButton && (
+                                <div className={'wp-block-glutenblocks-button gb-button-wrapper'}>
+                                    <a href={ (supportLink ? supportLink : '#') } target={ (supportTarget ? supportTarget : undefined) } className={`gb-button gb-button--inverse is-style-squared gb-button--${ supportTheme }`} rel={ relAttr }>
+                                        { supportText }
+                                    </a>
+                                </div>
+                            )}
+                            {callToAction && (
+                                <Button className={'is-style-squared gb-jumbotron__call-to-action'} { ...{ attributes:{ theme, text, link, target, noFollow, icon, iconSide } } }/>
+                            )}
+                        </div>
                     </footer>
                 )}
             </div>

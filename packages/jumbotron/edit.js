@@ -1,12 +1,11 @@
 import PropTypes from 'prop-types';
 import utils from '../globals/utils';
-
 import Button from '../button/edit';
 
 const { __ } = wp.i18n;
 const { Component, Fragment } = wp.element;
-const { InnerBlocks, InspectorControls, RichText, ColorPalette } = wp.editor;
-const { PanelBody, ToggleControl, TextControl, SelectControl } = wp.components;
+const { InnerBlocks, InspectorControls, RichText, ColorPalette, URLInput } = wp.editor;
+const { IconButton, PanelBody, ToggleControl, TextControl, SelectControl } = wp.components;
 
 const TEMPLATE = [
     ['glutenblocks/hero', { align:'full', minHeightUnit: 'vh', minHeight: 100 }, [
@@ -28,7 +27,10 @@ class JumbotronEdit extends Component {
                 scrollToColor,
                 scrollToTheme,
                 callToAction,
-                theme, text, link, target, noFollow, icon, iconSide
+                theme, text, link, target, noFollow, icon, iconSide,
+                supportButton,
+                supportTheme, supportText, supportLink, supportTarget, supportNoFollow
+
             },
             setAttributes,
             className,
@@ -71,6 +73,45 @@ class JumbotronEdit extends Component {
                             </Fragment>
                         )}
                     </PanelBody>
+                    <PanelBody title={ __('Support Button') } initialOpen={ true }>
+                        <Fragment>
+                            <ToggleControl
+                                label={ __('Add a Support Button') }
+                                checked={ supportButton }
+                                onChange={ () => setAttributes({
+                                    supportButton: ! supportButton,
+                                }) }
+                            />
+                            {supportButton && (
+                                <Fragment>
+                                    <SelectControl
+                                        label={ __('Button Theme') }
+                                        value={ supportTheme }
+                                        options={ utils.themeStyles() }
+                                        onChange={ value => {
+                                            setAttributes({ supportTheme: value });
+                                        } }
+                                    />
+                                    <SelectControl
+                                        label={ __('Link Target') }
+                                        value={ supportTarget }
+                                        options={ [
+                                            { value: '_self', label: __('Same Window') },
+                                            { value: '_blank', label: __('New Window') },
+                                        ] }
+                                        onChange={ value => {
+                                            setAttributes({ supportTarget: value });
+                                        } }
+                                    />
+                                    <ToggleControl
+                                        label={ __('Set link to nofollow?') }
+                                        checked={ (undefined !== supportNoFollow ? supportNoFollow : false) }
+                                        onChange={ (value) => setAttributes({ supportNoFollow: value }) }
+                                    />
+                                </Fragment>
+                            )}
+                        </Fragment>
+                    </PanelBody>
                     <PanelBody title={ __('Call To Action') } initialOpen={ true }>
                         <ToggleControl
                             label={ __('Add Call To Action button') }
@@ -98,9 +139,48 @@ class JumbotronEdit extends Component {
                             keepPlaceholderOnFocus
                         />
                     )}
-                    {callToAction && (
-                        <Button setAttributes={setAttributes} className={'wp-block-glutenblocks-button is-style-squared gb-jumbotron__call-to-action'} isSelected={isSelected} { ...{ attributes:{ theme, text, link, target, noFollow, icon, iconSide } } }/>
-                    )}
+                    <div className="gb-buttons-wrapper">
+                        {supportButton && (
+                            <div className={ 'gb-button__area-wrap' } >
+                                <span className={'gb-button__wrap'}>
+                                    <span className={`gb-button gb-button--inverse is-style-squared gb-button--${supportTheme}`}>
+                                        <RichText
+                                            tagName="div"
+                                            placeholder={ __('Support Button...') }
+                                            value={ supportText }
+                                            onChange={ value => {
+                                                setAttributes({ supportText: value });
+                                            } }
+                                            formattingControls={ [] }
+                                            className={ 'gb-button__text' }
+                                            keepPlaceholderOnFocus
+                                        />
+                                    </span>
+                                </span>
+                                { isSelected && (
+                                    <form
+                                        key={ 'form-link' }
+                                        onSubmit={ (event) => event.preventDefault() }
+                                        className="blocks-button__inline-link">
+                                        <URLInput
+                                            value={ supportLink }
+                                            onChange={ value => {
+                                                setAttributes({ supportLink: value });
+                                            } }
+                                        />
+                                        <IconButton
+                                            icon={ 'editor-break' }
+                                            label={ __('Apply') }
+                                            type={ 'submit' }
+                                        />
+                                    </form>
+                                ) }
+                            </div>
+                        )}
+                        {callToAction && (
+                            <Button setAttributes={setAttributes} className={'wp-block-glutenblocks-button is-style-squared gb-jumbotron__call-to-action'} isSelected={isSelected} { ...{ attributes:{ theme, text, link, target, noFollow, icon, iconSide } } }/>
+                        )}
+                    </div>
                 </div>
             </Fragment>
         );

@@ -57,7 +57,31 @@ const attributes = {
     iconSide: {
         type: 'String',
         default: 'right',
-    }
+    },
+    supportButton: {
+        type: 'Boolean',
+        default: false
+    },
+    supportTheme: {
+        type: 'String',
+        default: 'light',
+    },
+    supportText: {
+        type: 'String',
+        default: '',
+    },
+    supportLink: {
+        type: 'String',
+        default: '',
+    },
+    supportTarget: {
+        type: 'String',
+        default: '_self',
+    },
+    supportNoFollow: {
+        type: 'Boolean',
+        default: false,
+    },
 
 };
 export default attributes;
