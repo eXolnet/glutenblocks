@@ -32,11 +32,15 @@ class GlutenblocksJumbotronSave extends Component {
         return (
             <div className={classes}>
                 <InnerBlocks.Content/>
-                {scrollTo && (
-                    <a className={`gb-button gb-button--${scrollToTheme} gb-jumbotron__scroll-to`} href={scrollToAnchor} style={{ color : scrollToColor ? scrollToColor : undefined }}>{ scrollToText }</a>
-                )}
-                {callToAction && (
-                    <Button className={'is-style-squared gb-jumbotron__call-to-action'} { ...{ attributes:{ theme, text, link, target, noFollow, icon, iconSide } } }/>
+                {(scrollTo || callToAction) && (
+                    <footer className={'gb-jumbotron__footer'}>
+                        {scrollTo && (
+                            <a className={`gb-button gb-button--${scrollToTheme} gb-jumbotron__scroll-to`} href={scrollToAnchor} style={{ color : scrollToColor ? scrollToColor : undefined }}>{ scrollToText }</a>
+                        )}
+                        {callToAction && (
+                            <Button className={'is-style-squared gb-jumbotron__call-to-action'} { ...{ attributes:{ theme, text, link, target, noFollow, icon, iconSide } } }/>
+                        )}
+                    </footer>
                 )}
             </div>
         );
