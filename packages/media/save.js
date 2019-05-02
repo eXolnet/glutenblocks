@@ -26,9 +26,10 @@ class GlutenblocksMediaSave extends Component {
             image: () => <img src={ mediaUrl } alt={ mediaAlt } width={width} height={height} className={ (mediaId && mediaType === 'image') ? `gb-media__image wp-image-${ mediaId }` : null } />,
             video: () => <video controls src={ mediaUrl } />,
         };
-        const className = classnames({
-            'gb-media gb-media--right': 'right' === mediaPosition,
+
+        const className = classnames('gb-media', {
             'gb-media--stacked-on-mobile': isStackedOnMobile,
+            [ `gb-media--${mediaPosition}` ]: mediaPosition,
             [ `gb-media--aligned-${ verticalAlignment }` ]: verticalAlignment,
         });
 
