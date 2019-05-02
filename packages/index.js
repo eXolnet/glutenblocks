@@ -12,6 +12,7 @@ const jumbotron = require('./jumbotron');
 const card = require('./card');
 const listLink = require('./list-link');
 const link = require('./link');
+const section = require('./section');
 
 /**
  * WordPress dependencies
@@ -46,6 +47,7 @@ const BLOCKS_TO_UNREGISTER = [
         card,
         listLink,
         link,
+        section,
     ].forEach((block) => {
         if (!block) {
             return;

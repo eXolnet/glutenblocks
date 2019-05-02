@@ -77,6 +77,11 @@ function glutenblocks_enqueue_block_editor_assets()
 
         $phpVars['themeStyles'] = $encodedStyles;
     }
+
+    if ($sectionThemes = get_theme_support('glutenblocks-section-themes')) {
+        $phpVars['sectionThemes'] = $sectionThemes[0] ?? [];
+    }
+
     wp_localize_script('glutenblocks', 'php_vars', $phpVars);
 
     wp_enqueue_style(

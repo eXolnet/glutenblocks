@@ -24,4 +24,19 @@ utils.themeStyles = () => {
     return window.php_vars.themeStyles;
 };
 
+utils.sectionThemes = () => {
+    const themes = window.php_vars?.sectionThemes;
+
+    if (typeof themes !== 'object') {
+        return [];
+    }
+
+    return Object.entries(themes).map(theme => {
+        return {
+            value: theme[0],
+            label: theme[1],
+        };
+    });
+};
+
 export default utils;
