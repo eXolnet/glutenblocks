@@ -4,10 +4,10 @@ import PropTypes from 'prop-types';
 
 const { __ } = wp.i18n;
 const { Component, Fragment } = wp.element;
-const { InnerBlocks, BlockControls } = wp.editor;
+const { InnerBlocks, BlockControls, InspectorControls } = wp.editor;
 const { compose } = wp.compose;
 const { withSelect, withDispatch } = wp.data;
-const { Button, Toolbar, Tooltip } = wp.components;
+const { Button, Toolbar, Tooltip, PanelBody, ToggleControl } = wp.components;
 
 /**
  * This allows for checking to see if the block needs to generate a new ID.
@@ -34,11 +34,13 @@ class GlutenBlocksColumn extends Component {
         }
     }
     render() {
-        const { attributes: { uniqueID, verticalAlignment, colClasses }, updateAlignment } = this.props;
+        const { attributes: { uniqueID, verticalAlignment, colClasses, override }, updateAlignment, setAttributes } = this.props;
+
         const classes = classnames({
             [ `valign-${ verticalAlignment }` ]: verticalAlignment,
             [`${colClasses}`]: colClasses
         });
+
         return (
             <Fragment>
                 <BlockControls>
@@ -85,6 +87,15 @@ class GlutenBlocksColumn extends Component {
                         </Tooltip>
                     </Toolbar>
                 </BlockControls>
+                <InspectorControls>
+                    <PanelBody>
+                        <ToggleControl
+                            label={ __('Override Classes') }
+                            checked={ (override || false) }
+                            onChange={ (value) => setAttributes({ override: value }) }
+                        />
+                    </PanelBody>
+                </InspectorControls>
                 <div id={ `glutenblocks-column${ uniqueID }` } className={ classes }>
                     <InnerBlocks templateLock={ false } />
                 </div>

@@ -14,14 +14,19 @@ const {
 
 class GlutenblocksColumnSave extends Component {
     render() {
-        const { attributes: { uniqueID, verticalAlignment, colClasses, tabletColClasses, mobileColClasses } } = this.props;
+        const { attributes: { uniqueID, verticalAlignment, colClasses, tabletColClasses, mobileColClasses, override } } = this.props;
 
-        const classes = classnames({
+        const baseClasses = {
             [ `valign-${ verticalAlignment }` ]: verticalAlignment,
-            [`${colClasses}`]: colClasses,
-            [`${tabletColClasses}`]: tabletColClasses,
-            [`${mobileColClasses}`]: mobileColClasses,
-        });
+        };
+
+        if (! override) {
+            baseClasses[`${colClasses}`] = colClasses;
+            baseClasses[`${tabletColClasses}`] = tabletColClasses;
+            baseClasses[`${mobileColClasses}`] = mobileColClasses;
+        }
+
+        const classes = classnames(baseClasses);
 
         return (
             <div id={ `glutenblocks-column${ uniqueID }` }  className={ classes }>

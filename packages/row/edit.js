@@ -63,6 +63,8 @@ export class GlutenBlocksRowEdit extends Component {
 
         const selectColLayout = (columns && (2 === columns) ? widthString : colLayout);
 
+        const rowClasses = classnames(className, `gb-row-has-${columns}-columns`);
+
         let layoutOptions;
         let mobileLayoutOptions;
 
@@ -330,7 +332,7 @@ export class GlutenBlocksRowEdit extends Component {
                 <InspectorControls>
                     {tabControls}
                 </InspectorControls>
-                <div id={ `glutenblocks-row${ uniqueID }` } className={className}>
+                <div id={ `glutenblocks-row${ uniqueID }` } className={rowClasses}>
                     <InnerBlocks
                         template={getColumnsTemplate(columns)}
                         templateLock="all"

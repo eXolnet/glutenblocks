@@ -29,5 +29,9 @@ const attributes = {
         type: 'string',
         default: 'col-sm-12',
     },
+    override: {
+        type: 'boolean',
+        default: false,
+    },
 };
 export default attributes;

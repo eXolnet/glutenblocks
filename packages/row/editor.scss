@@ -114,3 +114,8 @@
 .gb-inspect-tabs .components-button-group svg {
     width: 45px;
 }
+
+.gb-row-has-1-columns > .editor-inner-blocks > .editor-block-list__layout > [data-type="glutenblocks/column"] {
+    flex-basis: 100%;
+    margin-right: 14px !important;
+}
