@@ -20,7 +20,9 @@ class GlutenblocksHeroSave extends Component {
 
         return (
             <section className={classes}>
-                <InnerBlocks.Content/>
+                <div className="gb-section__content">
+                    <InnerBlocks.Content/>
+                </div>
             </section>
         );
     }
