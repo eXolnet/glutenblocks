@@ -17,9 +17,9 @@ class GlutenblocksJumbotronSave extends Component {
     render() {
         const {
             attributes: {
+                jumbotronTheme,
                 scrollTo,
                 scrollToAnchor,
-                scrollToColor,
                 scrollToText,
                 scrollToTheme,
                 callToAction,
@@ -28,7 +28,7 @@ class GlutenblocksJumbotronSave extends Component {
                 supportTheme, supportText, supportLink, supportTarget, supportNoFollow
             },
         } = this.props;
-        const classes = classnames('gb-jumbotron');
+        const classes = classnames('gb-jumbotron', `gb-jumbotron--${jumbotronTheme}`);
 
         let relAttr = 'noopener noreferrer';
         let relAttrSupport = relAttr;
@@ -47,7 +47,7 @@ class GlutenblocksJumbotronSave extends Component {
                 {(scrollTo || callToAction || supportButton) && (
                     <footer className={'gb-jumbotron__footer'}>
                         {scrollTo && (
-                            <a className={`gb-button gb-button--${scrollToTheme} gb-jumbotron__scroll-to`} href={scrollToAnchor} style={{ color : scrollToColor ? scrollToColor : undefined }}>{ scrollToText }</a>
+                            <a className={`gb-button gb-button--${scrollToTheme} gb-jumbotron__scroll-to`} href={scrollToAnchor}>{ scrollToText }</a>
                         )}
                         <div className={'gb-button-wrapper'}>
                             {supportButton && (

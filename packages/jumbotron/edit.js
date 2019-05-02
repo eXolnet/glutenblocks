@@ -1,9 +1,10 @@
 import PropTypes from 'prop-types';
 import utils from '../globals/utils';
+import classnames from 'classnames';
 
 const { __ } = wp.i18n;
 const { Component, Fragment } = wp.element;
-const { InnerBlocks, InspectorControls, RichText, ColorPalette, URLInput } = wp.editor;
+const { InnerBlocks, InspectorControls, RichText, URLInput } = wp.editor;
 const { IconButton, PanelBody, ToggleControl, TextControl, SelectControl } = wp.components;
 
 const TEMPLATE = [
@@ -26,10 +27,10 @@ class JumbotronEdit extends Component {
     render() {
         const {
             attributes: {
+                jumbotronTheme,
                 scrollTo,
                 scrollToAnchor,
                 scrollToText,
-                scrollToColor,
                 scrollToTheme,
                 callToAction,
                 theme, text, link, target, noFollow,
@@ -42,10 +43,25 @@ class JumbotronEdit extends Component {
             isSelected
         } = this.props;
 
+        const jumbotronClasses = classnames(className, `gb-jumbotron--${jumbotronTheme}`);
+
         return (
             <Fragment>
                 <InspectorControls>
-                    <PanelBody title={ __('Scroll To') } initialOpen={ true }>
+                    <PanelBody title={ __('Color Theme') } initialOpen={ true }>
+                        <SelectControl
+                            label={ __('Color Theme') }
+                            value={ jumbotronTheme }
+                            options={ [
+                                { value: 'light', label: __('Light') },
+                                { value: 'dark', label: __('Dark') },
+                            ] }
+                            onChange={ value => {
+                                setAttributes({ jumbotronTheme: value });
+                            } }
+                        />
+                    </PanelBody>
+                    <PanelBody title={ __('Scroll To') } initialOpen={ false }>
                         <ToggleControl
                             label={ __('Add Scroll To button') }
                             checked={ scrollTo }
@@ -61,12 +77,6 @@ class JumbotronEdit extends Component {
                                     value={ scrollToAnchor }
                                     onChange={ value => setAttributes({ scrollToAnchor: value }) }
                                 />
-                                <p>{__('Color')}</p>
-                                <ColorPalette
-                                    colors={ utils.themeColors() }
-                                    value={ scrollToColor }
-                                    onChange={ value => setAttributes({ scrollToColor: value }) }
-                                />
                                 <SelectControl
                                     label={ __('Button Theme') }
                                     value={ scrollToTheme }
@@ -78,7 +88,7 @@ class JumbotronEdit extends Component {
                             </Fragment>
                         )}
                     </PanelBody>
-                    <PanelBody title={ __('Support Button') } initialOpen={ true }>
+                    <PanelBody title={ __('Support Button') } initialOpen={ false }>
                         <Fragment>
                             <ToggleControl
                                 label={ __('Add a Support Button') }
@@ -117,7 +127,7 @@ class JumbotronEdit extends Component {
                             )}
                         </Fragment>
                     </PanelBody>
-                    <PanelBody title={ __('Call To Action') } initialOpen={ true }>
+                    <PanelBody title={ __('Call To Action') } initialOpen={ false }>
                         <ToggleControl
                             label={ __('Add Call To Action button') }
                             checked={ callToAction }
@@ -155,22 +165,23 @@ class JumbotronEdit extends Component {
                         )}
                     </PanelBody>
                 </InspectorControls>
-                <div className={ className } >
+                <div className={ jumbotronClasses } >
                     <InnerBlocks
                         template={TEMPLATE} />
                     {scrollTo && (
-                        <RichText
-                            tagName="div"
-                            placeholder={ __('Scroll To Text...') }
-                            value={ scrollToText }
-                            onChange={ value => {
-                                setAttributes({ scrollToText: value });
-                            } }
-                            style={{ color : scrollToColor ? scrollToColor : undefined }}
-                            formattingControls={ ['bold', 'italic', 'strikethrough'] }
-                            className={ `gb-button gb-button--${scrollToTheme} gb-jumbotron__scroll-to` }
-                            keepPlaceholderOnFocus
-                        />
+                        <div className={'gb-jumbotron__scroll-to'}>
+                            <RichText
+                                tagName="div"
+                                placeholder={ __('Scroll To Text...') }
+                                value={ scrollToText }
+                                onChange={ value => {
+                                    setAttributes({ scrollToText: value });
+                                } }
+                                formattingControls={ ['bold', 'italic', 'strikethrough'] }
+                                className={ `gb-button gb-button--${scrollToTheme} gb-jumbotron__scroll-to` }
+                                keepPlaceholderOnFocus
+                            />
+                        </div>
                     )}
                     <div className="gb-buttons-wrapper">
                         {supportButton && (

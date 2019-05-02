@@ -34,4 +34,16 @@
             display: none;
         }
     }
+
+    &.gb-jumbotron--light {
+        .gb-jumbotron__scroll-to {
+            color: #fff;
+        }
+    }
+
+    &.gb-jumbotron--dark {
+        .gb-jumbotron__scroll-to {
+            color: #000;
+        }
+    }
 }

@@ -2,6 +2,10 @@
  * BLOCK: Glutenblock Jumbotron Attributes
  */
 const attributes = {
+    jumbotronTheme: {
+        type: 'String',
+        default: 'dark',
+    },
     align: {
         type: 'String',
         default: 'full',
@@ -13,10 +17,6 @@ const attributes = {
     scrollToAnchor: {
         type: 'String',
         default: '#main',
-    },
-    scrollToColor: {
-        type: 'String',
-        default: '',
     },
     scrollToText: {
         type: 'String',
