@@ -12,8 +12,6 @@ const {
 } = wp.editor;
 
 import PropTypes from 'prop-types';
-import Button from '../button/save';
-
 
 class GlutenblocksJumbotronSave extends Component {
     render() {
@@ -25,7 +23,7 @@ class GlutenblocksJumbotronSave extends Component {
                 scrollToText,
                 scrollToTheme,
                 callToAction,
-                theme, text, link, target, noFollow, icon, iconSide,
+                theme, text, link, target, noFollow,
                 supportButton,
                 supportTheme, supportText, supportLink, supportTarget, supportNoFollow
             },
@@ -33,15 +31,20 @@ class GlutenblocksJumbotronSave extends Component {
         const classes = classnames('gb-jumbotron');
 
         let relAttr = 'noopener noreferrer';
+        let relAttrSupport = relAttr;
 
         if (supportNoFollow) {
+            relAttrSupport = relAttrSupport + ' nofollow';
+        }
+
+        if (noFollow) {
             relAttr = relAttr + ' nofollow';
         }
 
         return (
             <div className={classes}>
                 <InnerBlocks.Content/>
-                {(scrollTo || callToAction) && (
+                {(scrollTo || callToAction || supportButton) && (
                     <footer className={'gb-jumbotron__footer'}>
                         {scrollTo && (
                             <a className={`gb-button gb-button--${scrollToTheme} gb-jumbotron__scroll-to`} href={scrollToAnchor} style={{ color : scrollToColor ? scrollToColor : undefined }}>{ scrollToText }</a>
@@ -49,13 +52,17 @@ class GlutenblocksJumbotronSave extends Component {
                         <div className={'gb-button-wrapper'}>
                             {supportButton && (
                                 <div className={'wp-block-glutenblocks-button gb-button-wrapper'}>
-                                    <a href={ (supportLink ? supportLink : '#') } target={ (supportTarget ? supportTarget : undefined) } className={`gb-button gb-button--inverse is-style-squared gb-button--${ supportTheme }`} rel={ relAttr }>
+                                    <a href={ (supportLink ? supportLink : '#') } target={ (supportTarget ? supportTarget : undefined) } className={`gb-button gb-button--inverse is-style-squared gb-button--${ supportTheme }`} rel={ relAttrSupport }>
                                         { supportText }
                                     </a>
                                 </div>
                             )}
                             {callToAction && (
-                                <Button className={'is-style-squared gb-jumbotron__call-to-action'} { ...{ attributes:{ theme, text, link, target, noFollow, icon, iconSide } } }/>
+                                <div className={'wp-block-glutenblocks-button gb-button-wrapper'}>
+                                    <a href={ (link ? link : '#') } target={ (target ? target : undefined) } className={`gb-button is-style-squared gb-jumbotron__call-to-action gb-button--${ theme }`} rel={ relAttr }>
+                                        { text }
+                                    </a>
+                                </div>
                             )}
                         </div>
                     </footer>
