@@ -1,15 +1,15 @@
 <?php
 /**
- * Server-side rendering of the `glutenblocks/hero` block.
+ * Server-side rendering of the `glutenblocks/jumbotron` block.
  * phpcs:disable
  */
 
 /**
- * Registers the `glutenblocks/hero` block on server.
+ * Registers the `glutenblocks/jumbotron` block on server.
  */
-function glutenblocksregister_block_glutenblocks_hero() {
+function glutenblocksregister_block_glutenblocks_jumbotron() {
     register_block_type(
-        'glutenblocks/hero',
+        'glutenblocks/jumbotron',
         [
             'style' => 'glutenblocks-style',
             'editor_script' => 'glutenblocks',
@@ -17,4 +17,4 @@ function glutenblocksregister_block_glutenblocks_hero() {
         ]
     );
 }
-add_action( 'init', 'glutenblocksregister_block_glutenblocks_hero' );
+add_action( 'init', 'glutenblocksregister_block_glutenblocks_jumbotron' );

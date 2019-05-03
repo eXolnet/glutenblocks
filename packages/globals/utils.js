@@ -2,6 +2,19 @@ import forEach from 'lodash/forEach';
 
 const utils = {};
 
+utils.objectToOptions = (items) => {
+    if (typeof items !== 'object') {
+        return [];
+    }
+
+    return Object.entries(items).map(theme => {
+        return {
+            value: theme[0],
+            label: theme[1],
+        };
+    });
+};
+
 utils.themeColors = () => {
     const colors = [];
 
@@ -16,27 +29,16 @@ utils.themeColors = () => {
     return colors;
 };
 
-utils.themeStyles = () => {
-    if (typeof window.php_vars === 'undefined') {
-        return [];
-    }
+utils.buttonColors = () => {
+    return utils.objectToOptions(window.php_vars?.buttonColors);
+};
 
-    return window.php_vars.themeStyles;
+utils.buttonShapes = () => {
+    return utils.objectToOptions(window.php_vars?.buttonShapes);
 };
 
 utils.sectionThemes = () => {
-    const themes = window.php_vars?.sectionThemes;
-
-    if (typeof themes !== 'object') {
-        return [];
-    }
-
-    return Object.entries(themes).map(theme => {
-        return {
-            value: theme[0],
-            label: theme[1],
-        };
-    });
+    return utils.objectToOptions(window.php_vars?.sectionThemes);
 };
 
 export default utils;

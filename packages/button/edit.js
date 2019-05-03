@@ -29,27 +29,68 @@ class GlutenblocksButtonEdit extends Component {
     }
 
     render() {
-
-        const { attributes: { theme, text, link, target, noFollow, icon, iconSide }, className, setAttributes, isSelected } = this.props;
+        const { attributes: { color, colorInverse, shape, size, text, link, target, noFollow, icon, iconSide }, className, setAttributes, isSelected } = this.props;
 
         const renderSVG = svg => (
             <GenIcon name={ svg } icon={ ('fa' === svg.substring(0, 2) ? FaIco[ svg ] : Ico[ svg ]) } />
         );
 
+        const colorOptions = utils.buttonColors();
+        const shapeOptions = utils.buttonShapes();
+
+        const buttonClass = classnames('gb-button', {
+            [ `gb-button--${ color }` ]: color,
+            [ 'gb-button--inverse' ]: colorInverse,
+            [ `gb-button--${ shape }` ]: shape,
+            [ `gb-button--${ size }` ]: size,
+        });
+
         return (
             <Fragment>
                 <InspectorControls>
                     <PanelBody
-                        title={ __('Theme') }
-                        initialOpen={ false }
+                        title={ __('Appearance') }
+                        initialOpen={ true }
                         className={'gb-hero__panel-body'}
                     >
+                        {colorOptions && (
+                            <SelectControl
+                                label={ __('Color') }
+                                value={ color }
+                                options={ colorOptions }
+                                onChange={ value => {
+                                    setAttributes({ color: value });
+                                } }
+                            />
+                        )}
+
+                        <ToggleControl
+                            label={ __('Inverse') }
+                            checked={ colorInverse || false }
+                            onChange={ (value) => setAttributes({ colorInverse: value }) }
+                        />
+
+                        {shapeOptions && (
+                            <SelectControl
+                                label={ __('Shape') }
+                                value={ shape }
+                                options={ shapeOptions }
+                                onChange={ value => {
+                                    setAttributes({ shape: value });
+                                } }
+                            />
+                        )}
+
                         <SelectControl
-                            label={ __('Button Theme') }
-                            value={ theme }
-                            options={ utils.themeStyles() }
+                            label={ __('Size') }
+                            value={ size }
+                            options={ [
+                                { value: 'small', label: __('Small') },
+                                { value: '', label: __('Normal') },
+                                { value: 'large', label: __('Large') },
+                            ] }
                             onChange={ value => {
-                                setAttributes({ theme: value });
+                                setAttributes({ size: value });
                             } }
                         />
                     </PanelBody>
@@ -104,7 +145,7 @@ class GlutenblocksButtonEdit extends Component {
                 </InspectorControls>
                 <div className={ classnames(className, 'gb-button__area-wrap') } >
                     <span className={'gb-button__wrap'}>
-                        <span className={`gb-button gb-button--${theme}`}>
+                        <span className={buttonClass}>
                             { icon && 'left' === iconSide && (
                                 <GenIcon className={ `gb-button__svg-icon gb-button__svg-icon--${ icon } gb-button__svg-icon--${ iconSide }` } name={ icon } icon={ ('fa' === icon.substring(0, 2) ? FaIco[ icon ] : Ico[ icon ]) } />
                             ) }

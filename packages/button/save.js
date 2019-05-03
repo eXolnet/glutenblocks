@@ -15,17 +15,19 @@ import Ico from '../globals/svgicons';
 
 class GlutenblocksButtonSave extends Component {
     render() {
-        const { attributes: { theme, link, target, noFollow, text, icon, iconSide }, className } = this.props;
+        const { attributes: { color, colorInverse, shape, size, link, target, noFollow, text, icon, iconSide }, className } = this.props;
 
-        let relAttr = 'noopener noreferrer';
+        let relAttr = target ? 'noopener noreferrer' : '';
 
         if (noFollow) {
             relAttr = relAttr + ' nofollow';
         }
 
-        const classes = classnames({
-            [ `${className}` ]: className,
-            [ `gb-button gb-button--${ theme }` ]: theme,
+        const classes = classnames(className, 'gb-button', {
+            [ `gb-button--${ color }` ]: color,
+            [ 'gb-button--inverse' ]: colorInverse,
+            [ `gb-button--${ shape }` ]: shape,
+            [ `gb-button--${ size }` ]: size,
         });
 
         return (

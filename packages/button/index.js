@@ -23,10 +23,6 @@ export const settings = {
         align: ['left', 'right', 'center'],
         html: false,
     },
-    styles: [
-        { name: 'default', label: __('Default'), isDefault: true },
-        { name: 'squared', label: __('Squared') },
-    ],
     edit,
     save,
 };

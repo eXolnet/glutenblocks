@@ -65,17 +65,12 @@ function glutenblocks_enqueue_block_editor_assets()
         $phpVars['themeColors'] = $themeColorsOption[0];
     }
 
-    $themeStyles = get_theme_support('glutenblocks-styles');
-    if ($themeStyles && $themeStyles !== '') {
-        $encodedStyles = [];
-        foreach ($themeStyles[0] as $style){
-            $styleArr = [];
-            $styleArr['value'] = $style;
-            $styleArr['label'] = ucfirst($style);
-            $encodedStyles[] = $styleArr;
-        }
+    if ($buttonColors = get_theme_support('glutenblocks-button-colors')) {
+        $phpVars['buttonColors'] = $buttonColors[0] ?? [];
+    }
 
-        $phpVars['themeStyles'] = $encodedStyles;
+    if ($buttonShapes = get_theme_support('glutenblocks-button-shapes')) {
+        $phpVars['buttonShapes'] = $buttonShapes[0] ?? [];
     }
 
     if ($sectionThemes = get_theme_support('glutenblocks-section-themes')) {
