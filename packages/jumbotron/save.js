@@ -41,13 +41,16 @@ class GlutenblocksJumbotronSave extends Component {
             relAttr = relAttr + ' nofollow';
         }
 
+        let scrollToHref = scrollToAnchor || '#gb-jumbotron-end';
+
+
         return (
             <div className={classes}>
                 <InnerBlocks.Content/>
                 {(scrollTo || callToAction || supportButton) && (
                     <footer className={'gb-jumbotron__footer'}>
                         {scrollTo && (
-                            <a className={`gb-button gb-button--${scrollToTheme} gb-jumbotron__scroll-to`} href={scrollToAnchor}>{ scrollToText }</a>
+                            <a className={`gb-button gb-button--${scrollToTheme} gb-jumbotron__scroll-to`} href={scrollToHref}>{ scrollToText }</a>
                         )}
                         <div className={'gb-button-wrapper'}>
                             {supportButton && (
@@ -66,6 +69,9 @@ class GlutenblocksJumbotronSave extends Component {
                             )}
                         </div>
                     </footer>
+                )}
+                {scrollTo && (
+                    <a href={'#gb-jumbotron-end'} id={'gb-jumbotron-end'} aria-hidden={'true'} className={'gb-jumbotron__anchor'}/>
                 )}
             </div>
         );
