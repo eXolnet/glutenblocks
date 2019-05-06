@@ -237,6 +237,13 @@ icons.button = <svg viewBox='0 0 48 48' xmlns='http://www.w3.org/2000/svg' fillR
         />
     </g>
 </svg>;
+icons.buttonGroup = <svg width="23" height="23" xmlns="http://www.w3.org/2000/svg">
+    <g stroke="#402B8A" strokeWidth="2" fill="none" fillRule="evenodd">
+        <rect x="1" y="9" width="5" height="4" rx="1"/>
+        <rect x="9" y="9" width="5" height="4" rx="1"/>
+        <rect x="17" y="9" width="5" height="4" rx="1"/>
+    </g>
+</svg>;
 icons.media = <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" role="img" aria-hidden="true" focusable="false">
     <path d="M13 17h8v-2h-8v2zM3 19h8V5H3v14zM13 9h8V7h-8v2zm0 4h8v-2h-8v2z" fill='#402C8A'></path>
 </svg>;

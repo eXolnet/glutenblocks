@@ -7,6 +7,7 @@ const row = require('./row');
 const column = require('./column');
 const hero = require('./hero');
 const button = require('./button');
+const buttonGroup = require('./button-group');
 const media = require('./media');
 const jumbotron = require('./jumbotron');
 const card = require('./card');
@@ -42,6 +43,7 @@ const BLOCKS_TO_UNREGISTER = [
         column,
         hero,
         button,
+        buttonGroup,
         media,
         jumbotron,
         card,
