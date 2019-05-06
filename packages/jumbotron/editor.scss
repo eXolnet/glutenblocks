@@ -1,8 +1,6 @@
-.wp-block-glutenblocks-jumbotron {
+.gb-jumbotron {
     position: relative;
     height: auto;
-
-    @extend .wp-block-glutenblocks-button;
 
     > .editor-rich-text {
         position: absolute;
@@ -13,35 +11,23 @@
         display: inline-block;
     }
 
-    > .gb-buttons-wrapper {
-        position: absolute;
-        bottom: 0;
-        z-index: 100;
-        right: 0;
-
-        .gb-button__area-wrap {
-            display: inline-block;
-        }
-    }
-
-    .blocks-button__inline-link {
-        left: inherit;
-        right: 0;
-    }
-
     > .editor-inner-blocks > .editor-block-list__layout {
+        .wp-block-glutenblocks-hero {
+            padding-bottom: 15px;
+        }
+
         > div > .editor-default-block-appender {
             display: none;
         }
     }
 
-    &.gb-jumbotron--light {
+    &--light {
         .gb-jumbotron__scroll-to {
             color: #fff;
         }
     }
 
-    &.gb-jumbotron--dark {
+    &--dark {
         .gb-jumbotron__scroll-to {
             color: #000;
         }

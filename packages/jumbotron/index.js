@@ -11,19 +11,17 @@ import icons from '../globals/icons';
  * WordPress dependencies
  */
 const { __ } = wp.i18n;
+import { settings as heroSettings } from '../hero';
 
 export const name = 'glutenblocks/jumbotron';
 
 export const settings = {
+    ...heroSettings,
+
     title: __('Jumbotron', 'glutenblocks'),
     description: __('A Glutenblock jumbotron'),
-    icon: icons.hero,
-    category: 'glutenblocks',
-    attributes: attributes,
-    supports: {
-        align: ['full', 'wide'],
-        html: false,
-    },
+    icon: icons.jumbotron,
+    attributes,
     edit,
     save,
     deprecated,

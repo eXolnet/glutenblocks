@@ -10,14 +10,4 @@
         transform: translateX(-50%);
         left: 50%;
     }
-
-    & > .gb-button-wrapper {
-        position: absolute;
-        bottom: 0;
-        right: 0;
-
-        .gb-button-wrapper {
-            display: inline-block;
-        }
-    }
 }
