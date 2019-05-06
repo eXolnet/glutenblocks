@@ -2,12 +2,12 @@
     position: relative;
     display: flex;
 
-    &.gb-hero--theme-light {
+    &--theme-light {
         color: white;
     }
 
-    .gb-hero__overlay,
-    .gb-hero__background {
+    &__overlay,
+    &__background {
         top: 0;
         bottom: 0;
         left: 0;
@@ -16,12 +16,12 @@
         width: 100%;
     }
 
-    .gb-hero__background {
+    &__background {
         height: 100%;
         margin: 0;
         overflow: hidden;
         text-align: center;
-        z-index: -1;
+        z-index: 0;
 
         img {
             height: 100%;
@@ -29,8 +29,7 @@
         }
     }
 
-    .gb-hero__content {
-        position: relative;
+    &__content {
         z-index: 1;
 
         &--valign-top {

@@ -1,17 +1,9 @@
-/**
- * BLOCK: Glutenblock Hero
- */
-
-const {
-    Component
-} = wp.element;
-const {
-    InnerBlocks,
-} = wp.editor;
-
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
 import memoize from 'memize';
+
+const { Component, Fragment } = wp.element;
+const { InnerBlocks } = wp.editor;
 
 const overlayOpacityOutput = memoize((opacity) => {
     if (opacity < 10) {
@@ -23,16 +15,19 @@ const overlayOpacityOutput = memoize((opacity) => {
 });
 
 class GlutenblocksHeroSave extends Component {
-    render() {
-        const { attributes: { bgColor, bgImg, bgImgId, bgImgAlt, bgImgWidth,bgImgHeight, bgImgSize, overlay, overlayBgImg, currentOverlayTab, overlayBgImgSize, overlayBgImgPosition, overlayBgImgRepeat, overlayBgImgAttachment, overlayBlendMode, overlayOpacity, overlayGradType, overlayGradAngle, overlayGradLoc, overlaySecond, overlayGradLocSecond, paddingUnit, paddingTop, paddingRight, paddingBottom, paddingLeft, marginUnit, marginTop, marginBottom, minHeightUnit, minHeight, maxWidthUnit, maxWidth, colorTheme, verticalAlignment } } = this.props;
+    getHeroClassName() {
+        const { attributes: { bgColor, bgImg, overlay, overlayBgImg, colorTheme } } = this.props;
 
         const hasBG = (bgColor || bgImg || overlay || overlayBgImg ? 'gb-hero--has-bg' : '');
-        const overlayType = (!currentOverlayTab || 'grad' !== currentOverlayTab ? 'normal' : 'gradient');
 
-        const classes = classnames(`gb-hero ${hasBG} gb-hero--theme-${colorTheme}`);
+        return classnames(`gb-hero ${hasBG} gb-hero--theme-${colorTheme}`);
+    }
+
+    render() {
+        const { attributes: { bgColor, paddingUnit, paddingTop, paddingRight, paddingBottom, paddingLeft, marginUnit, marginTop, marginBottom, minHeightUnit, minHeight } } = this.props;
 
         return (
-            <div className={classes} style={{
+            <div className={ this.getHeroClassName() } style={{
                 paddingTop: (paddingTop ? paddingTop + paddingUnit : undefined),
                 paddingRight: (paddingRight ? paddingRight + paddingUnit : undefined),
                 paddingBottom: (paddingBottom ? paddingBottom + paddingUnit : undefined),
@@ -42,6 +37,25 @@ class GlutenblocksHeroSave extends Component {
                 minHeight: (minHeight ? minHeight + minHeightUnit : undefined),
                 backgroundColor: (bgColor ? bgColor : undefined),
             }}>
+                { this.renderHeroBefore() }
+                { this.renderHeroBackground() }
+                { this.renderHeroContent() }
+                { this.renderHeroAfter() }
+            </div>
+        );
+    }
+
+    renderHeroBefore() {
+        return null;
+    }
+
+    renderHeroBackground() {
+        const { attributes: { bgImg, bgImgId, bgImgAlt, bgImgWidth,bgImgHeight, bgImgSize, overlay, overlayBgImg, currentOverlayTab, overlayBgImgSize, overlayBgImgPosition, overlayBgImgRepeat, overlayBgImgAttachment, overlayBlendMode, overlayOpacity, overlayGradType, overlayGradAngle, overlayGradLoc, overlaySecond, overlayGradLocSecond } } = this.props;
+
+        const overlayType = (!currentOverlayTab || 'grad' !== currentOverlayTab ? 'normal' : 'gradient');
+
+        return (
+            <Fragment>
                 {(bgImg !== '') && (
                     <figure className={'gb-hero__background'}>
                         <img
@@ -75,13 +89,24 @@ class GlutenblocksHeroSave extends Component {
                         opacity: overlayOpacityOutput(overlayOpacity),
                     }}/>
                 )}
-                <div className={`gb-hero__content gb-hero__content--valign-${verticalAlignment}`} style={{
-                    maxWidth: (maxWidth ? maxWidth + maxWidthUnit : undefined),
-                }}>
-                    <InnerBlocks.Content/>
-                </div>
+            </Fragment>
+        );
+    }
+
+    renderHeroContent() {
+        const { attributes: { maxWidthUnit, maxWidth, verticalAlignment } } = this.props;
+
+        return (
+            <div className={`gb-hero__content gb-hero__content--valign-${verticalAlignment}`} style={{
+                maxWidth: (maxWidth ? maxWidth + maxWidthUnit : undefined),
+            }}>
+                <InnerBlocks.Content/>
             </div>
         );
+    }
+
+    renderHeroAfter() {
+        return null;
     }
 }
 
