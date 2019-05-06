@@ -484,7 +484,7 @@ class GlutenblocksHeroEdit extends Component {
     }
 
     renderPanelBodySizing() {
-        const { attributes: { paddingUnit, paddingTop, paddingRight, paddingBottom, paddingLeft, marginUnit, marginTop, marginBottom, minHeightUnit, minHeight, maxWidthUnit, maxWidth }, setAttributes } = this.props;
+        const { attributes: { paddingUnit, paddingTop, paddingRight, paddingBottom, paddingLeft, marginUnit, marginTop, marginBottom, minHeightUnit, minHeight, heroHeightUnit, heroHeight, maxWidthUnit, maxWidth }, setAttributes } = this.props;
 
         const marginUnits = [
             { key: 'px', name: __('px') },
@@ -496,6 +496,7 @@ class GlutenblocksHeroEdit extends Component {
         const paddingUnits = marginUnits;
         const maxWidthUnits = marginUnits;
         const minHeightUnits = marginUnits;
+        const heroHeightUnits = marginUnits;
 
         return (
             <PanelBody
@@ -623,6 +624,31 @@ class GlutenblocksHeroEdit extends Component {
                     onChange={ (value) => {
                         setAttributes({
                             minHeight: value,
+                        });
+                    } }
+                    min={ 0 }
+                    max={ 500 }
+                />
+                <h2>{ __('Height') }</h2>
+                <ButtonGroup aria-label={ __('Height Unit') }>
+                    { map(heroHeightUnits, ({ name, key }) => (
+                        <Button
+                            key={ key }
+                            isSmall
+                            isPrimary={ heroHeightUnit === key }
+                            aria-pressed={ heroHeightUnit === key }
+                            onClick={ () => setAttributes({ heroHeightUnit: key }) }
+                        >
+                            { name }
+                        </Button>
+                    )) }
+                </ButtonGroup>
+                <RangeControl
+                    value={ heroHeight }
+                    className={'gb-hero__spacing-range-control'}
+                    onChange={ (value) => {
+                        setAttributes({
+                            heroHeight: value,
                         });
                     } }
                     min={ 0 }

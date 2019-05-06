@@ -127,6 +127,14 @@ const attributes = {
         type: 'Number',
         default: null,
     },
+    heroHeightUnit: {
+        type: 'String',
+        default: 'px',
+    },
+    heroHeight: {
+        type: 'Number',
+        default: null,
+    },
     maxWidthUnit: {
         type: 'String',
         default: 'px',

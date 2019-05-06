@@ -24,7 +24,7 @@ class GlutenblocksHeroSave extends Component {
     }
 
     render() {
-        const { attributes: { bgColor, paddingUnit, paddingTop, paddingRight, paddingBottom, paddingLeft, marginUnit, marginTop, marginBottom, minHeightUnit, minHeight } } = this.props;
+        const { attributes: { bgColor, paddingUnit, paddingTop, paddingRight, paddingBottom, paddingLeft, marginUnit, marginTop, marginBottom, minHeightUnit, minHeight, heroHeight, heroHeightUnit } } = this.props;
 
         return (
             <div className={ this.getHeroClassName() } style={{
@@ -35,6 +35,7 @@ class GlutenblocksHeroSave extends Component {
                 marginTop: (marginTop ? marginTop + marginUnit : undefined),
                 marginBottom: (marginBottom ? marginBottom + marginUnit : undefined),
                 minHeight: (minHeight ? minHeight + minHeightUnit : undefined),
+                height: (heroHeight ? heroHeight + heroHeightUnit : undefined),
                 backgroundColor: (bgColor ? bgColor : undefined),
             }}>
                 { this.renderHeroBefore() }
