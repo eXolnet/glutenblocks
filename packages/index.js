@@ -3,16 +3,16 @@
  */
 
 // Import blocks here
-const row = require('./row');
-const column = require('./column');
-const hero = require('./hero');
 const button = require('./button');
 const buttonGroup = require('./button-group');
-const media = require('./media');
-const jumbotron = require('./jumbotron');
 const card = require('./card');
-const listLink = require('./list-link');
+const column = require('./column');
+const hero = require('./hero');
+const jumbotron = require('./jumbotron');
 const link = require('./link');
+const listLink = require('./list-link');
+const media = require('./media');
+const row = require('./row');
 const section = require('./section');
 
 /**
@@ -39,16 +39,16 @@ const BLOCKS_TO_UNREGISTER = [
 
 (function registerGlutenblocks() {
     [
-        row,
-        column,
-        hero,
         button,
         buttonGroup,
-        media,
-        jumbotron,
         card,
-        listLink,
+        column,
+        hero,
+        jumbotron,
         link,
+        listLink,
+        media,
+        row,
         section,
     ].forEach((block) => {
         if (!block) {
