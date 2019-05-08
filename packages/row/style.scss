@@ -9,20 +9,20 @@
     min-height: 0;
 
     &.valign-middle {
-        justify-content: center;
+        align-self: center;
     }
 
     &.valign-bottom {
-        justify-content: flex-end;
+        align-self: flex-end;
     }
 }
 
-.gb-row-valign-middle > .wp-block-glutenblocks-column {
-    justify-content: center;
+.gb-row-valign-middle {
+    align-items: center;
 }
 
-.gb-row-valign-bottom > .wp-block-glutenblocks-column {
-    justify-content: flex-end;
+.gb-row-valign-bottom {
+    align-items: flex-end;
 }
 
 // Tablet specific
