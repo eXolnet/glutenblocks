@@ -35,9 +35,11 @@ class GlutenblocksMediaSave extends Component {
 
         return (
             <div className={ className }>
-                <figure className="wp-block-image gb-media__figure">
-                    { (mediaTypeRenders[ mediaType ] || noop)() }
-                </figure>
+                <div className="gb-media__figure">
+                    <figure className="wp-block-image">
+                        { (mediaTypeRenders[ mediaType ] || noop)() }
+                    </figure>
+                </div>
                 <div className="gb-media__content">
                     <InnerBlocks.Content />
                 </div>
