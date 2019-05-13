@@ -6,6 +6,10 @@ const attributes = {
         type: 'String',
         default: 'default'
     },
+    sectionId: {
+        type: 'String',
+        default: ''
+    },
 };
 
 export default attributes;

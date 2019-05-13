@@ -3,7 +3,7 @@ import utils from '../globals/utils';
 import classnames from 'classnames';
 
 const { __ } = wp.i18n;
-const { PanelBody, SelectControl } = wp.components;
+const { PanelBody, SelectControl, TextControl } = wp.components;
 const { Component, Fragment } = wp.element;
 const { InspectorControls, InnerBlocks } = wp.editor;
 
@@ -17,26 +17,39 @@ class GlutenblocksHeroEdit extends Component {
     }
 
     render() {
-        const { attributes: { theme }, className, setAttributes } = this.props;
+        const { attributes: { theme, sectionId }, className, setAttributes } = this.props;
 
         const themeOptions = utils.sectionThemes();
 
         return (
             <Fragment>
-                {themeOptions.length > 0 && <InspectorControls>
+                <InspectorControls>
+                    {themeOptions.length > 0 &&
+                        <PanelBody
+                            title={ __('Appearance') }
+                            initialOpen={ false }
+                            className={'gb-section__panel-body'}
+                        >
+                            <SelectControl
+                                label={ __('Theme') }
+                                value={ theme }
+                                options={ themeOptions }
+                                onChange={ value => setAttributes({ theme: value }) }
+                            />
+                        </PanelBody>
+                    }
                     <PanelBody
-                        title={ __('Appearance') }
+                        title={ __('Setting') }
                         initialOpen={ false }
                         className={'gb-section__panel-body'}
                     >
-                        <SelectControl
-                            label={ __('Theme') }
-                            value={ theme }
-                            options={ themeOptions }
-                            onChange={ value => setAttributes({ theme: value }) }
+                        <TextControl
+                            label={ __('ID') }
+                            value={ sectionId }
+                            onChange={ value => setAttributes({ sectionId: value }) }
                         />
                     </PanelBody>
-                </InspectorControls>}
+                </InspectorControls>
                 <section className={ classnames(className, `gb-section gb-section--theme-${theme}`) }>
                     <InnerBlocks templateLock={ false } template={TEMPLATE} />
                 </section>
