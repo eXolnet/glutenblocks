@@ -5,6 +5,7 @@
 // Import blocks here
 const button = require('./button');
 const buttonGroup = require('./button-group');
+const responsiveImage = require('./responsive-image');
 const card = require('./card');
 const column = require('./column');
 const hero = require('./hero');
@@ -41,10 +42,11 @@ const BLOCKS_TO_UNREGISTER = [
     [
         button,
         buttonGroup,
+        responsiveImage,
+        jumbotron,
         card,
         column,
         hero,
-        jumbotron,
         link,
         listLink,
         media,

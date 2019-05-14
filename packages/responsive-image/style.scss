@@ -1,0 +1,53 @@
+.wp-block-glutenblocks-responsive-image {
+    text-align: center;
+
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+
+    .mobile-display {
+        display: none;
+
+        @media (max-width: 767px) {
+            display: initial;
+        }
+    }
+
+    .tablet-display {
+        display: none;
+
+        @media (min-width: 768px) and (max-width: 1024px) {
+            display: initial;
+        }
+    }
+
+    .desktop-display {
+        display: none;
+
+        @media (min-width: 1025px) {
+            display: initial;
+        }
+    }
+
+    .edit-bg {
+        background: #f3f4f5;
+        padding: 15px;
+
+        button {
+            margin: auto;
+        }
+    }
+}
+
+.screen-select {
+    margin-bottom: 0.5em;
+    margin-top: 1em;
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.active-tab {
+    background: #402c8a;
+    color: white;
+}
