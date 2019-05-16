@@ -68,13 +68,13 @@ class GlutenblocksExampleSave extends Component {
 
         return (
             <div className={className} >
-                <div className="desktop-display">
+                <div className="gb-responsive-image gb-responsive-image--desktop">
                     {desktopDisplay()}
                 </div>
-                <div className="tablet-display">
+                <div className="gb-responsive-image gb-responsive-image--tablet">
                     {tabletDisplay()}
                 </div>
-                <div className="mobile-display">
+                <div className="gb-responsive-image gb-responsive-image--mobile">
                     {mobileDisplay()}
                 </div>
             </div>

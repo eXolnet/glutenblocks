@@ -6,27 +6,25 @@
         height: auto;
     }
 
-    .mobile-display {
+    .gb-responsive-image {
         display: none;
 
-        @media (max-width: 767px) {
-            display: initial;
+        &--mobile {
+            @media (max-width: 767px) {
+                display: initial;
+            }
         }
-    }
 
-    .tablet-display {
-        display: none;
-
-        @media (min-width: 768px) and (max-width: 1024px) {
-            display: initial;
+        &--tablet {
+            @media (min-width: 768px) and (max-width: 1024px) {
+                display: initial;
+            }
         }
-    }
 
-    .desktop-display {
-        display: none;
-
-        @media (min-width: 1025px) {
-            display: initial;
+        &--desktop {
+            @media (min-width: 1025px) {
+                display: initial;
+            }
         }
     }
 

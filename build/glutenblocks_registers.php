@@ -1,15 +1,15 @@
 <?php
 /**
- * Server-side rendering of the `glutenblocks/button-group` block.
+ * Server-side rendering of the `glutenblocks/button` block.
  * phpcs:disable
  */
 
 /**
- * Registers the `glutenblocks/button-group` block on server.
+ * Registers the `glutenblocks/button` block on server.
  */
-function glutenblocksregister_block_glutenblocks_button_group() {
+function glutenblocksregister_block_glutenblocks_button() {
     register_block_type(
-        'glutenblocks/button-group',
+        'glutenblocks/button',
         [
             'style' => 'glutenblocks-style',
             'editor_script' => 'glutenblocks',
@@ -17,4 +17,4 @@ function glutenblocksregister_block_glutenblocks_button_group() {
         ]
     );
 }
-add_action( 'init', 'glutenblocksregister_block_glutenblocks_button_group' );
+add_action( 'init', 'glutenblocksregister_block_glutenblocks_button' );

@@ -193,7 +193,6 @@ class GlutenblocksResponsiveImageEdit extends Component {
             setAttributes,
         } = this.props;
 
-
         const onTabSelect = (tabName) => {
             setAttributes({ currentTab: tabName });
         };
@@ -286,13 +285,13 @@ class GlutenblocksResponsiveImageEdit extends Component {
         return (
             <Fragment>
                 <div className={className} >
-                    <div className="mobile-display">
+                    <div className="gb-responsive-image gb-responsive-image--mobile">
                         {mobileDisplay()}
                     </div>
-                    <div className="tablet-display">
+                    <div className="gb-responsive-image gb-responsive-image--tablet">
                         {tabletDisplay()}
                     </div>
-                    <div className="desktop-display">
+                    <div className="gb-responsive-image gb-responsive-image--desktop">
                         {desktopDisplay()}
                     </div>
                 </div>

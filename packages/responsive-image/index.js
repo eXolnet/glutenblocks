@@ -16,7 +16,7 @@ export const name = 'glutenblocks/responsive-image';
 export const settings = {
     title: __('Responsive Image', 'glutenblocks'),
     description: __('An Image Formatter'),
-    icon: icons.media,
+    icon: icons.responsiveImage ,
     category: 'glutenblocks',
     attributes: attributes,
     edit,
