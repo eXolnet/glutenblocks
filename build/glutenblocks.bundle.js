@@ -35820,13 +35820,21 @@ icons.section = React.createElement("svg", {
   strokeLinecap: "round"
 })));
 icons.responsiveImage = React.createElement("svg", {
-  "class": "svg-icon",
   width: "20",
   height: "20",
   viewBox: "0 0 20 20"
 }, React.createElement("path", {
   fill: "#402C8A",
   d: "M18.555,15.354V4.592c0-0.248-0.202-0.451-0.45-0.451H1.888c-0.248,0-0.451,0.203-0.451,0.451v10.808c0,0.559,0.751,0.451,0.451,0.451h16.217h0.005C18.793,15.851,18.478,14.814,18.555,15.354 M2.8,14.949l4.944-6.464l4.144,5.419c0.003,0.003,0.003,0.003,0.003,0.005l0.797,1.04H2.8z M13.822,14.949l-1.006-1.317l1.689-2.218l2.688,3.535H13.822z M17.654,14.064l-2.791-3.666c-0.181-0.237-0.535-0.237-0.716,0l-1.899,2.493l-4.146-5.42c-0.18-0.237-0.536-0.237-0.716,0l-5.047,6.598V5.042h15.316V14.064z M12.474,6.393c-0.869,0-1.577,0.707-1.577,1.576s0.708,1.576,1.577,1.576s1.577-0.707,1.577-1.576S13.343,6.393,12.474,6.393 M12.474,8.645c-0.371,0-0.676-0.304-0.676-0.676s0.305-0.676,0.676-0.676c0.372,0,0.676,0.304,0.676,0.676S12.846,8.645,12.474,8.645"
+}));
+icons.youtube = React.createElement("svg", {
+  xmlns: "http://www.w3.org/2000/svg",
+  width: "24",
+  height: "22",
+  viewBox: "0 0 576 512"
+}, React.createElement("path", {
+  fill: "#402C8A",
+  d: "M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z"
 }));
 /* harmony default export */ __webpack_exports__["default"] = (icons);
 
@@ -45086,6 +45094,8 @@ var media = __webpack_require__(/*! ./media */ "./packages/media/index.js");
 var row = __webpack_require__(/*! ./row */ "./packages/row/index.js");
 
 var section = __webpack_require__(/*! ./section */ "./packages/section/index.js");
+
+var youtubeEmbed = __webpack_require__(/*! ./youtube-embed */ "./packages/youtube-embed/index.js");
 /**
  * WordPress dependencies
  */
@@ -45107,7 +45117,7 @@ var BLOCKS_TO_UNREGISTER = [// 'core/column',
  */
 
 (function registerGlutenblocks() {
-  [button, buttonGroup, responsiveImage, jumbotron, card, column, hero, link, listLink, media, row, section].forEach(function (block) {
+  [button, buttonGroup, responsiveImage, jumbotron, card, column, hero, link, listLink, media, row, section, youtubeEmbed].forEach(function (block) {
     if (!block) {
       return;
     }
@@ -48698,6 +48708,532 @@ GlutenblocksHeroSave.propTypes = {
 
 /***/ }),
 
+/***/ "./packages/youtube-embed/attributes.js":
+/*!**********************************************!*\
+  !*** ./packages/youtube-embed/attributes.js ***!
+  \**********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/**
+ * BLOCK: Glutenblock Youtube Embed Attributes
+ */
+var attributes = {
+  playBgColor: {
+    type: 'string',
+    "default": ''
+  },
+  playIconColor: {
+    type: 'string',
+    defaults: ''
+  },
+  url: {
+    type: 'string',
+    defaults: ''
+  },
+  poster: {
+    type: 'object',
+    defaults: null
+  },
+  enableCaption: {
+    type: 'boolean',
+    defaults: false
+  },
+  ccLang: {
+    type: 'string',
+    defaults: ''
+  },
+  start: {
+    type: 'string',
+    "default": null
+  },
+  end: {
+    type: 'string',
+    "default": null
+  }
+};
+/* harmony default export */ __webpack_exports__["default"] = (attributes);
+
+/***/ }),
+
+/***/ "./packages/youtube-embed/deprecated.js":
+/*!**********************************************!*\
+  !*** ./packages/youtube-embed/deprecated.js ***!
+  \**********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ([]);
+
+/***/ }),
+
+/***/ "./packages/youtube-embed/edit.js":
+/*!****************************************!*\
+  !*** ./packages/youtube-embed/edit.js ***!
+  \****************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _globals_utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../globals/utils */ "./packages/globals/utils.js");
+/* harmony import */ var _globals_icons__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../globals/icons */ "./packages/globals/icons.js");
+/* harmony import */ var _util__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./util */ "./packages/youtube-embed/util.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+
+var _wp$i18n = wp.i18n,
+    __ = _wp$i18n.__,
+    _x = _wp$i18n._x,
+    sprintf = _wp$i18n.sprintf;
+var _wp$element = wp.element,
+    Component = _wp$element.Component,
+    Fragment = _wp$element.Fragment;
+var _wp$components = wp.components,
+    Button = _wp$components.Button,
+    IconButton = _wp$components.IconButton,
+    PanelBody = _wp$components.PanelBody,
+    Placeholder = _wp$components.Placeholder,
+    SelectControl = _wp$components.SelectControl,
+    TextControl = _wp$components.TextControl,
+    ToggleControl = _wp$components.ToggleControl,
+    Toolbar = _wp$components.Toolbar;
+var _wp$editor = wp.editor,
+    InspectorControls = _wp$editor.InspectorControls,
+    MediaUpload = _wp$editor.MediaUpload,
+    MediaUploadCheck = _wp$editor.MediaUploadCheck,
+    ColorPalette = _wp$editor.ColorPalette,
+    BlockIcon = _wp$editor.BlockIcon,
+    BlockControls = _wp$editor.BlockControls;
+var withInstanceId = wp.compose.withInstanceId;
+
+var GlutenblocksYoutubeEmbedEdit =
+/*#__PURE__*/
+function (_Component) {
+  _inherits(GlutenblocksYoutubeEmbedEdit, _Component);
+
+  function GlutenblocksYoutubeEmbedEdit() {
+    var _this;
+
+    _classCallCheck(this, GlutenblocksYoutubeEmbedEdit);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(GlutenblocksYoutubeEmbedEdit).apply(this, arguments));
+    _this.state = {
+      editingURL: false,
+      url: _this.props.attributes.url
+    };
+    _this.formSubmit = _this.formSubmit.bind(_assertThisInitialized(_this));
+    return _this;
+  }
+
+  _createClass(GlutenblocksYoutubeEmbedEdit, [{
+    key: "render",
+    value: function render() {
+      var className = this.props.className;
+      return React.createElement(Fragment, null, React.createElement(InspectorControls, null, this.renderInspectorControls()), React.createElement("div", {
+        className: className
+      }, this.renderContent()));
+    }
+  }, {
+    key: "renderInspectorControls",
+    value: function renderInspectorControls() {
+      return React.createElement(Fragment, null, this.renderPlayButtonPanel(), this.renderVideoSettingsPanel());
+    }
+  }, {
+    key: "renderContent",
+    value: function renderContent() {
+      var _this2 = this;
+
+      var label = 'YouTube URL';
+      var url = this.props.attributes.url;
+      var editingURL = this.state.editingURL;
+
+      if (editingURL || !url) {
+        return React.createElement(Placeholder, {
+          icon: React.createElement(BlockIcon, {
+            icon: _globals_icons__WEBPACK_IMPORTED_MODULE_2__["default"].youtube
+          }),
+          label: label,
+          className: "wp-block-embed"
+        }, React.createElement("form", {
+          onSubmit: this.formSubmit
+        }, React.createElement("input", {
+          type: "url",
+          value: this.state.url || '',
+          className: "components-placeholder__input",
+          "aria-label": label,
+          placeholder: __('Enter URL to embed here…'),
+          onChange: function onChange(event) {
+            return _this2.setState({
+              url: event.target.value
+            });
+          }
+        }), React.createElement(Button, {
+          isLarge: true,
+          type: "submit"
+        }, _x('Embed', 'button label'))));
+      }
+
+      return React.createElement(Fragment, null, React.createElement(BlockControls, null, React.createElement(Toolbar, null, React.createElement(IconButton, {
+        className: "components-toolbar__control",
+        label: __('Edit URL'),
+        icon: "edit",
+        onClick: function onClick() {
+          return _this2.setState({
+            editingURL: true
+          });
+        }
+      }))), React.createElement("div", {
+        className: "wp-embed-responsive"
+      }, React.createElement("figure", {
+        className: "wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio wp-block-embed is-type-video"
+      }, React.createElement("div", {
+        className: "wp-block-embed__wrapper"
+      }, React.createElement("iframe", {
+        src: Object(_util__WEBPACK_IMPORTED_MODULE_3__["parseUrl"])(this.props.attributes),
+        frameBorder: "0",
+        allow: "accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture",
+        allowFullScreen: true
+      })))));
+    }
+  }, {
+    key: "renderPlayButtonPanel",
+    value: function renderPlayButtonPanel() {
+      var _this$props = this.props,
+          _this$props$attribute = _this$props.attributes,
+          playBgColor = _this$props$attribute.playBgColor,
+          playIconColor = _this$props$attribute.playIconColor,
+          setAttributes = _this$props.setAttributes;
+      return React.createElement(PanelBody, {
+        title: __('Play Button', 'glutenblocks'),
+        initialOpen: false,
+        className: 'gb-hero__panel-body'
+      }, React.createElement("p", null, __('Icon Color', 'glutenblocks')), React.createElement(ColorPalette, {
+        colors: _globals_utils__WEBPACK_IMPORTED_MODULE_1__["default"].themeColors(),
+        value: playIconColor,
+        onChange: function onChange(playIconColor) {
+          return setAttributes({
+            playIconColor: playIconColor
+          });
+        }
+      }), React.createElement("p", null, __('Background Color')), React.createElement(ColorPalette, {
+        colors: _globals_utils__WEBPACK_IMPORTED_MODULE_1__["default"].themeColors(),
+        value: playBgColor,
+        onChange: function onChange(playBgColor) {
+          return setAttributes({
+            playBgColor: playBgColor
+          });
+        }
+      }));
+    }
+  }, {
+    key: "renderVideoSettingsPanel",
+    value: function renderVideoSettingsPanel() {
+      var _this$props2 = this.props,
+          _this$props2$attribut = _this$props2.attributes,
+          poster = _this$props2$attribut.poster,
+          ccLang = _this$props2$attribut.ccLang,
+          enableCaption = _this$props2$attribut.enableCaption,
+          start = _this$props2$attribut.start,
+          end = _this$props2$attribut.end,
+          setAttributes = _this$props2.setAttributes,
+          instanceId = _this$props2.instanceId;
+      var videoPosterDescription = "video-block__poster-image-description-".concat(instanceId);
+      return React.createElement(PanelBody, {
+        title: __('Video Settings', 'glutenblocks')
+      }, React.createElement("p", null, __('Poster image', 'glutenblocks')), React.createElement(MediaUploadCheck, null, React.createElement(MediaUpload, {
+        title: __('Select Poster Image'),
+        onSelect: function onSelect(poster) {
+          return setAttributes({
+            poster: poster
+          });
+        },
+        allowedTypes: ['image'],
+        render: function render(_ref) {
+          var open = _ref.open;
+          return React.createElement(Fragment, null, !!(poster === null || poster === void 0 ? void 0 : poster.url) && React.createElement("img", {
+            src: poster === null || poster === void 0 ? void 0 : poster.url,
+            alt: poster === null || poster === void 0 ? void 0 : poster.alt
+          }), React.createElement(Button, {
+            isDefault: true,
+            onClick: open,
+            "aria-describedby": videoPosterDescription
+          }, !(poster === null || poster === void 0 ? void 0 : poster.url) ? __('Select Poster Image') : __('Replace image')));
+        }
+      }), React.createElement("p", {
+        id: videoPosterDescription,
+        hidden: true
+      }, (poster === null || poster === void 0 ? void 0 : poster.url) ? sprintf(__('The current poster image url is %s'), poster.url) : __('There is no poster image currently selected')), !!(poster === null || poster === void 0 ? void 0 : poster.url) && React.createElement("p", null, React.createElement(Button, {
+        onClick: function onClick() {
+          return setAttributes({
+            poster: null
+          });
+        },
+        isLink: true,
+        isDestructive: true
+      }, __('Remove Poster Image')))), React.createElement(TextControl, {
+        label: __('Video start time'),
+        value: start,
+        onChange: function onChange(start) {
+          return setAttributes({
+            start: start
+          });
+        },
+        type: "Number"
+      }), React.createElement(TextControl, {
+        label: __('Video end time'),
+        value: end,
+        onChange: function onChange(end) {
+          return setAttributes({
+            end: end
+          });
+        },
+        type: "Number"
+      }), React.createElement(ToggleControl, {
+        label: __('Closed Captions'),
+        checked: enableCaption,
+        onChange: function onChange(enableCaption) {
+          return setAttributes({
+            enableCaption: enableCaption
+          });
+        }
+      }), enableCaption && React.createElement(SelectControl, {
+        label: __('Default Lang'),
+        value: ccLang,
+        options: [{
+          label: __('English'),
+          value: 'en'
+        }, {
+          label: __('French'),
+          value: 'fr'
+        }],
+        onChange: function onChange(ccLang) {
+          return setAttributes({
+            ccLang: ccLang
+          });
+        }
+      }));
+    }
+  }, {
+    key: "formSubmit",
+    value: function formSubmit(event) {
+      if (event) {
+        event.preventDefault();
+      }
+
+      var url = this.state.url;
+      var setAttributes = this.props.setAttributes;
+      this.setState({
+        editingURL: false
+      });
+      setAttributes({
+        url: url
+      });
+    }
+  }]);
+
+  return GlutenblocksYoutubeEmbedEdit;
+}(Component);
+
+GlutenblocksYoutubeEmbedEdit.propTypes = {
+  className: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.string,
+  attributes: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.object,
+  setAttributes: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.func,
+  instanceId: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.string
+};
+/* harmony default export */ __webpack_exports__["default"] = (withInstanceId(GlutenblocksYoutubeEmbedEdit));
+
+/***/ }),
+
+/***/ "./packages/youtube-embed/index.js":
+/*!*****************************************!*\
+  !*** ./packages/youtube-embed/index.js ***!
+  \*****************************************/
+/*! exports provided: name, settings */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "name", function() { return name; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "settings", function() { return settings; });
+/* harmony import */ var _deprecated__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./deprecated */ "./packages/youtube-embed/deprecated.js");
+/* harmony import */ var _edit__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./edit */ "./packages/youtube-embed/edit.js");
+/* harmony import */ var _save__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./save */ "./packages/youtube-embed/save.js");
+/* harmony import */ var _attributes__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./attributes */ "./packages/youtube-embed/attributes.js");
+/* harmony import */ var _globals_icons__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../globals/icons */ "./packages/globals/icons.js");
+/**
+ * Internal dependencies
+ */
+
+
+
+
+
+/**
+ * WordPress dependencies
+ */
+
+var __ = wp.i18n.__;
+var name = 'glutenblocks/youtube-embed';
+var settings = {
+  title: __('Youtube Embed', 'glutenblocks'),
+  description: __('A Glutenblock link'),
+  icon: _globals_icons__WEBPACK_IMPORTED_MODULE_4__["default"].youtube,
+  category: 'glutenblocks',
+  supports: {
+    align: ['left', 'center', 'right', 'full', 'wide'],
+    html: false
+  },
+  attributes: _attributes__WEBPACK_IMPORTED_MODULE_3__["default"],
+  edit: _edit__WEBPACK_IMPORTED_MODULE_1__["default"],
+  save: _save__WEBPACK_IMPORTED_MODULE_2__["default"],
+  deprecated: _deprecated__WEBPACK_IMPORTED_MODULE_0__["default"]
+};
+
+/***/ }),
+
+/***/ "./packages/youtube-embed/save.js":
+/*!****************************************!*\
+  !*** ./packages/youtube-embed/save.js ***!
+  \****************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _util__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./util */ "./packages/youtube-embed/util.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+var Component = wp.element.Component;
+
+var GlutenblocksYoutubeEmbedSave =
+/*#__PURE__*/
+function (_Component) {
+  _inherits(GlutenblocksYoutubeEmbedSave, _Component);
+
+  function GlutenblocksYoutubeEmbedSave() {
+    _classCallCheck(this, GlutenblocksYoutubeEmbedSave);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(GlutenblocksYoutubeEmbedSave).apply(this, arguments));
+  }
+
+  _createClass(GlutenblocksYoutubeEmbedSave, [{
+    key: "render",
+    value: function render() {
+      var _this$props = this.props,
+          className = _this$props.className,
+          _this$props$attribute = _this$props.attributes,
+          playBgColor = _this$props$attribute.playBgColor,
+          playIconColor = _this$props$attribute.playIconColor,
+          poster = _this$props$attribute.poster;
+      return React.createElement("div", {
+        className: className
+      }, React.createElement("div", {
+        className: "wp-embed-responsive"
+      }, React.createElement("figure", {
+        className: "wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio wp-block-embed is-type-video"
+      }, React.createElement("div", {
+        className: "wp-block-embed__wrapper"
+      }, React.createElement("div", {
+        className: "wp-block-embed__poster"
+      }, playBgColor && playIconColor && React.createElement("i", {
+        className: "fas fa-play wp-block-embed__poster_play",
+        style: {
+          color: playIconColor,
+          backgroundColor: playBgColor
+        }
+      }), React.createElement("img", {
+        className: "wp-block-embed__poster_image",
+        src: poster.url,
+        alt: poster.alt
+      })), React.createElement("iframe", {
+        src: Object(_util__WEBPACK_IMPORTED_MODULE_1__["parseUrl"])(this.props.attributes),
+        frameBorder: "0",
+        allow: "accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture",
+        allowFullScreen: true
+      })))));
+    }
+  }]);
+
+  return GlutenblocksYoutubeEmbedSave;
+}(Component);
+
+GlutenblocksYoutubeEmbedSave.propTypes = {
+  className: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.string,
+  attributes: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.object
+};
+/* harmony default export */ __webpack_exports__["default"] = (GlutenblocksYoutubeEmbedSave);
+
+/***/ }),
+
+/***/ "./packages/youtube-embed/util.js":
+/*!****************************************!*\
+  !*** ./packages/youtube-embed/util.js ***!
+  \****************************************/
+/*! exports provided: parseUrl */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "parseUrl", function() { return parseUrl; });
+var parseUrl = function parseUrl(_ref) {
+  var url = _ref.url,
+      enableCaption = _ref.enableCaption,
+      ccLang = _ref.ccLang,
+      start = _ref.start,
+      end = _ref.end;
+  var youtubeRegex = /(?:https?:\/\/)?(?:(?:(?:www\.?)?youtube\.com(?:\/(?:(?:watch\?.*?v=([^&\s]+)(?:&t=(\d+)s?)?).*)|(?:v(\/.*)|(channel\/.+)|(?:user\/(.+))|(?:results\?(search_query=.+))))?)|(?:youtu\.be(\/.*)?))/;
+  var matches = url.match(youtubeRegex);
+  return "https://www.youtube.com/embed/".concat(matches[1], "?enablejsapi=1").concat(enableCaption ? '&cc_load_policy=1&cc_lang_pref=' + ccLang : '').concat(start ? '&start=' + start : '').concat(end ? '&end=' + end : '');
+};
+
+/***/ }),
+
 /***/ 0:
 /*!******************************************************************************!*\
   !*** multi ./packages/index.js ./packages/style.scss ./packages/editor.scss ***!
@@ -48705,9 +49241,9 @@ GlutenblocksHeroSave.propTypes = {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/alessandro/Desktop/dev/exolnet/rollandinc-com-v2/web/app/plugins/glutenblocks/packages/index.js */"./packages/index.js");
-__webpack_require__(/*! /Users/alessandro/Desktop/dev/exolnet/rollandinc-com-v2/web/app/plugins/glutenblocks/packages/style.scss */"./packages/style.scss");
-module.exports = __webpack_require__(/*! /Users/alessandro/Desktop/dev/exolnet/rollandinc-com-v2/web/app/plugins/glutenblocks/packages/editor.scss */"./packages/editor.scss");
+__webpack_require__(/*! /Users/mmongeau/code/rollandinc-com-v2/web/app/plugins/glutenblocks/packages/index.js */"./packages/index.js");
+__webpack_require__(/*! /Users/mmongeau/code/rollandinc-com-v2/web/app/plugins/glutenblocks/packages/style.scss */"./packages/style.scss");
+module.exports = __webpack_require__(/*! /Users/mmongeau/code/rollandinc-com-v2/web/app/plugins/glutenblocks/packages/editor.scss */"./packages/editor.scss");
 
 
 /***/ })

@@ -15,6 +15,7 @@ const listLink = require('./list-link');
 const media = require('./media');
 const row = require('./row');
 const section = require('./section');
+const youtubeEmbed = require('./youtube-embed');
 
 /**
  * WordPress dependencies
@@ -52,6 +53,7 @@ const BLOCKS_TO_UNREGISTER = [
         media,
         row,
         section,
+        youtubeEmbed
     ].forEach((block) => {
         if (!block) {
             return;
