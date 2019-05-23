@@ -8,23 +8,23 @@ const attributes = {
     },
     playIconColor: {
         type: 'string',
-        defaults: '',
+        default: '',
     },
     url: {
         type: 'string',
-        defaults: ''
+        default: ''
     },
     poster: {
         type: 'object',
-        defaults: null
+        default: null
     },
     enableCaption: {
         type: 'boolean',
-        defaults: false
+        default: false
     },
     ccLang: {
         type: 'string',
-        defaults: ''
+        default: ''
     },
     start: {
         type: 'string',
