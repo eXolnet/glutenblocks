@@ -528,7 +528,7 @@ class GlutenblocksHeroEdit extends Component {
                         });
                     } }
                     min={ 0 }
-                    max={ 500 }
+                    max={ 750 }
                 />
                 <RangeControl
                     label={ icons.spacingRight }
@@ -540,7 +540,7 @@ class GlutenblocksHeroEdit extends Component {
                         });
                     } }
                     min={ 0 }
-                    max={ 500 }
+                    max={ 750 }
                 />
                 <RangeControl
                     label={ icons.spacingBottom }
@@ -552,7 +552,7 @@ class GlutenblocksHeroEdit extends Component {
                         });
                     } }
                     min={ 0 }
-                    max={ 500 }
+                    max={ 750 }
                 />
                 <RangeControl
                     label={ icons.spacingLeft }
@@ -564,7 +564,7 @@ class GlutenblocksHeroEdit extends Component {
                         });
                     } }
                     min={ 0 }
-                    max={ 500 }
+                    max={ 750 }
                 />
                 <h2>{ __('Margin') }</h2>
                 <ButtonGroup aria-label={ __('Margin Unit') }>
@@ -589,8 +589,8 @@ class GlutenblocksHeroEdit extends Component {
                             marginTop: value,
                         });
                     } }
-                    min={ -500 }
-                    max={ 500 }
+                    min={ -750 }
+                    max={ 750 }
                 />
                 <RangeControl
                     label={ icons.spacingBottom }
@@ -601,8 +601,8 @@ class GlutenblocksHeroEdit extends Component {
                             marginBottom: value,
                         });
                     } }
-                    min={ -500 }
-                    max={ 500 }
+                    min={ -750 }
+                    max={ 750 }
                 />
                 <h2>{ __('Minimium Height') }</h2>
                 <ButtonGroup aria-label={ __('Minimium Height Unit') }>
@@ -627,7 +627,7 @@ class GlutenblocksHeroEdit extends Component {
                         });
                     } }
                     min={ 0 }
-                    max={ 500 }
+                    max={ 750 }
                 />
                 <h2>{ __('Height') }</h2>
                 <ButtonGroup aria-label={ __('Height Unit') }>
@@ -652,7 +652,7 @@ class GlutenblocksHeroEdit extends Component {
                         });
                     } }
                     min={ 0 }
-                    max={ 500 }
+                    max={ 750 }
                 />
                 <h2>{ __('Content Max Width') }</h2>
                 <ButtonGroup aria-label={ __('Content Max Width Unit') }>
@@ -677,7 +677,7 @@ class GlutenblocksHeroEdit extends Component {
                         });
                     } }
                     min={ 0 }
-                    max={ 500 }
+                    max={ 750 }
                 />
             </PanelBody>
         );
