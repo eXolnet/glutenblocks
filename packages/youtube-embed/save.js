@@ -12,7 +12,9 @@ class GlutenblocksYoutubeEmbedSave extends Component {
                 return (
                     <div className="wp-block-embed__poster">
                         { (playBgColor && playIconColor) &&
-                            <i className="fas fa-play wp-block-embed__poster_play" style={ { color: playIconColor, backgroundColor: playBgColor } }/>
+                            <div className="wp-block-embed__poster_play" style={ { color: playIconColor, backgroundColor: playBgColor } }>
+                                <i className="fas fa-play"/>
+                            </div>
                         }
                         { !!poster &&
                             <img className="wp-block-embed__poster_image" src={ poster.url } alt={ poster.alt }/>
