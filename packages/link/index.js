@@ -21,8 +21,8 @@ export const settings = {
     category: 'glutenblocks',
     attributes: attributes,
     edit,
-    save({attributes, className}) {
-       return null;
+    save({ attributes, className }) {
+        return null;
     },
     deprecated,
 };
