@@ -1,14 +1,4 @@
-// Put your styles that will only be applied in the editor.
-.wp-block-glutenblocks-link {
-    display: flex;
-    font-size: 2rem;
-    font-weight: bold;
-    transition: all 0.2s ease-in-out;
-    border-top: 1px solid #d8d8d8;
-    border-bottom: 1px solid #d8d8d8;
-    padding: 1.75rem 1.5rem;
-    align-items: center;
-
+.wp-block-glutenblocks-listlink {
     .gb-list-links__text {
         flex-basis: 75%;
     }

@@ -44,3 +44,53 @@ function glutenblocks_pre_init()
 
     require_once dirname(__FILE__) .'/lib/load.php';
 }
+
+function gb_get_post_types() {
+    $args = array(
+        'public'   => true,
+        '_builtin' => false
+     );
+     $output = 'names'; // 'names' or 'objects' (default: 'names')
+     $operator = 'and'; // 'and' or 'or' (default: 'and')
+     $post_types = get_post_types( $args, $output, $operator );
+     return array_keys($post_types);
+}
+
+function gb_get_field_types($data){
+    $args = array(
+        'post_type'=> $data['field']
+    );
+    $posts = get_posts($args);
+    return $posts;
+}
+
+function gb_get_post_attributes($data){
+    return get_fields($data['id']);
+}
+
+function gb_is_acf_plugin_active(){
+    return is_plugin_active( 'acf-to-rest-api/class-acf-to-rest-api.php' );
+}
+
+add_action( 'rest_api_init', function () {
+    register_rest_route( 'glutenblocks/v1', '/wp_get_post_types', array(
+      'methods' => 'GET',
+      'callback' => 'gb_get_post_types',
+    ) );
+
+    register_rest_route( 'glutenblocks/v1', '/gb_get_field_types/field=(?P<field>[a-zA-Z0-9-]+)', array(
+        'methods' => 'GET',
+        'callback' => 'gb_get_field_types',
+    ) );
+
+    register_rest_route( 'glutenblocks/v1', '/gb_get_post_attributes/id=(?P<id>[a-zA-Z0-9-]+)', array(
+        'methods' => 'GET',
+        'callback' => 'gb_get_post_attributes',
+    ) );
+
+    register_rest_route( 'glutenblocks/v1', '/gb_is_acf_plugin_active', array(
+        'methods' => 'GET',
+        'callback' => 'gb_is_acf_plugin_active',
+    ) );
+});
+

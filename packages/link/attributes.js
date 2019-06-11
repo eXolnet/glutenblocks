@@ -26,5 +26,17 @@ const attributes = {
         type: 'Boolean',
         default: false,
     },
+    customPostType : {
+        type: 'String',
+        default: '',
+    },
+    customPostObjectID : {
+        type: 'String',
+        default: '',
+    },
+    customPostAttribute : {
+        type: 'String',
+        default: '',
+    },
 };
 export default attributes;
