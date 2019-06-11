@@ -3,7 +3,6 @@
  */
 import deprecated from './deprecated';
 import edit from './edit';
-import save from './save';
 import attributes from './attributes';
 import icons from '../globals/icons';
 
@@ -22,6 +21,8 @@ export const settings = {
     category: 'glutenblocks',
     attributes: attributes,
     edit,
-    save,
+    save({attributes, className}) {
+       return null;
+    },
     deprecated,
 };

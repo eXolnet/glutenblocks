@@ -10,6 +10,8 @@
  * @package glutenblocks
  */
 
+include 'packages/link/index.php'; //this is needed for server-side rendering
+
 glutenblocks_pre_init();
 
 /**
