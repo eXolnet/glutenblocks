@@ -60,7 +60,9 @@ function gb_get_post_types() {
 
 function gb_get_field_types($data){
     $args = array(
-        'post_type'=> $data['field']
+        'post_type'=> $data['field'],
+        'posts_per_page'=> -1, 
+        'numberposts'=> -1
     );
     $posts = get_posts($args);
     return $posts;
