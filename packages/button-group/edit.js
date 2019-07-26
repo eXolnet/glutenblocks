@@ -8,7 +8,7 @@ const { PanelBody, RangeControl } = wp.components;
 const { Component, Fragment } = wp.element;
 const { InnerBlocks, InspectorControls } = wp.editor;
 
-const ALLOWED_BLOCKS = ['glutenblocks/button'];
+const ALLOWED_BLOCKS = ['glutenblocks/button', 'glutenblocks/button-extra'];
 
 const getButtonsTemplate = memoize((buttons) => {
     return times(buttons, () => ['glutenblocks/button']);

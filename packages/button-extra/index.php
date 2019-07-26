@@ -4,7 +4,7 @@
  * phpcs:disable
  */
 
-function glutenblocksglutenblocks_button_extra_render_callback( $attributes, $content ) {
+function glutenblocks_button_extra_render_callback( $attributes, $content ) {
 
     $type = isset($attributes['type']) ? $attributes['type'] : 'visit' ;
     $text = isset($attributes['text']) ? $attributes['text'] : '';
@@ -79,15 +79,15 @@ HTML;
 /**
  * Registers the `glutenblocks/button` block on server.
  */
-function glutenblocksregister_block_glutenblocks_button_extra() {
+function register_block_glutenblocks_button_extra() {
     register_block_type(
         'glutenblocks/button-extra',
         [
             'style' => 'glutenblocks-style',
             'editor_script' => 'glutenblocks',
             'editor_style'  => 'glutenblocks-editor',
-            'render_callback' => 'glutenblocksglutenblocks_button_extra_render_callback'
+            'render_callback' => 'glutenblocks_button_extra_render_callback'
         ]
     );
 }
-add_action( 'init', 'glutenblocksregister_block_glutenblocks_button_extra' );
+add_action( 'init', 'register_block_glutenblocks_button_extra' );

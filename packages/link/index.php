@@ -30,13 +30,13 @@ function glutenblocks_link_render_callback( $attributes, $content ) {
     }
 
     return <<<HTML
-    <a href={$displayLink} target={$target} rel={$relAttr}>
+    <a href="{$displayLink}" target="{$target}" rel="{$relAttr}">
         {$text}
         <span class='gb-list-links__action gb-list-links--{$type}'>{$actionText}</span>
     </a>  
 HTML;
 }
- 
+
 
 /**
  * Registers the `glutenblocks/link` block on server.
