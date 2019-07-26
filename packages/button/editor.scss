@@ -1,4 +1,4 @@
-.wp-block-glutenblocks-button, .wp-block-glutenblocks-button-extra {
+.wp-block-glutenblocks-button {
     position: relative;
 
     &.gb-button__area-wrap,
@@ -92,7 +92,7 @@
 }
 
 .editor-block-styles {
-    .wp-block-glutenblocks-button, .wp-block-glutenblocks-button-extra {
+    .wp-block-glutenblocks-button {
         .gb-button {
             padding: 0.375rem 1.2rem !important;
         }

@@ -32660,10 +32660,251 @@ module.exports = function(module) {
 
 /***/ }),
 
-/***/ "./packages/button-extra/attributes.js":
+/***/ "./packages/button-group/attributes.js":
 /*!*********************************************!*\
-  !*** ./packages/button-extra/attributes.js ***!
+  !*** ./packages/button-group/attributes.js ***!
   \*********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+var attributes = {
+  buttonCount: {
+    type: 'Number',
+    "default": 1
+  }
+};
+/* harmony default export */ __webpack_exports__["default"] = (attributes);
+
+/***/ }),
+
+/***/ "./packages/button-group/edit.js":
+/*!***************************************!*\
+  !*** ./packages/button-group/edit.js ***!
+  \***************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var lodash_times__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lodash/times */ "./node_modules/lodash/times.js");
+/* harmony import */ var lodash_times__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lodash_times__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var memize__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! memize */ "./node_modules/memize/index.js");
+/* harmony import */ var memize__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(memize__WEBPACK_IMPORTED_MODULE_3__);
+
+
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+var __ = wp.i18n.__;
+var _wp$components = wp.components,
+    PanelBody = _wp$components.PanelBody,
+    RangeControl = _wp$components.RangeControl;
+var _wp$element = wp.element,
+    Component = _wp$element.Component,
+    Fragment = _wp$element.Fragment;
+var _wp$editor = wp.editor,
+    InnerBlocks = _wp$editor.InnerBlocks,
+    InspectorControls = _wp$editor.InspectorControls;
+var ALLOWED_BLOCKS = ['glutenblocks/button', 'glutenblocks/button-extra'];
+var getButtonsTemplate = memize__WEBPACK_IMPORTED_MODULE_3___default()(function (buttons) {
+  return lodash_times__WEBPACK_IMPORTED_MODULE_0___default()(buttons, function () {
+    return ['glutenblocks/button'];
+  });
+});
+
+var GlutenblocksButtonGroupEdit =
+/*#__PURE__*/
+function (_Component) {
+  _inherits(GlutenblocksButtonGroupEdit, _Component);
+
+  function GlutenblocksButtonGroupEdit() {
+    _classCallCheck(this, GlutenblocksButtonGroupEdit);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(GlutenblocksButtonGroupEdit).apply(this, arguments));
+  }
+
+  _createClass(GlutenblocksButtonGroupEdit, [{
+    key: "render",
+    value: function render() {
+      var _this$props = this.props,
+          buttonCount = _this$props.attributes.buttonCount,
+          className = _this$props.className,
+          setAttributes = _this$props.setAttributes;
+      return React.createElement(Fragment, null, React.createElement(InspectorControls, null, React.createElement(PanelBody, {
+        title: __('Appearance'),
+        initialOpen: true
+      }, React.createElement(RangeControl, {
+        label: __('Button Count'),
+        value: buttonCount,
+        onChange: function onChange(nextButtonCount) {
+          setAttributes({
+            buttonCount: nextButtonCount
+          });
+        },
+        min: 1,
+        max: 6
+      }))), React.createElement("div", {
+        className: classnames__WEBPACK_IMPORTED_MODULE_2___default()(className, 'gb-button-group')
+      }, React.createElement(InnerBlocks, {
+        template: getButtonsTemplate(buttonCount),
+        templateLock: "all",
+        allowedBlocks: ALLOWED_BLOCKS
+      })));
+    }
+  }]);
+
+  return GlutenblocksButtonGroupEdit;
+}(Component);
+
+GlutenblocksButtonGroupEdit.propTypes = {
+  attributes: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object,
+  setAttributes: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func,
+  className: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string
+};
+/* harmony default export */ __webpack_exports__["default"] = (GlutenblocksButtonGroupEdit);
+
+/***/ }),
+
+/***/ "./packages/button-group/index.js":
+/*!****************************************!*\
+  !*** ./packages/button-group/index.js ***!
+  \****************************************/
+/*! exports provided: name, settings */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "name", function() { return name; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "settings", function() { return settings; });
+/* harmony import */ var _edit__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./edit */ "./packages/button-group/edit.js");
+/* harmony import */ var _save__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./save */ "./packages/button-group/save.js");
+/* harmony import */ var _attributes__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./attributes */ "./packages/button-group/attributes.js");
+/* harmony import */ var _globals_icons__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../globals/icons */ "./packages/globals/icons.js");
+/**
+ * Internal dependencies
+ */
+
+
+
+
+/**
+ * WordPress dependencies
+ */
+
+var __ = wp.i18n.__;
+var name = 'glutenblocks/button-group';
+var settings = {
+  title: __('Button Group', 'glutenblocks'),
+  description: __('List multiple buttons side by side.'),
+  icon: _globals_icons__WEBPACK_IMPORTED_MODULE_3__["default"].buttonGroup,
+  category: 'glutenblocks',
+  attributes: _attributes__WEBPACK_IMPORTED_MODULE_2__["default"],
+  supports: {
+    align: ['left', 'right', 'center'],
+    html: false
+  },
+  edit: _edit__WEBPACK_IMPORTED_MODULE_0__["default"],
+  save: _save__WEBPACK_IMPORTED_MODULE_1__["default"]
+};
+
+/***/ }),
+
+/***/ "./packages/button-group/save.js":
+/*!***************************************!*\
+  !*** ./packages/button-group/save.js ***!
+  \***************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+var Component = wp.element.Component;
+var InnerBlocks = wp.editor.InnerBlocks;
+
+
+var GlutenblocksButtonGroupSave =
+/*#__PURE__*/
+function (_Component) {
+  _inherits(GlutenblocksButtonGroupSave, _Component);
+
+  function GlutenblocksButtonGroupSave() {
+    _classCallCheck(this, GlutenblocksButtonGroupSave);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(GlutenblocksButtonGroupSave).apply(this, arguments));
+  }
+
+  _createClass(GlutenblocksButtonGroupSave, [{
+    key: "render",
+    value: function render() {
+      var className = this.props.className;
+      return React.createElement("div", {
+        className: classnames__WEBPACK_IMPORTED_MODULE_0___default()(className, 'gb-button-group')
+      }, React.createElement(InnerBlocks.Content, null));
+    }
+  }]);
+
+  return GlutenblocksButtonGroupSave;
+}(Component);
+
+GlutenblocksButtonGroupSave.propTypes = {
+  attributes: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object,
+  className: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string
+};
+/* harmony default export */ __webpack_exports__["default"] = (GlutenblocksButtonGroupSave);
+
+/***/ }),
+
+/***/ "./packages/button/attributes.js":
+/*!***************************************!*\
+  !*** ./packages/button/attributes.js ***!
+  \***************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -32671,7 +32912,7 @@ module.exports = function(module) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _globals_utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../globals/utils */ "./packages/globals/utils.js");
 /**
- * BLOCK: Glutenblock Button Extra Attributes
+ * BLOCK: Glutenblock Button Attributes
  */
 
 var colorOptions = _globals_utils__WEBPACK_IMPORTED_MODULE_0__["default"].buttonColors();
@@ -32730,10 +32971,10 @@ var attributes = {
 
 /***/ }),
 
-/***/ "./packages/button-extra/edit.js":
-/*!***************************************!*\
-  !*** ./packages/button-extra/edit.js ***!
-  \***************************************/
+/***/ "./packages/button/edit.js":
+/*!*********************************!*\
+  !*** ./packages/button/edit.js ***!
+  \*********************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -32795,17 +33036,17 @@ var _wp$editor = wp.editor,
     URLInput = _wp$editor.URLInput,
     InspectorControls = _wp$editor.InspectorControls;
 
-var GlutenblocksButtonExtraEdit =
+var GlutenblocksButtonEdit =
 /*#__PURE__*/
 function (_Component) {
-  _inherits(GlutenblocksButtonExtraEdit, _Component);
+  _inherits(GlutenblocksButtonEdit, _Component);
 
-  function GlutenblocksButtonExtraEdit() {
+  function GlutenblocksButtonEdit() {
     var _this;
 
-    _classCallCheck(this, GlutenblocksButtonExtraEdit);
+    _classCallCheck(this, GlutenblocksButtonEdit);
 
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(GlutenblocksButtonExtraEdit).apply(this, arguments));
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(GlutenblocksButtonEdit).apply(this, arguments));
 
     _defineProperty(_assertThisInitialized(_this), "typeOptions", [{
       value: 'normal',
@@ -32828,7 +33069,7 @@ function (_Component) {
     return _this;
   }
 
-  _createClass(GlutenblocksButtonExtraEdit, [{
+  _createClass(GlutenblocksButtonEdit, [{
     key: "acfPluginCheck",
     value: function acfPluginCheck() {
       var _this2 = this;
@@ -32837,8 +33078,8 @@ function (_Component) {
           hasACFPlugin = _this$props.attributes.hasACFPlugin,
           setAttributes = _this$props.setAttributes;
       var options = [{
-        value: 'visit',
-        label: __('Visit')
+        value: 'normal',
+        label: __('Normal')
       }];
       apiFetch({
         path: addQueryArgs('/glutenblocks/v1/gb_is_acf_plugin_active')
@@ -33133,640 +33374,6 @@ function (_Component) {
     }
   }]);
 
-  return GlutenblocksButtonExtraEdit;
-}(Component);
-
-GlutenblocksButtonExtraEdit.propTypes = {
-  attributes: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.object,
-  setAttributes: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.func,
-  className: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.string,
-  isSelected: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.bool
-};
-/* harmony default export */ __webpack_exports__["default"] = (GlutenblocksButtonExtraEdit);
-
-/***/ }),
-
-/***/ "./packages/button-extra/index.js":
-/*!****************************************!*\
-  !*** ./packages/button-extra/index.js ***!
-  \****************************************/
-/*! exports provided: name, settings */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "name", function() { return name; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "settings", function() { return settings; });
-/* harmony import */ var _edit__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./edit */ "./packages/button-extra/edit.js");
-/* harmony import */ var _attributes__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./attributes */ "./packages/button-extra/attributes.js");
-/* harmony import */ var _globals_icons__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../globals/icons */ "./packages/globals/icons.js");
-/**
- * Internal dependencies
- */
-
-
-
-/**
- * WordPress dependencies
- */
-
-var __ = wp.i18n.__;
-var name = 'glutenblocks/button-extra';
-var settings = {
-  title: __('Button Extra', 'glutenblocks'),
-  description: __('A Button Block that contain the possibility to link custom post type'),
-  icon: _globals_icons__WEBPACK_IMPORTED_MODULE_2__["default"].button,
-  category: 'glutenblocks',
-  attributes: _attributes__WEBPACK_IMPORTED_MODULE_1__["default"],
-  supports: {
-    align: ['left', 'right', 'center'],
-    html: false
-  },
-  edit: _edit__WEBPACK_IMPORTED_MODULE_0__["default"],
-  save: function save(_ref) {
-    var attributes = _ref.attributes,
-        className = _ref.className;
-    return null;
-  }
-};
-
-/***/ }),
-
-/***/ "./packages/button-group/attributes.js":
-/*!*********************************************!*\
-  !*** ./packages/button-group/attributes.js ***!
-  \*********************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-var attributes = {
-  buttonCount: {
-    type: 'Number',
-    "default": 1
-  }
-};
-/* harmony default export */ __webpack_exports__["default"] = (attributes);
-
-/***/ }),
-
-/***/ "./packages/button-group/edit.js":
-/*!***************************************!*\
-  !*** ./packages/button-group/edit.js ***!
-  \***************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var lodash_times__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lodash/times */ "./node_modules/lodash/times.js");
-/* harmony import */ var lodash_times__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lodash_times__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
-/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var memize__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! memize */ "./node_modules/memize/index.js");
-/* harmony import */ var memize__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(memize__WEBPACK_IMPORTED_MODULE_3__);
-
-
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-
-
-
-var __ = wp.i18n.__;
-var _wp$components = wp.components,
-    PanelBody = _wp$components.PanelBody,
-    RangeControl = _wp$components.RangeControl;
-var _wp$element = wp.element,
-    Component = _wp$element.Component,
-    Fragment = _wp$element.Fragment;
-var _wp$editor = wp.editor,
-    InnerBlocks = _wp$editor.InnerBlocks,
-    InspectorControls = _wp$editor.InspectorControls;
-var ALLOWED_BLOCKS = ['glutenblocks/button', 'glutenblocks/button-extra'];
-var getButtonsTemplate = memize__WEBPACK_IMPORTED_MODULE_3___default()(function (buttons) {
-  return lodash_times__WEBPACK_IMPORTED_MODULE_0___default()(buttons, function () {
-    return ['glutenblocks/button'];
-  });
-});
-
-var GlutenblocksButtonGroupEdit =
-/*#__PURE__*/
-function (_Component) {
-  _inherits(GlutenblocksButtonGroupEdit, _Component);
-
-  function GlutenblocksButtonGroupEdit() {
-    _classCallCheck(this, GlutenblocksButtonGroupEdit);
-
-    return _possibleConstructorReturn(this, _getPrototypeOf(GlutenblocksButtonGroupEdit).apply(this, arguments));
-  }
-
-  _createClass(GlutenblocksButtonGroupEdit, [{
-    key: "render",
-    value: function render() {
-      var _this$props = this.props,
-          buttonCount = _this$props.attributes.buttonCount,
-          className = _this$props.className,
-          setAttributes = _this$props.setAttributes;
-      return React.createElement(Fragment, null, React.createElement(InspectorControls, null, React.createElement(PanelBody, {
-        title: __('Appearance'),
-        initialOpen: true
-      }, React.createElement(RangeControl, {
-        label: __('Button Count'),
-        value: buttonCount,
-        onChange: function onChange(nextButtonCount) {
-          setAttributes({
-            buttonCount: nextButtonCount
-          });
-        },
-        min: 1,
-        max: 6
-      }))), React.createElement("div", {
-        className: classnames__WEBPACK_IMPORTED_MODULE_2___default()(className, 'gb-button-group')
-      }, React.createElement(InnerBlocks, {
-        template: getButtonsTemplate(buttonCount),
-        templateLock: "all",
-        allowedBlocks: ALLOWED_BLOCKS
-      })));
-    }
-  }]);
-
-  return GlutenblocksButtonGroupEdit;
-}(Component);
-
-GlutenblocksButtonGroupEdit.propTypes = {
-  attributes: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object,
-  setAttributes: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func,
-  className: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string
-};
-/* harmony default export */ __webpack_exports__["default"] = (GlutenblocksButtonGroupEdit);
-
-/***/ }),
-
-/***/ "./packages/button-group/index.js":
-/*!****************************************!*\
-  !*** ./packages/button-group/index.js ***!
-  \****************************************/
-/*! exports provided: name, settings */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "name", function() { return name; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "settings", function() { return settings; });
-/* harmony import */ var _edit__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./edit */ "./packages/button-group/edit.js");
-/* harmony import */ var _save__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./save */ "./packages/button-group/save.js");
-/* harmony import */ var _attributes__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./attributes */ "./packages/button-group/attributes.js");
-/* harmony import */ var _globals_icons__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../globals/icons */ "./packages/globals/icons.js");
-/**
- * Internal dependencies
- */
-
-
-
-
-/**
- * WordPress dependencies
- */
-
-var __ = wp.i18n.__;
-var name = 'glutenblocks/button-group';
-var settings = {
-  title: __('Button Group', 'glutenblocks'),
-  description: __('List multiple buttons side by side.'),
-  icon: _globals_icons__WEBPACK_IMPORTED_MODULE_3__["default"].buttonGroup,
-  category: 'glutenblocks',
-  attributes: _attributes__WEBPACK_IMPORTED_MODULE_2__["default"],
-  supports: {
-    align: ['left', 'right', 'center'],
-    html: false
-  },
-  edit: _edit__WEBPACK_IMPORTED_MODULE_0__["default"],
-  save: _save__WEBPACK_IMPORTED_MODULE_1__["default"]
-};
-
-/***/ }),
-
-/***/ "./packages/button-group/save.js":
-/*!***************************************!*\
-  !*** ./packages/button-group/save.js ***!
-  \***************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
-/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-
-var Component = wp.element.Component;
-var InnerBlocks = wp.editor.InnerBlocks;
-
-
-var GlutenblocksButtonGroupSave =
-/*#__PURE__*/
-function (_Component) {
-  _inherits(GlutenblocksButtonGroupSave, _Component);
-
-  function GlutenblocksButtonGroupSave() {
-    _classCallCheck(this, GlutenblocksButtonGroupSave);
-
-    return _possibleConstructorReturn(this, _getPrototypeOf(GlutenblocksButtonGroupSave).apply(this, arguments));
-  }
-
-  _createClass(GlutenblocksButtonGroupSave, [{
-    key: "render",
-    value: function render() {
-      var className = this.props.className;
-      return React.createElement("div", {
-        className: classnames__WEBPACK_IMPORTED_MODULE_0___default()(className, 'gb-button-group')
-      }, React.createElement(InnerBlocks.Content, null));
-    }
-  }]);
-
-  return GlutenblocksButtonGroupSave;
-}(Component);
-
-GlutenblocksButtonGroupSave.propTypes = {
-  attributes: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object,
-  className: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string
-};
-/* harmony default export */ __webpack_exports__["default"] = (GlutenblocksButtonGroupSave);
-
-/***/ }),
-
-/***/ "./packages/button/attributes.js":
-/*!***************************************!*\
-  !*** ./packages/button/attributes.js ***!
-  \***************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _globals_utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../globals/utils */ "./packages/globals/utils.js");
-/**
- * BLOCK: Glutenblock Button Attributes
- */
-
-var colorOptions = _globals_utils__WEBPACK_IMPORTED_MODULE_0__["default"].buttonColors();
-var shapeOptions = _globals_utils__WEBPACK_IMPORTED_MODULE_0__["default"].buttonShapes();
-var attributes = {
-  color: {
-    type: 'String',
-    "default": colorOptions.length > 0 ? colorOptions[0].value : ''
-  },
-  colorInverse: {
-    type: 'Boolean',
-    "default": false
-  },
-  shape: {
-    type: 'String',
-    "default": shapeOptions.length > 0 ? shapeOptions[0].value : ''
-  },
-  size: {
-    type: 'String',
-    "default": ''
-  },
-  text: {
-    type: 'String',
-    "default": ''
-  },
-  link: {
-    type: 'String',
-    "default": ''
-  },
-  target: {
-    type: 'String',
-    "default": '_self'
-  },
-  noFollow: {
-    type: 'Boolean',
-    "default": false
-  },
-  icon: {
-    type: 'String',
-    "default": ''
-  },
-  iconSide: {
-    type: 'String',
-    "default": 'right'
-  }
-};
-/* harmony default export */ __webpack_exports__["default"] = (attributes);
-
-/***/ }),
-
-/***/ "./packages/button/edit.js":
-/*!*********************************!*\
-  !*** ./packages/button/edit.js ***!
-  \*********************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _fonticonpicker_react_fonticonpicker__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @fonticonpicker/react-fonticonpicker */ "./node_modules/@fonticonpicker/react-fonticonpicker/dist/fonticonpicker.react.js");
-/* harmony import */ var _fonticonpicker_react_fonticonpicker__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_fonticonpicker_react_fonticonpicker__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _globals_utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../globals/utils */ "./packages/globals/utils.js");
-/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
-/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _globals_genicon__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../globals/genicon */ "./packages/globals/genicon.js");
-/* harmony import */ var _globals_svgicons__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../globals/svgicons */ "./packages/globals/svgicons.js");
-/* harmony import */ var _globals_faicons__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../globals/faicons */ "./packages/globals/faicons.js");
-/* harmony import */ var _globals_svgiconsnames__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../globals/svgiconsnames */ "./packages/globals/svgiconsnames.js");
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-
-
-
-
-
-
-
-
-var __ = wp.i18n.__;
-var _wp$components = wp.components,
-    IconButton = _wp$components.IconButton,
-    PanelBody = _wp$components.PanelBody,
-    SelectControl = _wp$components.SelectControl,
-    ToggleControl = _wp$components.ToggleControl;
-var _wp$element = wp.element,
-    Component = _wp$element.Component,
-    Fragment = _wp$element.Fragment;
-var _wp$editor = wp.editor,
-    RichText = _wp$editor.RichText,
-    URLInput = _wp$editor.URLInput,
-    InspectorControls = _wp$editor.InspectorControls;
-
-var GlutenblocksButtonEdit =
-/*#__PURE__*/
-function (_Component) {
-  _inherits(GlutenblocksButtonEdit, _Component);
-
-  function GlutenblocksButtonEdit() {
-    var _this;
-
-    _classCallCheck(this, GlutenblocksButtonEdit);
-
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(GlutenblocksButtonEdit).apply(this, arguments));
-    _this.state = {
-      btnFocused: 'false'
-    };
-    return _this;
-  }
-
-  _createClass(GlutenblocksButtonEdit, [{
-    key: "componentDidUpdate",
-    value: function componentDidUpdate(prevProps) {
-      if (!this.props.isSelected && prevProps.isSelected && this.state.btnFocused) {
-        this.setState({
-          btnFocused: 'false'
-        });
-      }
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      var _classnames;
-
-      var _this$props = this.props,
-          _this$props$attribute = _this$props.attributes,
-          color = _this$props$attribute.color,
-          colorInverse = _this$props$attribute.colorInverse,
-          shape = _this$props$attribute.shape,
-          size = _this$props$attribute.size,
-          text = _this$props$attribute.text,
-          link = _this$props$attribute.link,
-          target = _this$props$attribute.target,
-          noFollow = _this$props$attribute.noFollow,
-          icon = _this$props$attribute.icon,
-          iconSide = _this$props$attribute.iconSide,
-          className = _this$props.className,
-          setAttributes = _this$props.setAttributes,
-          isSelected = _this$props.isSelected;
-
-      var renderSVG = function renderSVG(svg) {
-        return React.createElement(_globals_genicon__WEBPACK_IMPORTED_MODULE_4__["default"], {
-          name: svg,
-          icon: 'fa' === svg.substring(0, 2) ? _globals_faicons__WEBPACK_IMPORTED_MODULE_6__["default"][svg] : _globals_svgicons__WEBPACK_IMPORTED_MODULE_5__["default"][svg]
-        });
-      };
-
-      var colorOptions = _globals_utils__WEBPACK_IMPORTED_MODULE_2__["default"].buttonColors();
-      var shapeOptions = _globals_utils__WEBPACK_IMPORTED_MODULE_2__["default"].buttonShapes();
-      var buttonClass = classnames__WEBPACK_IMPORTED_MODULE_3___default()('gb-button', (_classnames = {}, _defineProperty(_classnames, "gb-button--".concat(color), color), _defineProperty(_classnames, 'gb-button--inverse', colorInverse), _defineProperty(_classnames, "gb-button--".concat(shape), shape), _defineProperty(_classnames, "gb-button--".concat(size), size), _classnames));
-      return React.createElement(Fragment, null, React.createElement(InspectorControls, null, React.createElement(PanelBody, {
-        title: __('Appearance'),
-        initialOpen: true,
-        className: 'gb-hero__panel-body'
-      }, colorOptions && React.createElement(SelectControl, {
-        label: __('Color'),
-        value: color,
-        options: colorOptions,
-        onChange: function onChange(value) {
-          setAttributes({
-            color: value
-          });
-        }
-      }), React.createElement(ToggleControl, {
-        label: __('Inverse'),
-        checked: colorInverse || false,
-        onChange: function onChange(value) {
-          return setAttributes({
-            colorInverse: value
-          });
-        }
-      }), shapeOptions && React.createElement(SelectControl, {
-        label: __('Shape'),
-        value: shape,
-        options: shapeOptions,
-        onChange: function onChange(value) {
-          setAttributes({
-            shape: value
-          });
-        }
-      }), React.createElement(SelectControl, {
-        label: __('Size'),
-        value: size,
-        options: [{
-          value: 'small',
-          label: __('Small')
-        }, {
-          value: '',
-          label: __('Normal')
-        }, {
-          value: 'large',
-          label: __('Large')
-        }],
-        onChange: function onChange(value) {
-          setAttributes({
-            size: value
-          });
-        }
-      })), React.createElement(PanelBody, {
-        title: __('Icon'),
-        initialOpen: false,
-        className: 'gb-hero__panel-body'
-      }, React.createElement(_fonticonpicker_react_fonticonpicker__WEBPACK_IMPORTED_MODULE_1___default.a, {
-        icons: _globals_svgiconsnames__WEBPACK_IMPORTED_MODULE_7__["default"],
-        value: icon,
-        onChange: function onChange(value) {
-          setAttributes({
-            icon: value
-          });
-        },
-        appendTo: "body",
-        renderFunc: renderSVG,
-        theme: "default",
-        isMulti: false
-      }), React.createElement(SelectControl, {
-        label: __('Icon Location'),
-        value: iconSide,
-        options: [{
-          value: 'right',
-          label: __('Right')
-        }, {
-          value: 'left',
-          label: __('Left')
-        }],
-        onChange: function onChange(value) {
-          setAttributes({
-            iconSide: value
-          });
-        }
-      })), React.createElement(PanelBody, {
-        title: __('Settings'),
-        initialOpen: false,
-        className: 'gb-hero__panel-body'
-      }, React.createElement(SelectControl, {
-        label: __('Link Target'),
-        value: target,
-        options: [{
-          value: '_self',
-          label: __('Same Window')
-        }, {
-          value: '_blank',
-          label: __('New Window')
-        }],
-        onChange: function onChange(value) {
-          setAttributes({
-            target: value
-          });
-        }
-      }), React.createElement(ToggleControl, {
-        label: __('Set link to nofollow?'),
-        checked: undefined !== noFollow ? noFollow : false,
-        onChange: function onChange(value) {
-          return setAttributes({
-            noFollow: value
-          });
-        }
-      }))), React.createElement("div", {
-        className: classnames__WEBPACK_IMPORTED_MODULE_3___default()(className, 'gb-button__area-wrap')
-      }, React.createElement("span", {
-        className: 'gb-button__wrap'
-      }, React.createElement("span", {
-        className: buttonClass
-      }, icon && 'left' === iconSide && React.createElement(_globals_genicon__WEBPACK_IMPORTED_MODULE_4__["default"], {
-        className: "gb-button__svg-icon gb-button__svg-icon--".concat(icon, " gb-button__svg-icon--").concat(iconSide),
-        name: icon,
-        icon: 'fa' === icon.substring(0, 2) ? _globals_faicons__WEBPACK_IMPORTED_MODULE_6__["default"][icon] : _globals_svgicons__WEBPACK_IMPORTED_MODULE_5__["default"][icon]
-      }), React.createElement(RichText, {
-        tagName: "div",
-        placeholder: __('Button...'),
-        value: text,
-        onChange: function onChange(value) {
-          setAttributes({
-            text: value
-          });
-        },
-        formattingControls: ['bold', 'italic', 'strikethrough'],
-        className: 'gb-button__text',
-        keepPlaceholderOnFocus: true
-      }), icon && 'left' !== iconSide && React.createElement(_globals_genicon__WEBPACK_IMPORTED_MODULE_4__["default"], {
-        className: "gb-button__svg-icon gb-button__svg-icon--".concat(icon, " gb-button__svg-icon--").concat(iconSide),
-        name: icon,
-        icon: 'fa' === icon.substring(0, 2) ? _globals_faicons__WEBPACK_IMPORTED_MODULE_6__["default"][icon] : _globals_svgicons__WEBPACK_IMPORTED_MODULE_5__["default"][icon]
-      }))), isSelected && React.createElement("form", {
-        key: 'form-link',
-        onSubmit: function onSubmit(event) {
-          return event.preventDefault();
-        },
-        className: "blocks-button__inline-link"
-      }, React.createElement(URLInput, {
-        value: link,
-        onChange: function onChange(value) {
-          setAttributes({
-            link: value
-          });
-        }
-      }), React.createElement(IconButton, {
-        icon: 'editor-break',
-        label: __('Apply'),
-        type: 'submit'
-      }))));
-    }
-  }]);
-
   return GlutenblocksButtonEdit;
 }(Component);
 
@@ -33810,7 +33417,7 @@ var __ = wp.i18n.__;
 var name = 'glutenblocks/button';
 var settings = {
   title: __('Button', 'glutenblocks'),
-  description: __('A Button Block'),
+  description: __('A Button Block that contain the possibility to link custom post type'),
   icon: _globals_icons__WEBPACK_IMPORTED_MODULE_3__["default"].button,
   category: 'glutenblocks',
   attributes: _attributes__WEBPACK_IMPORTED_MODULE_2__["default"],
@@ -33897,8 +33504,6 @@ function (_Component) {
           target = _this$props$attribute.target,
           noFollow = _this$props$attribute.noFollow,
           text = _this$props$attribute.text,
-          icon = _this$props$attribute.icon,
-          iconSide = _this$props$attribute.iconSide,
           className = _this$props.className;
       var relAttr = target ? 'noopener noreferrer' : '';
 
@@ -33914,15 +33519,7 @@ function (_Component) {
         target: target ? target : undefined,
         className: classes,
         rel: relAttr
-      }, icon && 'left' === iconSide && React.createElement(_globals_genicon__WEBPACK_IMPORTED_MODULE_0__["default"], {
-        className: "gb-button__svg-icon gb-button__svg-icon--".concat(icon, " gb-button__svg-icon--").concat(iconSide),
-        name: icon,
-        icon: 'fa' === icon.substring(0, 2) ? _globals_faicons__WEBPACK_IMPORTED_MODULE_3__["default"][icon] : _globals_svgicons__WEBPACK_IMPORTED_MODULE_4__["default"][icon]
-      }), text, icon && 'left' !== iconSide && React.createElement(_globals_genicon__WEBPACK_IMPORTED_MODULE_0__["default"], {
-        className: "gb-button__svg-icon gb-button__svg-icon--".concat(icon, " gb-button__svg-icon--").concat(iconSide),
-        name: icon,
-        icon: 'fa' === icon.substring(0, 2) ? _globals_faicons__WEBPACK_IMPORTED_MODULE_3__["default"][icon] : _globals_svgicons__WEBPACK_IMPORTED_MODULE_4__["default"][icon]
-      })));
+      }, text));
     }
   }]);
 
@@ -45605,8 +45202,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 // Import blocks here
 var button = __webpack_require__(/*! ./button */ "./packages/button/index.js");
 
-var button_extra = __webpack_require__(/*! ./button-extra */ "./packages/button-extra/index.js");
-
 var buttonGroup = __webpack_require__(/*! ./button-group */ "./packages/button-group/index.js");
 
 var responsiveImage = __webpack_require__(/*! ./responsive-image */ "./packages/responsive-image/index.js");
@@ -45651,7 +45246,7 @@ var BLOCKS_TO_UNREGISTER = [// 'core/column',
  */
 
 (function registerGlutenblocks() {
-  [button, button_extra, buttonGroup, responsiveImage, jumbotron, card, column, hero, link, listLink, media, row, section, youtubeEmbed].forEach(function (block) {
+  [button, buttonGroup, responsiveImage, jumbotron, card, column, hero, link, listLink, media, row, section, youtubeEmbed].forEach(function (block) {
     if (!block) {
       return;
     }

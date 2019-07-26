@@ -15,7 +15,7 @@ export const name = 'glutenblocks/button';
 
 export const settings = {
     title: __('Button', 'glutenblocks'),
-    description: __('A Button Block'),
+    description: __('A Button Block that contain the possibility to link custom post type'),
     icon: icons.button,
     category: 'glutenblocks',
     attributes: attributes,

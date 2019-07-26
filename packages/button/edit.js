@@ -7,6 +7,8 @@ import Ico from '../globals/svgicons';
 import FaIco from '../globals/faicons';
 import IcoNames from '../globals/svgiconsnames';
 
+const { apiFetch } = wp;
+const { addQueryArgs } = wp.url;
 const { __ } = wp.i18n;
 const { IconButton, PanelBody, SelectControl, ToggleControl } = wp.components;
 const { Component, Fragment } = wp.element;
@@ -14,12 +16,100 @@ const { RichText, URLInput, InspectorControls } = wp.editor;
 
 
 class GlutenblocksButtonEdit extends Component {
+    typeOptions = [
+        { value: 'normal', label: __('Normal') },
+    ];
+    mediaObjects = [];
+    postFiles = [];
+    postAttibutes = [{ value: '', label: __('Select Post Attribute') }];
+
     constructor() {
         super(...arguments);
         this.state = {
             btnFocused: 'false',
         };
+        this.postTypes = null;
     }
+
+    acfPluginCheck() {
+        const {
+            attributes: { hasACFPlugin },
+            setAttributes
+        } = this.props;
+        var options = [
+            { value: 'normal', label: __('Normal') },
+        ];
+        apiFetch({
+            path: addQueryArgs('/glutenblocks/v1/gb_is_acf_plugin_active')
+        }).then(answer => {
+            if (answer) {
+                options.push({
+                    value: 'custom',
+                    label: __('Link to Custom Post Type')
+                });
+            }
+            this.typeOptions = options;
+            setAttributes({ hasACFPlugin: answer }); //needed to update dom of typeOptions
+        });
+    }
+
+    getPostTypes() {
+        apiFetch({
+            path: addQueryArgs('/glutenblocks/v1/wp_get_post_types')
+        }).then(post_types => {
+            var postFormatter = [{ value: '', label: __('Select Post Type') }];
+            post_types.forEach(post_type => {
+                postFormatter.push({ value: post_type, label: __(post_type) });
+            });
+            this.postTypes = postFormatter;
+        });
+    }
+
+    getCustomPostObjects(postType) {
+        const { setAttributes } = this.props;
+        apiFetch({
+            path: addQueryArgs(
+                '/glutenblocks/v1/gb_get_field_types/field=' + postType
+            )
+        })
+            .then(objects => {
+                var options = [{ value: '', label: __('Select Post Object') }];
+                objects.forEach(obj => {
+                    options.push({ value: obj.ID, label: __(obj.post_title) });
+                });
+                this.postFiles = options;
+                setAttributes({ customPostType: postType });
+            })
+            .catch(err => {
+                setAttributes({ customPostType: '' });
+            });
+    }
+
+    getCustomPostAttributes(postId) {
+        const {
+            attributes: { customPostType },
+            setAttributes
+        } = this.props;
+        apiFetch({
+            path: addQueryArgs(
+                '/glutenblocks/v1/gb_get_post_attributes/id=' + postId
+            )
+        })
+            .then(objects => {
+                var options = [
+                    { value: '', label: __('Select Post Attribute') }
+                ];
+                Object.keys(objects[customPostType]).forEach(key => {
+                    options.push({ value: key, label: __(key) });
+                });
+                this.postAttibutes = options;
+                setAttributes({ customPostObjectID: postId });
+            })
+            .catch(err => {
+                setAttributes({ customPostObjectID: '' });
+            });
+    }
+
     componentDidUpdate(prevProps) {
         if (! this.props.isSelected && prevProps.isSelected && this.state.btnFocused) {
             this.setState({
@@ -29,11 +119,16 @@ class GlutenblocksButtonEdit extends Component {
     }
 
     render() {
-        const { attributes: { color, colorInverse, shape, size, text, link, target, noFollow, icon, iconSide }, className, setAttributes, isSelected } = this.props;
+        const { attributes: { color, colorInverse, shape, size, text, link, target, noFollow, type, customPostType, customPostObjectID, customPostAttribute }, className, setAttributes, isSelected } = this.props;
 
-        const renderSVG = svg => (
-            <GenIcon name={ svg } icon={ ('fa' === svg.substring(0, 2) ? FaIco[ svg ] : Ico[ svg ]) } />
-        );
+        this.acfPluginCheck();
+        this.getPostTypes();
+        if (customPostType) {
+            this.getCustomPostObjects(customPostType);
+        }
+        if (customPostObjectID) {
+            this.getCustomPostAttributes(customPostObjectID);
+        }
 
         const colorOptions = utils.buttonColors();
         const shapeOptions = utils.buttonShapes();
@@ -48,6 +143,55 @@ class GlutenblocksButtonEdit extends Component {
         return (
             <Fragment>
                 <InspectorControls>
+                    <PanelBody
+                        title={__('Settings')}
+                        initialOpen={true}
+                        className={'gb-link__panel-body'}
+                    >
+                        <SelectControl
+                            label={__('Type')}
+                            value={type}
+                            options={this.typeOptions}
+                            onChange={value => setAttributes({ type: value })}
+                        />
+
+                        {type === 'custom' && (
+                            <SelectControl
+                                label={__('Post Type')}
+                                value={customPostType}
+                                options={this.postTypes}
+                                onChange={value =>
+                                    this.getCustomPostObjects(value)
+                                }
+                            />
+                        )}
+
+                        {type === 'custom' && customPostType && (
+                            <SelectControl
+                                label={__('Object')}
+                                value={customPostObjectID}
+                                options={this.postFiles}
+                                onChange={value =>
+                                    this.getCustomPostAttributes(value)
+                                }
+                            />
+                        )}
+
+                        {type === 'custom' &&
+                        customPostType &&
+                        customPostObjectID && (
+                            <SelectControl
+                                label={__('Attribute')}
+                                value={customPostAttribute}
+                                options={this.postAttibutes}
+                                onChange={value =>
+                                    setAttributes({
+                                        customPostAttribute: value
+                                    })
+                                }
+                            />
+                        )}
+                    </PanelBody>
                     <PanelBody
                         title={ __('Appearance') }
                         initialOpen={ true }
@@ -94,34 +238,6 @@ class GlutenblocksButtonEdit extends Component {
                             } }
                         />
                     </PanelBody>
-                    <PanelBody
-                        title={ __('Icon') }
-                        initialOpen={ false }
-                        className={'gb-hero__panel-body'}
-                    >
-                        <FontIconPicker
-                            icons={ IcoNames }
-                            value={ icon }
-                            onChange={ value => {
-                                setAttributes({ icon: value });
-                            } }
-                            appendTo="body"
-                            renderFunc={ renderSVG }
-                            theme="default"
-                            isMulti={ false }
-                        />
-                        <SelectControl
-                            label={ __('Icon Location') }
-                            value={ iconSide }
-                            options={ [
-                                { value: 'right', label: __('Right') },
-                                { value: 'left', label: __('Left') },
-                            ] }
-                            onChange={ value => {
-                                setAttributes({ iconSide: value });
-                            } }
-                        />
-                    </PanelBody>
                     <PanelBody title={ __('Settings') }
                         initialOpen={ false }
                         className={'gb-hero__panel-body'}>
@@ -146,9 +262,6 @@ class GlutenblocksButtonEdit extends Component {
                 <div className={ classnames(className, 'gb-button__area-wrap') } >
                     <span className={'gb-button__wrap'}>
                         <span className={buttonClass}>
-                            { icon && 'left' === iconSide && (
-                                <GenIcon className={ `gb-button__svg-icon gb-button__svg-icon--${ icon } gb-button__svg-icon--${ iconSide }` } name={ icon } icon={ ('fa' === icon.substring(0, 2) ? FaIco[ icon ] : Ico[ icon ]) } />
-                            ) }
                             <RichText
                                 tagName="div"
                                 placeholder={ __('Button...') }
@@ -160,9 +273,6 @@ class GlutenblocksButtonEdit extends Component {
                                 className={ 'gb-button__text' }
                                 keepPlaceholderOnFocus
                             />
-                            { icon && 'left' !== iconSide && (
-                                <GenIcon className={ `gb-button__svg-icon gb-button__svg-icon--${ icon } gb-button__svg-icon--${ iconSide }` } name={ icon } icon={ ('fa' === icon.substring(0, 2) ? FaIco[ icon ] : Ico[ icon ]) } />
-                            ) }
                         </span>
                     </span>
                     { isSelected && (

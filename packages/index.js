@@ -4,7 +4,6 @@
 
 // Import blocks here
 const button = require('./button');
-const button_extra = require('./button-extra');
 const buttonGroup = require('./button-group');
 const responsiveImage = require('./responsive-image');
 const card = require('./card');
@@ -43,7 +42,6 @@ const BLOCKS_TO_UNREGISTER = [
 (function registerGlutenblocks() {
     [
         button,
-        button_extra,
         buttonGroup,
         responsiveImage,
         jumbotron,

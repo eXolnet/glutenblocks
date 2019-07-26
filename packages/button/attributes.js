@@ -40,13 +40,21 @@ const attributes = {
         type: 'Boolean',
         default: false,
     },
-    icon: {
+    type : {
+        type: 'String',
+        default: 'visit',
+    },
+    customPostType : {
         type: 'String',
         default: '',
     },
-    iconSide: {
+    customPostObjectID : {
         type: 'String',
-        default: 'right',
+        default: '',
+    },
+    customPostAttribute : {
+        type: 'String',
+        default: '',
     }
 };
 
