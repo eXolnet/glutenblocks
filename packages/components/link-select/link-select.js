@@ -4,7 +4,7 @@ const { addQueryArgs } = wp.url;
 const { __ } = wp.i18n;
 
 const { Component, Fragment } = wp.element;
-const { SelectControl } = wp.components;
+const { SelectControl, ToggleControl } = wp.components;
 
 class LinkSelect extends Component {
     typeOptions = [
@@ -18,6 +18,7 @@ class LinkSelect extends Component {
 
     type = 'custom';
     target = '_self';
+    noFollow;
     customPostType = '';
     customPostObjectID = '';
     customPostAttribute = '';
@@ -125,6 +126,14 @@ class LinkSelect extends Component {
         this.forceUpdate();
     }
 
+    handleNoFollow(value) {
+        const { onNoFollowChange } = this.props;
+
+        this.noFollow = value;
+        onNoFollowChange(value);
+        this.forceUpdate();
+    }
+
     handleCustomAttributeChange(value) {
         const { onCustomPostAttributeChange } = this.props;
 
@@ -139,6 +148,7 @@ class LinkSelect extends Component {
         const {
             target,
             type,
+            noFollow,
             customPostType,
             customPostObjectID,
             customPostAttribute
@@ -150,6 +160,7 @@ class LinkSelect extends Component {
 
             this.type = type ? type : 'visit';
             this.target = target ? target : '_self';
+            this.noFollow = noFollow ? noFollow : null;
             this.customPostType = customPostType ? customPostType : '';
             this.customPostObjectID = customPostObjectID
                 ? customPostObjectID
@@ -228,6 +239,13 @@ class LinkSelect extends Component {
                                 }}
                             />
                         )}
+                        <ToggleControl
+                            label={__('Set link to nofollow?')}
+                            checked={undefined !== this.noFollow ? this.noFollow : false}
+                            onChange={value => { 
+                                this.handleNoFollow(value); 
+                            }}
+                        />
                     </Fragment>
                 )}
             </Fragment>
@@ -239,11 +257,13 @@ LinkSelect.propTypes = {
     attributes: PropTypes.object,
     type: PropTypes.string,
     target: PropTypes.string,
+    noFollow: PropTypes.string,
     customPostType: PropTypes.string,
     customPostObjectID: PropTypes.string,
     customPostAttribute: PropTypes.string,
     onLinkTypeChange: PropTypes.func,
     onTargetChange: PropTypes.func,
+    onNoFollowChange: PropTypes.func,
     onCustomPostTypeChange: PropTypes.func,
     onCustomPostIdChange: PropTypes.func,
     onCustomPostAttributeChange: PropTypes.func
