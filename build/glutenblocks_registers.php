@@ -15,9 +15,6 @@ function glutenblocksglutenblocks_button_render_callback( $attributes, $content 
     $colorInverse = $attributes['colorInverse'] ?? false;
     $shape = $attributes['shape'] ?? '';
     $size = $attributes['size'] ?? 'normal';
-    $link = $attributes['link'] ?? '';
-    $target = $attributes['target'] ?? '';
-    $noFollow = $attributes['noFollow'] ?? '';
     $text = $attributes['text'] ?? '';
     $icon = $attributes['icon'] ?? '';
     $iconSide = $attributes['iconSide'] ?? '';
@@ -41,13 +38,6 @@ function glutenblocksglutenblocks_button_render_callback( $attributes, $content 
     }else{
         $displayLink = '#';
     }
-
-//    return <<<HTML
-//    <a href="{$displayLink}" target="{$target}" rel="{$relAttr}">
-//        {$text}
-//        <span class='gb-list-links__action gb-list-links--{$type}'>{$actionText}</span>
-//    </a>
-//HTML;
 
     $classes = [
         'gb-button',
