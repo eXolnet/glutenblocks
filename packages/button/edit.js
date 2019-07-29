@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import FontIconPicker from '@fonticonpicker/react-fonticonpicker';
 import utils from '../globals/utils';
 import classnames from 'classnames';
+import LinkSelect from '../components/link-select/link-select';
 import GenIcon from '../globals/genicon';
 import Ico from '../globals/svgicons';
 import FaIco from '../globals/faicons';
@@ -28,86 +29,43 @@ class GlutenblocksButtonEdit extends Component {
         this.state = {
             btnFocused: 'false',
         };
-        this.postTypes = null;
+
+        this.onLinkTypeChange = this.onLinkTypeChange.bind(this);
+        this.onTargetChange = this.onTargetChange.bind(this);
+        this.onNoFollowChange = this.onNoFollowChange.bind(this);
+        this.onCustomPostTypeChange = this.onCustomPostTypeChange.bind(this);
+        this.onCustomPostIdChange = this.onCustomPostIdChange.bind(this);
+        this.onCustomPostAttributeChange = this.onCustomPostAttributeChange.bind(this);
     }
 
-    acfPluginCheck() {
-        const {
-            attributes: { hasACFPlugin },
-            setAttributes
-        } = this.props;
-        var options = [
-            { value: 'normal', label: __('Normal') },
-        ];
-        apiFetch({
-            path: addQueryArgs('/glutenblocks/v1/gb_is_acf_plugin_active')
-        }).then(answer => {
-            if (answer) {
-                options.push({
-                    value: 'custom',
-                    label: __('Link to Custom Post Type')
-                });
-            }
-            this.typeOptions = options;
-            setAttributes({ hasACFPlugin: answer }); //needed to update dom of typeOptions
-        });
-    }
-
-    getPostTypes() {
-        apiFetch({
-            path: addQueryArgs('/glutenblocks/v1/wp_get_post_types')
-        }).then(post_types => {
-            var postFormatter = [{ value: '', label: __('Select Post Type') }];
-            post_types.forEach(post_type => {
-                postFormatter.push({ value: post_type, label: __(post_type) });
-            });
-            this.postTypes = postFormatter;
-        });
-    }
-
-    getCustomPostObjects(postType) {
+    onLinkTypeChange(value) {
         const { setAttributes } = this.props;
-        apiFetch({
-            path: addQueryArgs(
-                '/glutenblocks/v1/gb_get_field_types/field=' + postType
-            )
-        })
-            .then(objects => {
-                var options = [{ value: '', label: __('Select Post Object') }];
-                objects.forEach(obj => {
-                    options.push({ value: obj.ID, label: __(obj.post_title) });
-                });
-                this.postFiles = options;
-                setAttributes({ customPostType: postType });
-            })
-            .catch(err => {
-                setAttributes({ customPostType: '' });
-            });
+        setAttributes({ type: value });
     }
 
-    getCustomPostAttributes(postId) {
-        const {
-            attributes: { customPostType },
-            setAttributes
-        } = this.props;
-        apiFetch({
-            path: addQueryArgs(
-                '/glutenblocks/v1/gb_get_post_attributes/id=' + postId
-            )
-        })
-            .then(objects => {
-                var options = [
-                    { value: '', label: __('Select Post Attribute') }
-                ];
-                Object.keys(objects[customPostType]).forEach(key => {
-                    options.push({ value: key, label: __(key) });
-                });
-                this.postAttibutes = options;
-                setAttributes({ customPostObjectID: postId });
-            })
-            .catch(err => {
-                setAttributes({ customPostObjectID: '' });
-            });
+    onTargetChange(value) {
+        const { setAttributes } = this.props;
+        setAttributes({ target: value });
+    }
+
+    onNoFollowChange(value) {
+        const { setAttributes } = this.props;
+        setAttributes({ noFollow: value });
+    }
+
+    onCustomPostTypeChange(value) {
+        const { setAttributes } = this.props;
+        setAttributes({ customPostType: value });
+    }
+
+    onCustomPostIdChange(value) {
+        const { setAttributes } = this.props;
+        setAttributes({ customPostObjectID: value });
+    }
+
+    onCustomPostAttributeChange(value) {
+        const { setAttributes } = this.props;
+        setAttributes({ customPostAttribute: value });
     }
 
     componentDidUpdate(prevProps) {
@@ -120,15 +78,6 @@ class GlutenblocksButtonEdit extends Component {
 
     render() {
         const { attributes: { color, colorInverse, shape, size, text, link, target, noFollow, type, customPostType, customPostObjectID, customPostAttribute }, className, setAttributes, isSelected } = this.props;
-
-        this.acfPluginCheck();
-        this.getPostTypes();
-        if (customPostType) {
-            this.getCustomPostObjects(customPostType);
-        }
-        if (customPostObjectID) {
-            this.getCustomPostAttributes(customPostObjectID);
-        }
 
         const colorOptions = utils.buttonColors();
         const shapeOptions = utils.buttonShapes();
@@ -148,49 +97,17 @@ class GlutenblocksButtonEdit extends Component {
                         initialOpen={true}
                         className={'gb-link__panel-body'}
                     >
-                        <SelectControl
-                            label={__('Type')}
-                            value={type}
-                            options={this.typeOptions}
-                            onChange={value => setAttributes({ type: value })}
-                        />
+                        <LinkSelect
+                            onLinkTypeChange={ this.onLinkTypeChange }
+                            onTargetChange={ this.onTargetChange}
+                            onNoFollowChange={ this.onNoFollowChange }
+                            onCustomPostTypeChange={this.onCustomPostTypeChange}
+                            onCustomPostIdChange={this.onCustomPostIdChange}
+                            onCustomPostAttributeChange={this.onCustomPostAttributeChange}
+                            { ...{ type, target, customPostType, customPostObjectID, customPostAttribute } }
+                        >
+                        </LinkSelect>
 
-                        {type === 'custom' && (
-                            <SelectControl
-                                label={__('Post Type')}
-                                value={customPostType}
-                                options={this.postTypes}
-                                onChange={value =>
-                                    this.getCustomPostObjects(value)
-                                }
-                            />
-                        )}
-
-                        {type === 'custom' && customPostType && (
-                            <SelectControl
-                                label={__('Object')}
-                                value={customPostObjectID}
-                                options={this.postFiles}
-                                onChange={value =>
-                                    this.getCustomPostAttributes(value)
-                                }
-                            />
-                        )}
-
-                        {type === 'custom' &&
-                        customPostType &&
-                        customPostObjectID && (
-                            <SelectControl
-                                label={__('Attribute')}
-                                value={customPostAttribute}
-                                options={this.postAttibutes}
-                                onChange={value =>
-                                    setAttributes({
-                                        customPostAttribute: value
-                                    })
-                                }
-                            />
-                        )}
                     </PanelBody>
                     <PanelBody
                         title={ __('Appearance') }
@@ -236,26 +153,6 @@ class GlutenblocksButtonEdit extends Component {
                             onChange={ value => {
                                 setAttributes({ size: value });
                             } }
-                        />
-                    </PanelBody>
-                    <PanelBody title={ __('Settings') }
-                        initialOpen={ false }
-                        className={'gb-hero__panel-body'}>
-                        <SelectControl
-                            label={ __('Link Target') }
-                            value={ target }
-                            options={ [
-                                { value: '_self', label: __('Same Window') },
-                                { value: '_blank', label: __('New Window') },
-                            ] }
-                            onChange={ value => {
-                                setAttributes({ target: value });
-                            } }
-                        />
-                        <ToggleControl
-                            label={ __('Set link to nofollow?') }
-                            checked={ (undefined !== noFollow ? noFollow : false) }
-                            onChange={ (value) => setAttributes({ noFollow: value }) }
                         />
                     </PanelBody>
                 </InspectorControls>
