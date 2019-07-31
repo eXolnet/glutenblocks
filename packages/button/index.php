@@ -15,6 +15,7 @@ function glutenblocks_button_render_callback( $attributes, $content ) {
     $colorInverse = $attributes['colorInverse'] ?? false;
     $shape = $attributes['shape'] ?? '';
     $size = $attributes['size'] ?? 'normal';
+    $align = $attributes['align'] ?? '';
     $text = $attributes['text'] ?? '';
     $icon = $attributes['icon'] ?? '';
     $iconSide = $attributes['iconSide'] ?? '';
@@ -45,12 +46,16 @@ function glutenblocks_button_render_callback( $attributes, $content ) {
         'gb-button--' . $size,
     ];
 
-    if($shape !== '') {
-        $classes[] = 'gb-button--'. $shape;
+    if ($shape !== '') {
+        $classes[] = 'gb-button--' . $shape;
     }
 
     if ($colorInverse) {
         $classes[] = 'gb-button--inverse';
+    }
+
+    if ($align !== '') {
+        $classes[] = 'gb-button--align-' . $align;
     }
 
     $classString = implode(' ', $classes);
