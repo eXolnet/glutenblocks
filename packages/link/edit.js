@@ -1,12 +1,11 @@
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import LinkSelect from '../components/link-select/link-select';
-const { apiFetch } = wp;
-const { addQueryArgs } = wp.url;
+
 const { __ } = wp.i18n;
 
 const { Component, Fragment } = wp.element;
-const { IconButton, PanelBody, ToggleControl } = wp.components;
+const { IconButton, PanelBody } = wp.components;
 const { InspectorControls, URLInput, RichText } = wp.editor;
 
 class GlutenblocksLinkEdit extends Component {
@@ -51,7 +50,7 @@ class GlutenblocksLinkEdit extends Component {
         const { setAttributes } = this.props;
         setAttributes({ customPostAttribute: value });
     }
-    
+
 
     render() {
         const {
