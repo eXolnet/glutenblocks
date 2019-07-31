@@ -1,5 +1,5 @@
-import GenIcon from '../globals/genicon';
 import classnames from 'classnames';
+import PropTypes from 'prop-types';
 
 /**
  * BLOCK: Glutenblock Button
@@ -9,13 +9,9 @@ const {
     Component,
 } = wp.element;
 
-import PropTypes from 'prop-types';
-import FaIco from '../globals/faicons';
-import Ico from '../globals/svgicons';
-
 class GlutenblocksButtonSave extends Component {
     render() {
-        const { attributes: { color, colorInverse, shape, size, link, target, noFollow, text }, className } = this.props;
+        const { attributes: { color, colorInverse, shape, size, link, target, noFollow, text, align }, className } = this.props;
 
         let relAttr = target ? 'noopener noreferrer' : '';
 
@@ -28,6 +24,7 @@ class GlutenblocksButtonSave extends Component {
             [ 'gb-button--inverse' ]: colorInverse,
             [ `gb-button--${ shape }` ]: shape,
             [ `gb-button--${ size }` ]: size,
+            [ `gb-button--align-${ align }` ]: align,
         });
 
         return (

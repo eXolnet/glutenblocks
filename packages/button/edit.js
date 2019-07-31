@@ -1,15 +1,8 @@
 import PropTypes from 'prop-types';
-import FontIconPicker from '@fonticonpicker/react-fonticonpicker';
 import utils from '../globals/utils';
 import classnames from 'classnames';
 import LinkSelect from '../components/link-select/link-select';
-import GenIcon from '../globals/genicon';
-import Ico from '../globals/svgicons';
-import FaIco from '../globals/faicons';
-import IcoNames from '../globals/svgiconsnames';
 
-const { apiFetch } = wp;
-const { addQueryArgs } = wp.url;
 const { __ } = wp.i18n;
 const { IconButton, PanelBody, SelectControl, ToggleControl } = wp.components;
 const { Component, Fragment } = wp.element;
@@ -77,7 +70,7 @@ class GlutenblocksButtonEdit extends Component {
     }
 
     render() {
-        const { attributes: { color, colorInverse, shape, size, text, link, target, noFollow, type, customPostType, customPostObjectID, customPostAttribute }, className, setAttributes, isSelected } = this.props;
+        const { attributes: { color, colorInverse, shape, size, text, link, target, type, customPostType, customPostObjectID, customPostAttribute, align }, className, setAttributes, isSelected } = this.props;
 
         const colorOptions = utils.buttonColors();
         const shapeOptions = utils.buttonShapes();
@@ -87,6 +80,7 @@ class GlutenblocksButtonEdit extends Component {
             [ 'gb-button--inverse' ]: colorInverse,
             [ `gb-button--${ shape }` ]: shape,
             [ `gb-button--${ size }` ]: size,
+            [ `gb-button--align-${ align }` ]: align,
         });
 
         return (
