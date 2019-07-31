@@ -61,8 +61,6 @@ function glutenblocks_button_render_callback( $attributes, $content ) {
 
     $classString = implode(' ', $classes);
 
-    $iconClass = 'gb-button__svg-icon gb-button__svg-icon--'.$icon.' gb-button__svg-icon-'.$iconSide;
-
     return <<<HTML
     <div class='wp-block-glutenblocks-button gb-button-wrapper {$alignClass}'>
                 <a href="{$displayLink}" target="{$target}" rel="{$relAttr}" class="{$classString}">

@@ -3,6 +3,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const mix = require('laravel-mix');
 const _escapeRegExp = require('lodash/escapeRegExp');
 const { sep } = require('path');
+const MergeIntoSingle = require('webpack-merge-and-include-globally');
 
 /*
  |--------------------------------------------------------------------------
@@ -28,42 +29,30 @@ mix
             chunkFilename: 'build/[name].[chunkhash].js',
         },
         plugins: [
-            new CopyWebpackPlugin([
-                {
-                    from: './packages/**/index.php',
-                    test: new RegExp(`([\\w-]+)${_escapeRegExp(sep)}index\\.php$`),
-                    to: './build/glutenblocks_registers.php',
-                    ignore: ['**/example/index.php'],
-                    transform(content) {
-                        content = content.toString();
-
-                        // Within content, search for any function definitions. For
-                        // each, replace every other reference to it in the file.
-                        return content
-                            .match(/^function [^\(]+/gm)
-                            .reduce((result, functionName) => {
-                                // Trim leading "function " prefix from match.
-                                functionName = functionName.slice(9);
-
-                                // Prepend the Gutenberg prefix, substituting any
-                                // other core prefix (e.g. "wp_").
-                                return result.replace(
-                                    new RegExp(functionName, 'g'),
-                                    (match) => 'glutenblocks' + match.replace(/^wp_/, '')
-                                );
-                            }, content)
-                            // The core blocks override procedure takes place in
-                            // the init action default priority to ensure that core
-                            // blocks would have been registered already. Since the
-                            // blocks implementations occur at the default priority
-                            // and due to WordPress hooks behavior not considering
-                            // mutations to the same priority during another's
-                            // callback, the Gutenberg build blocks are modified
-                            // to occur at a later priority.
-                            .replace(/(add_action\(\s*'init',\s*'glutenblocks_register_block_[^']+'(?!,))/, '$1, 20');
-                    },
+            new MergeIntoSingle({
+                files: {
+                    './build/glutenblocks_registers.php': [
+                        './packages/**/index.php',
+                    ]
                 },
-            ]),
+                transform: {
+                    './build/glutenblocks_registers.php': code =>
+                        code.match(/^function [^\(]+/gm)
+                            .reduce((result, functionName) => {
+                            // Trim leading "function " prefix from match.
+                            functionName = functionName.slice(9);
+
+                            // Prepend the Gutenberg prefix, substituting any
+                            // other core prefix (e.g. "wp_").
+                            return result.replace(
+                                new RegExp(functionName, 'g'),
+                                (match) => 'glutenblocks' + match.replace(/^wp_/, '')
+                            );
+                        }, code)
+                            .replace(/(add_action\(\s*'init',\s*'glutenblocks_register_block_[^']+'(?!,))/, '$1, 20')
+                            .replace(/(?!^)<\?php/g, '')
+                }
+            }),
             new CopyWebpackPlugin([{
                 from: 'node_modules/@fonticonpicker/react-fonticonpicker/dist/assets',
                 to: 'build/assets'

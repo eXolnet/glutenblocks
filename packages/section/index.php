@@ -9,7 +9,7 @@
  */
 function register_block_glutenblocks_section() {
     register_block_type(
-        'glutenblocks/theme',
+        'glutenblocks/section',
         [
             'style' => 'glutenblocks-style',
             'editor_script' => 'glutenblocks',
@@ -17,4 +17,4 @@ function register_block_glutenblocks_section() {
         ]
     );
 }
-add_action( 'init', 'register_block_glutenblocks_theme' );
+add_action( 'init', 'register_block_glutenblocks_section' );

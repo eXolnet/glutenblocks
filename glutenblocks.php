@@ -10,8 +10,6 @@
  * @package glutenblocks
  */
 
-include 'packages/link/index.php'; //this is needed for server-side rendering
-
 glutenblocks_pre_init();
 
 /**
@@ -61,7 +59,7 @@ function gb_get_post_types() {
 function gb_get_field_types($data){
     $args = array(
         'post_type'=> $data['field'],
-        'posts_per_page'=> -1, 
+        'posts_per_page'=> -1,
         'numberposts'=> -1
     );
     $posts = get_posts($args);

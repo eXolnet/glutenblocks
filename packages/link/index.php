@@ -4,7 +4,7 @@
  * phpcs:disable
  */
 
-function glutenblocks_link_render_callback( $attributes, $content ) {
+function glutenblocks_register_link_render_callback( $attributes, $content ) {
     $type = isset($attributes['type']) ? $attributes['type'] : 'visit' ;
     $text = isset($attributes['text']) ? $attributes['text'] : '';
     $target = isset($attributes['target']) ? $attributes['target'] : null;
@@ -48,7 +48,7 @@ function register_block_glutenblocks_link() {
             'style' => 'glutenblocks-style',
             'editor_script' => 'glutenblocks',
             'editor_style'  => 'glutenblocks-editor',
-            'render_callback' => 'glutenblocks_link_render_callback'
+            'render_callback' => 'glutenblocks_register_link_render_callback'
         ]
     );
 }

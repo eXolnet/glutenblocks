@@ -64,7 +64,7 @@
         "webpack-cli": "^3.2.3",
         "webpack-dev-middleware": "~2.0.4",
         "webpack-hot-middleware": "~2.22.3",
-        "webpack-merge": "~4.1.4"
-    },
-    "dependencies": {}
+        "webpack-merge": "~4.1.4",
+        "webpack-merge-and-include-globally": "^2.1.16"
+    }
 }
