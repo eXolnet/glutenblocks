@@ -40,7 +40,7 @@
         "cross-env": "^5.2.0",
         "eslint": "^5.16.0",
         "laravel-mix": "^4.0.15",
-        "lodash": "^4.17.11",
+        "lodash": "^4.17.15",
         "memize": "^1.0.5",
         "node-sass": "^4.11.0",
         "path": "^0.12.7",
