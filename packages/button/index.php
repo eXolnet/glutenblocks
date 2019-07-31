@@ -54,8 +54,9 @@ function glutenblocks_button_render_callback( $attributes, $content ) {
         $classes[] = 'gb-button--inverse';
     }
 
+    $alignClass = '';
     if ($align !== '') {
-        $classes[] = 'gb-button--align-' . $align;
+        $alignClass = 'gb-button--align-' . $align;
     }
 
     $classString = implode(' ', $classes);
@@ -63,7 +64,7 @@ function glutenblocks_button_render_callback( $attributes, $content ) {
     $iconClass = 'gb-button__svg-icon gb-button__svg-icon--'.$icon.' gb-button__svg-icon-'.$iconSide;
 
     return <<<HTML
-    <div class='wp-block-glutenblocks-button gb-button-wrapper'>
+    <div class='wp-block-glutenblocks-button gb-button-wrapper {$alignClass}'>
                 <a href="{$displayLink}" target="{$target}" rel="{$relAttr}" class="{$classString}">
                     {$text}
                 </a>

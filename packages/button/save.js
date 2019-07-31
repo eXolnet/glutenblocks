@@ -24,11 +24,16 @@ class GlutenblocksButtonSave extends Component {
             [ 'gb-button--inverse' ]: colorInverse,
             [ `gb-button--${ shape }` ]: shape,
             [ `gb-button--${ size }` ]: size,
+        });
+
+        const containerClasses = classnames('wp-block-glutenblocks-button gb-button-wrapper', {
             [ `gb-button--align-${ align }` ]: align,
         });
 
+
+
         return (
-            <div className={'wp-block-glutenblocks-button gb-button-wrapper'}>
+            <div className={containerClasses}>
                 <a href={ (link ? link : '#') } target={ (target ? target : undefined) } className={classes} rel={ relAttr }>
                     { text }
                 </a>
