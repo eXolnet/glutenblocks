@@ -1,10 +1,9 @@
 {
-    "extends": [
-        "@exolnet/eslint-config-react"
-    ],
+    "extends": ["@exolnet/eslint-config-react", "plugin:jest/recommended"],
     "globals": {
         "__webpack_public_path__": true,
         "wp": true,
         "React": true
-    }
+    },
+    "plugins": ["jest"]
 }

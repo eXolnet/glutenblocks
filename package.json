@@ -39,6 +39,7 @@
         "copy-webpack-plugin": "^5.0.2",
         "cross-env": "^5.2.0",
         "eslint": "^5.16.0",
+        "eslint-plugin-jest": "^22.15.1",
         "jest": "^24.8.0",
         "laravel-mix": "^4.0.15",
         "lodash": "^4.17.15",
