@@ -18,7 +18,7 @@
         "lint": "npm run -s lint:scripts && npm run -s lint:styles",
         "lint:scripts": "eslint packages/",
         "lint:styles": "stylelint \"packages/**/*.{css,sass,scss,sss,less}\"",
-        "test": "npm run -s lint"
+        "test": "npm run -s lint && jest"
     },
     "devDependencies": {
         "@babel/core": "^7.0.0",
@@ -39,6 +39,7 @@
         "copy-webpack-plugin": "^5.0.2",
         "cross-env": "^5.2.0",
         "eslint": "^5.16.0",
+        "jest": "^24.8.0",
         "laravel-mix": "^4.0.15",
         "lodash": "^4.17.15",
         "memize": "^1.0.5",
@@ -53,6 +54,7 @@
         "react-container-dimensions": "^1.4.1",
         "react-dom": "^16.8.6",
         "react-lazy-load": "^3.0.13",
+        "react-test-renderer": "^16.9.0",
         "react-transition-group": "^2.3.0",
         "resolve-url-loader": "^3.0.1",
         "sass": "^1.17.4",
