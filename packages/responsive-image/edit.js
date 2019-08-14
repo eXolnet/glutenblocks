@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 
-const { __ } = wp.i18n;
-const {
+import { __ } from '@wordpress/i18n';
+import {
     Button,
     Dashicon,
     PanelBody,
@@ -9,11 +9,9 @@ const {
     TextareaControl,
     ExternalLink,
     TextControl
-} = wp.components;
-const { Component, Fragment } = wp.element;
-const { InspectorControls, MediaUpload } = wp.editor;
-
-
+} from '@wordpress/components';
+import { Component, Fragment } from '@wordpress/element';
+import { InspectorControls, MediaUpload } from '@wordpress/block-editor';
 
 class GlutenblocksResponsiveImageEdit extends Component {
 
