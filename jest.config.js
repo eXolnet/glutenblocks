@@ -3,7 +3,7 @@
 
 module.exports = {
     // All imported modules in your tests should be mocked automatically
-    // automock: false,
+    automock: false,
 
     // Stop running tests after `n` failures
     // bail: 0,
@@ -88,7 +88,7 @@ module.exports = {
     // notifyMode: "failure-change",
 
     // A preset that is used as a base for Jest's configuration
-    // preset: null,
+    preset: '@wordpress/jest-preset-default',
 
     // Run tests from one or more projects
     // projects: null,
@@ -129,7 +129,7 @@ module.exports = {
     // snapshotSerializers: [],
 
     // The test environment that will be used for testing
-    testEnvironment: 'node',
+    testEnvironment: 'jsdom',
 
     // Options that will be passed to the testEnvironment
     // testEnvironmentOptions: {},
@@ -145,9 +145,7 @@ module.exports = {
     ],
 
     // An array of regexp pattern strings that are matched against all test paths, matched tests are skipped
-    // testPathIgnorePatterns: [
-    //   "/node_modules/"
-    // ],
+    testPathIgnorePatterns: ['/node_modules/']
 
     // The regexp pattern or array of patterns that Jest uses to detect test files
     // testRegex: [],
