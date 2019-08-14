@@ -17,6 +17,8 @@ class GlutenblocksResponsiveImageEdit extends Component {
 
     constructor() {
         super(...arguments);
+
+        this.onTabSelect = this.onTabSelect.bind(this);
     }
 
     imageControls(imageType, isQuickView) {
@@ -179,6 +181,10 @@ class GlutenblocksResponsiveImageEdit extends Component {
         );
     }
 
+    onTabSelect(tabName) {
+        this.props.setAttributes({ currentTab: tabName });
+    }
+
     render() {
         const {
             attributes: {
@@ -191,15 +197,12 @@ class GlutenblocksResponsiveImageEdit extends Component {
             setAttributes,
         } = this.props;
 
-        const onTabSelect = (tabName) => {
-            setAttributes({ currentTab: tabName });
-        };
-
         const tabControls = (
-            <TabPanel className="gb-inspect-tabs"
+            <TabPanel
+                className="gb-inspect-tabs"
                 activeClass="active-tab"
                 initialTabName={currentTab}
-                onSelect={onTabSelect}
+                onSelect={this.onTabSelect}
                 tabs={[
                     {
                         name: 'desk',
