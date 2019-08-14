@@ -37,18 +37,18 @@ mix
                 },
                 transform: {
                     './build/glutenblocks_registers.php': code =>
-                        code.match(/^function [^\(]+/gm)
+                        code.match(/^function [^(]+/gm)
                             .reduce((result, functionName) => {
-                            // Trim leading "function " prefix from match.
-                            functionName = functionName.slice(9);
+                                // Trim leading "function " prefix from match.
+                                functionName = functionName.slice(9);
 
-                            // Prepend the Gutenberg prefix, substituting any
-                            // other core prefix (e.g. "wp_").
-                            return result.replace(
-                                new RegExp(functionName, 'g'),
-                                (match) => 'glutenblocks' + match.replace(/^wp_/, '')
-                            );
-                        }, code)
+                                // Prepend the Gutenberg prefix, substituting any
+                                // other core prefix (e.g. "wp_").
+                                return result.replace(
+                                    new RegExp(functionName, 'g'),
+                                    (match) => 'glutenblocks' + match.replace(/^wp_/, '')
+                                );
+                            }, code)
                             .replace(/(add_action\(\s*'init',\s*'glutenblocks_register_block_[^']+'(?!,))/, '$1, 20')
                             .replace(/(?!^)<\?php/g, '')
                 }
