@@ -12,12 +12,30 @@ Collection of Wordpress blocks for the Gutenberg editor.
 
 ## Usage
 
-If you need to create a new Block, please use the `packages/src/example` as the skeleton of your new block.
+If you need to create a new Block, please use the `packages/src/example` as the skeleton of your new block. 
+
+## Developement flow
+
+To be able to see the components, you need to install the plugin in a Wordpress site. If you have Docker installed, 
+you can create a new Wordpress site quickly with this command:
+``` bash
+docker-compose -f docker-compose.yml -f docker-compose-localdev.yml up
+```
+Your Wordpress site will be available on `localhost:8888`. You will have to finish the Wordpress installation in the browser.
+
+If it is the first time you start the Docker containers, you will need to enable Glutenblocks plugin from the WP admin panel.
+
+When you are done, you can stop the `docker-compose` process to stop the server from working.
+
+If you want to remove the containers from your development machine, you can run this command:
+``` bash
+docker-compose down
+```
 
 ## Testing
 
 ### Lint
-To run linter tests (project guidelines), please use : 
+To run linter tests (project guidelines), please use: 
 ``` bash
 yarn lint
 composer lint
@@ -27,6 +45,12 @@ To run the phpUnit tests, please use:
 
 ``` bash
 composer test
+```
+
+### Component Tests
+To run your components tests, please use:
+``` bash
+yarn test
 ```
 
 ## Contributing
