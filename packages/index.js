@@ -21,11 +21,11 @@ const youtubeEmbed = require('./youtube-embed');
  * WordPress dependencies
  */
 
-const {
+import {
     registerBlockType,
     unregisterBlockType,
-    unstable__bootstrapServerSideBlockDefinitions, // eslint-disable-line camelcase
-} = wp.blocks;
+    unstable__bootstrapServerSideBlockDefinitions // eslint-disable-line camelcase
+} from '@wordpress/blocks';
 
 /**
  * This array define the list of blocks to unregister.
@@ -54,7 +54,7 @@ const BLOCKS_TO_UNREGISTER = [
         row,
         section,
         youtubeEmbed
-    ].forEach((block) => {
+    ].forEach(block => {
         if (!block) {
             return;
         }

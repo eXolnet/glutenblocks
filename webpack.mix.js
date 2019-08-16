@@ -5,6 +5,8 @@ const _escapeRegExp = require('lodash/escapeRegExp');
 const { sep } = require('path');
 const MergeIntoSingle = require('webpack-merge-and-include-globally');
 
+const externals = require('./config/externals');
+
 /*
  |--------------------------------------------------------------------------
  | Mix Asset Management
@@ -25,6 +27,7 @@ mix
     })
     .webpackConfig({
         devtool: '#source-map',
+        externals,
         output: {
             chunkFilename: 'build/[name].[chunkhash].js',
         },
