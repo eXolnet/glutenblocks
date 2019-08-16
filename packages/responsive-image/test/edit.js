@@ -2,17 +2,13 @@
  * External dependencies
  */
 import TestRenderer from 'react-test-renderer';
-import { shallow, mount } from 'enzyme';
-import { MediaUpload } from '@wordpress/block-editor';
+import { shallow } from 'enzyme';
 
 /**
  * Internal dependencies
  */
 import '../../../tests/matchMedia.mock';
 import GlutenblocksResponsiveImageEdit from '../edit';
-import { InspectorControls } from '@wordpress/block-editor/build/components';
-import { PanelBody, TabPanel } from '@wordpress/components';
-import { Fragment } from '@wordpress/element/build/react';
 
 const attributes = {
     desktopImgURL: '',
