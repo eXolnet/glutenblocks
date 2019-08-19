@@ -2,55 +2,54 @@
  * BLOCK: Glutenblock responsive-image Attributes
  */
 
-const attributes = {
-    //add attributes here
-    desktopImgURL:{
+const sizeObject = {
+    url: {
         type: 'string',
         default: ''
     },
-    desktopImgAlt:{
+    alt: {
         type: 'string',
         default: ''
     },
-    desktopImgWidth:{
+    width: {
         type: 'number',
         default: 0
     },
-    desktopImgHeight:{
+    height: {
         type: 'number',
         default: 0
     },
-    tabletImgURL:{
+    radius: {
+        type: 'number',
+        default: 0
+    },
+    radiusUnit: {
         type: 'string',
-        default: ''
-    },
-    tabletImgAlt:{
-        type: 'string',
-        default: ''
-    },
-    tabletImgWidth:{
-        type: 'number',
-        default: 0
-    },
-    tabletImgHeight:{
-        type: 'number',
-        default: 0
-    },
-    mobileImgURL:{
-        type: 'string',
-        default: ''
-    },
-    mobileImgAlt:{
-        type: 'string',
-        default: ''
-    },
-    mobileImgWidth:{
-        type: 'number',
-        default: 0
-    },
-    mobileImgHeight:{
-        type: 'number',
-        default: 0
+        default: 'px',
+        enum: ['px', '%', 'em']
     }
 };
+
+// Create an object with the default of each property.
+// { url: '', alt: '', width: 0, ... }
+const defaultSizeObject = Object.assign(...Object.entries(sizeObject).map(([k, v]) => ({ [k]: v.default })));
+
+const attributes = {
+    desktop: {
+        type: 'object',
+        properties: sizeObject,
+        default: defaultSizeObject
+    },
+    tablet: {
+        type: 'object',
+        properties: sizeObject,
+        default: defaultSizeObject
+    },
+    mobile: {
+        type: 'object',
+        properties: sizeObject,
+        default: defaultSizeObject
+    },
+};
+
 export default attributes;

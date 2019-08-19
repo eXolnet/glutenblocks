@@ -5,6 +5,7 @@ import edit from './edit';
 import save from './save';
 import icons from '../globals/icons';
 import attributes from './attributes';
+import deprecated from './deprecated';
 
 /**
  * WordPress dependencies
@@ -21,4 +22,5 @@ export const settings = {
     attributes: attributes,
     edit,
     save,
+    deprecated
 };
