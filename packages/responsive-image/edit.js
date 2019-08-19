@@ -12,6 +12,7 @@ import {
 } from '@wordpress/components';
 import { Component, Fragment } from '@wordpress/element';
 import { InspectorControls, MediaUpload } from '@wordpress/block-editor';
+import upperFirst from 'lodash/upperFirst';
 
 class GlutenblocksResponsiveImageEdit extends Component {
     constructor() {
@@ -20,151 +21,31 @@ class GlutenblocksResponsiveImageEdit extends Component {
         this.onTabSelect = this.onTabSelect.bind(this);
     }
 
-    imageControls(imageType, isQuickView) {
-        const {
-            attributes: {
-                desktopImgURL,
-                desktopImgHeight,
-                desktopImgWidth,
-                desktopImgAlt,
-                tabletImgURL,
-                tabletImgHeight,
-                tabletImgWidth,
-                tabletImgAlt,
-                mobileImgURL,
-                mobileImgHeight,
-                mobileImgWidth,
-                mobileImgAlt
-            },
-            setAttributes
-        } = this.props;
-
-        const onSelectImage = img => {
-            switch (imageType) {
-                case 'desktop':
-                    setAttributes({ desktopImgURL: img.url });
-                    break;
-                case 'tablet':
-                    setAttributes({ tabletImgURL: img.url });
-                    break;
-                case 'mobile':
-                    setAttributes({ mobileImgURL: img.url });
-                    break;
-            }
-            updateHeight(img.height);
-            updateWidth(img.width);
-            updateAlt(img.alt);
+    imageControls(size, attributes, isQuickView) {
+        const { setAttributes } = this.props;
+        const updateAttribute = attribute => value => {
+            setAttributes({ [size]: { ...attributes, [attribute]: value } });
         };
 
-        const updateHeight = height => {
-            var formattedHeight = parseInt(height);
-            if (formattedHeight) {
-                switch (imageType) {
-                    case 'desktop':
-                        setAttributes({ desktopImgHeight: formattedHeight });
-                        break;
-                    case 'tablet':
-                        setAttributes({ tabletImgHeight: formattedHeight });
-                        break;
-                    case 'mobile':
-                        setAttributes({ mobileImgHeight: formattedHeight });
-                        break;
-                }
-            }
-        };
-
-        const updateWidth = width => {
-            var formattedWidth = parseInt(width);
-            if (formattedWidth) {
-                switch (imageType) {
-                    case 'desktop':
-                        setAttributes({ desktopImgWidth: formattedWidth });
-                        break;
-                    case 'tablet':
-                        setAttributes({ tabletImgWidth: formattedWidth });
-                        break;
-                    case 'mobile':
-                        setAttributes({ mobileImgWidth: formattedWidth });
-                        break;
-                }
-            }
-        };
-
-        const updateAlt = alt => {
-            switch (imageType) {
-                case 'desktop':
-                    setAttributes({ desktopImgAlt: alt });
-                    break;
-                case 'tablet':
-                    setAttributes({ tabletImgAlt: alt });
-                    break;
-                case 'mobile':
-                    setAttributes({ mobileImgAlt: alt });
-                    break;
-            }
-        };
-
-        const getImgAlt = () => {
-            switch (imageType) {
-                case 'desktop':
-                    return desktopImgAlt;
-                case 'tablet':
-                    return tabletImgAlt;
-                case 'mobile':
-                    return mobileImgAlt;
-                default:
-                    '';
-            }
-        };
-
-        const getImgURL = () => {
-            switch (imageType) {
-                case 'desktop':
-                    return desktopImgURL;
-                case 'tablet':
-                    return tabletImgURL;
-                case 'mobile':
-                    return mobileImgURL;
-                default:
-                    '';
-            }
-        };
-
-        const getImgWidth = () => {
-            switch (imageType) {
-                case 'desktop':
-                    return desktopImgWidth;
-                case 'tablet':
-                    return tabletImgWidth;
-                case 'mobile':
-                    return mobileImgWidth;
-                default:
-                    '';
-            }
-        };
-
-        const getImgHeight = () => {
-            switch (imageType) {
-                case 'desktop':
-                    return desktopImgHeight;
-                case 'tablet':
-                    return tabletImgHeight;
-                case 'mobile':
-                    return mobileImgHeight;
-                default:
-                    '';
-            }
+        const onSelectImage = ({ url, height, width, alt }) => {
+            setAttributes({ [size]: {
+                ...attributes,
+                url,
+                height: parseInt(height),
+                width: parseInt(width),
+                alt
+            } });
         };
 
         const removeImage = () => {
-            var data = { url: '', height: 0, width: 0, alt: '' };
+            const data = { url: '', height: 0, width: 0, alt: '' };
             onSelectImage(data);
         };
 
         return (
             <div className={isQuickView ? 'edit-bg' : ''}>
-                {isQuickView && !getImgURL() && <h3>Add {imageType} Image</h3>}
-                <img src={getImgURL()} />
+                {isQuickView && !attributes.url && <h3>Add {size} Image</h3>}
+                <img src={attributes.url} />
                 <MediaUpload
                     onSelect={onSelectImage}
                     type="image"
@@ -176,11 +57,11 @@ class GlutenblocksResponsiveImageEdit extends Component {
                             onClick={open}
                         >
                             <Dashicon icon="format-image" />
-                            {__('Select ' + imageType + ' Image')}
+                            {__(`Select ${size} Image`)}
                         </Button>
                     )}
                 />
-                {getImgURL() && (
+                {attributes.url && (
                     <Button
                         className={
                             'components-button components-icon-button gb-hero__cta-upload-btn'
@@ -195,8 +76,8 @@ class GlutenblocksResponsiveImageEdit extends Component {
                     <div>
                         <TextareaControl
                             label={__('Alt Text (Alternative Text)')}
-                            value={getImgAlt()}
-                            onChange={updateAlt}
+                            value={attributes.alt}
+                            onChange={updateAttribute('alt')}
                             help={
                                 <Fragment>
                                     <ExternalLink href="https://www.w3.org/WAI/tutorials/images/decision-tree">
@@ -219,17 +100,17 @@ class GlutenblocksResponsiveImageEdit extends Component {
                                     type="number"
                                     className="block-library-image__dimensions__width"
                                     label={__('Width')}
-                                    value={getImgWidth()}
+                                    value={attributes.width}
                                     min={1}
-                                    onChange={updateWidth}
+                                    onChange={updateAttribute('width')}
                                 />
                                 <TextControl
                                     type="number"
                                     className="block-library-image__dimensions__height"
                                     label={__('Height')}
-                                    value={getImgHeight()}
+                                    value={attributes.height}
                                     min={1}
-                                    onChange={updateHeight}
+                                    onChange={updateAttribute('height')}
                                 />
                             </div>
                         </div>
@@ -245,34 +126,19 @@ class GlutenblocksResponsiveImageEdit extends Component {
 
     render() {
         const {
-            attributes: {
-                desktopImgURL,
-                desktopImgHeight,
-                desktopImgWidth,
-                desktopImgAlt,
-                tabletImgURL,
-                tabletImgHeight,
-                tabletImgWidth,
-                tabletImgAlt,
-                mobileImgURL,
-                mobileImgHeight,
-                mobileImgWidth,
-                mobileImgAlt,
-                currentTab
-            },
+            attributes,
             className,
-            setAttributes
         } = this.props;
 
         const tabControls = (
             <TabPanel
                 className="gb-inspect-tabs"
                 activeClass="active-tab"
-                initialTabName={currentTab}
+                initialTabName={attributes.currentTab}
                 onSelect={this.onTabSelect}
                 tabs={[
                     {
-                        name: 'desk',
+                        name: 'desktop',
                         title: <Dashicon icon="desktop" />,
                         className: 'gb-desk-tab'
                     },
@@ -289,99 +155,41 @@ class GlutenblocksResponsiveImageEdit extends Component {
                 ]}
             >
                 {tab => {
-                    let tabOut;
-                    if (tab.name) {
-                        if ('mobile' === tab.name) {
-                            tabOut = mobileControls;
-                        } else if ('tablet' === tab.name) {
-                            tabOut = tabletControls;
-                        } else {
-                            tabOut = deskControls;
-                        }
-                    }
-                    return <div>{tabOut}</div>;
+                    return (<div>
+                        <Fragment>
+                            <PanelBody>
+                                <p>{__(`${upperFirst(tab.name)} Image`)}</p>
+                                {this.imageControls(tab.name, attributes[tab.name], false)}
+                            </PanelBody>
+                        </Fragment>
+                    </div>);
                 }}
             </TabPanel>
         );
-        const mobileControls = (
-            <Fragment>
-                <PanelBody>
-                    <p>{__('Mobile Image')}</p>
-                    {this.imageControls('mobile', false)}
-                </PanelBody>
-            </Fragment>
-        );
-        const tabletControls = (
-            <Fragment>
-                <PanelBody>
-                    <p>{__('Tablet Image')}</p>
-                    {this.imageControls('tablet', false)}
-                </PanelBody>
-            </Fragment>
-        );
-        const deskControls = (
-            <Fragment>
-                <PanelBody>
-                    <p>{__('Desktop Image')}</p>
-                    {this.imageControls('desktop', false)}
-                </PanelBody>
-            </Fragment>
-        );
 
-        const mobileDisplay = () => {
-            if (mobileImgURL) {
+        const display = (size, att) => {
+            if (att.url) {
                 return (
                     <img
-                        src={mobileImgURL}
-                        height={mobileImgHeight}
-                        width={mobileImgWidth}
-                        alt={mobileImgAlt}
+                        src={att.url}
+                        height={att.height}
+                        width={att.width}
+                        alt={att.alt}
                     />
                 );
             }
-            return this.imageControls('mobile', true);
-        };
-
-        const tabletDisplay = () => {
-            if (tabletImgURL) {
-                return (
-                    <img
-                        src={tabletImgURL}
-                        height={tabletImgHeight}
-                        width={tabletImgWidth}
-                        alt={tabletImgAlt}
-                    />
-                );
-            }
-            return this.imageControls('tablet', true);
-        };
-
-        const desktopDisplay = () => {
-            if (desktopImgURL) {
-                return (
-                    <img
-                        src={desktopImgURL}
-                        height={desktopImgHeight}
-                        width={desktopImgWidth}
-                        alt={desktopImgAlt}
-                    />
-                );
-            }
-            return this.imageControls('desktop', true);
+            return this.imageControls(size, att, true);
         };
 
         return (
             <Fragment>
                 <div className={className}>
-                    <div className="gb-responsive-image gb-responsive-image--mobile">
-                        {mobileDisplay()}
-                    </div>
-                    <div className="gb-responsive-image gb-responsive-image--tablet">
-                        {tabletDisplay()}
-                    </div>
-                    <div className="gb-responsive-image gb-responsive-image--desktop">
-                        {desktopDisplay()}
-                    </div>
+                    {['mobile', 'tablet', 'desktop'].map(size =>
+                        // eslint-disable-next-line react/jsx-key
+                        <div className={`gb-responsive-image gb-responsive-image--${size}`}>
+                            {display(size, attributes[size])}
+                        </div>
+                    )}
                 </div>
 
                 <InspectorControls>
