@@ -10,7 +10,7 @@ import icons from '../globals/icons';
 /**
  * WordPress dependencies
  */
-const { __ } = wp.i18n;
+import { __ } from '@wordpress/i18n';
 import { settings as heroSettings } from '../hero';
 
 export const name = 'glutenblocks/jumbotron';

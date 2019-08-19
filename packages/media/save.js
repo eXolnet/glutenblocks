@@ -2,17 +2,13 @@
  * External dependencies
  */
 import classnames from 'classnames';
-const { noop } = 'lodash/noop';
+import noop from 'lodash/noop';
 
 /**
  * WordPress dependencies
  */
-const {
-    Component,
-} = wp.element;
-const {
-    InnerBlocks,
-} = wp.editor;
+import { Component } from '@wordpress/element';
+import { InnerBlocks } from '@wordpress/block-editor';
 
 /**
  * Internal dependencies

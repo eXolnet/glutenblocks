@@ -5,12 +5,8 @@ import PropTypes from 'prop-types';
  * BLOCK: Glutenblock Column
  */
 
-const {
-    Component,
-} = wp.element;
-const {
-    InnerBlocks,
-} = wp.editor;
+import { Component } from '@wordpress/element';
+import { InnerBlocks } from '@wordpress/block-editor';
 
 class GlutenblocksColumnSave extends Component {
     render() {

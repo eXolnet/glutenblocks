@@ -75,6 +75,7 @@
     },
     "dependencies": {
         "@wordpress/babel-preset-default": "^4.4.0",
+        "@wordpress/block-editor": "^3.0.0",
         "@wordpress/blocks": "^6.5.0",
         "@wordpress/browserslist-config": "^2.6.0",
         "@wordpress/components": "^8.1.0",
@@ -85,7 +86,9 @@
         "@wordpress/dom-ready": "^2.5.0",
         "@wordpress/editor": "^9.5.0",
         "@wordpress/element": "^2.6.0",
+        "@wordpress/html-entities": "^2.5.0",
         "@wordpress/i18n": "^3.6.0",
+        "@wordpress/keycodes": "^2.5.0",
         "@wordpress/server-side-render": "^1.1.0",
         "@wordpress/url": "^2.7.0"
     }

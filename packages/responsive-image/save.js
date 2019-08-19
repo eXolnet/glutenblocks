@@ -1,8 +1,6 @@
 import PropTypes from 'prop-types';
 
-const {
-    Component, Fragment
-} = wp.element;
+import { Component, Fragment } from '@wordpress/element';
 
 class GlutenblocksExampleSave extends Component {
     render() {

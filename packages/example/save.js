@@ -4,9 +4,7 @@ import PropTypes from 'prop-types';
  * BLOCK: Glutenblock example
  */
 
-const {
-    Component
-} = wp.element;
+import { Component } from '@wordpress/element';
 
 class GlutenblocksExampleSave extends Component {
     render() {

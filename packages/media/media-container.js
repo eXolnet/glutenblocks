@@ -3,15 +3,15 @@ import PropTypes from 'prop-types';
 /**
  * WordPress dependencies
  */
-const { IconButton, Toolbar } = wp.components;
-const {
+import { IconButton, Toolbar } from '@wordpress/components';
+import {
     BlockControls,
     BlockIcon,
     MediaPlaceholder,
     MediaUpload,
-} = wp.editor;
-const { Component, Fragment } = wp.element;
-const { __ } = wp.i18n;
+} from '@wordpress/block-editor';
+import { Component, Fragment } from '@wordpress/element';
+import { __ } from '@wordpress/i18n';
 
 /**
  * Internal dependencies

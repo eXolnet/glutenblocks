@@ -3,11 +3,11 @@ import utils from '../globals/utils';
 import icons from '../globals/icons';
 import { parseUrl } from './util';
 
-const { __, _x, sprintf } = wp.i18n;
-const { Component, Fragment } = wp.element;
-const { Button, IconButton, PanelBody, Placeholder, SelectControl, TextControl, ToggleControl, Toolbar } = wp.components;
-const { InspectorControls, MediaUpload, MediaUploadCheck, ColorPalette, BlockIcon, BlockControls } = wp.editor;
-const { withInstanceId } = wp.compose;
+import { __, _x, sprintf } from '@wordpress/i18n';
+import { Component, Fragment } from '@wordpress/element';
+import { Button, IconButton, PanelBody, Placeholder, SelectControl, TextControl, ToggleControl, Toolbar } from '@wordpress/components';
+import { InspectorControls, MediaUpload, MediaUploadCheck, ColorPalette, BlockIcon, BlockControls } from '@wordpress/block-editor';
+import { withInstanceId } from '@wordpress/compose';
 
 class GlutenblocksYoutubeEmbedEdit extends Component {
     constructor() {

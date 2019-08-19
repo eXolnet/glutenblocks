@@ -1,7 +1,7 @@
 import classnames from 'classnames';
 
-const { Component } = wp.element;
-const { InnerBlocks } = wp.editor;
+import { Component } from '@wordpress/element';
+import { InnerBlocks } from '@wordpress/block-editor';
 
 import PropTypes from 'prop-types';
 

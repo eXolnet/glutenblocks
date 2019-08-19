@@ -3,10 +3,10 @@ import utils from '../globals/utils';
 import classnames from 'classnames';
 import LinkSelect from '../components/link-select/link-select';
 
-const { __ } = wp.i18n;
-const { IconButton, PanelBody, SelectControl, ToggleControl } = wp.components;
-const { Component, Fragment } = wp.element;
-const { RichText, URLInput, InspectorControls } = wp.editor;
+import { __ } from '@wordpress/i18n';
+import { IconButton, PanelBody, SelectControl, ToggleControl } from '@wordpress/components';
+import { Component, Fragment } from '@wordpress/element';
+import { RichText, URLInput, InspectorControls } from '@wordpress/block-editor';
 
 
 class GlutenblocksButtonEdit extends Component {

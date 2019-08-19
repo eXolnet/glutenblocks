@@ -5,10 +5,10 @@ import icons from '../globals/icons';
 import utils from '../globals/utils';
 import classnames from 'classnames';
 
-const { __ } = wp.i18n;
-const { Button, ButtonGroup, Dashicon, PanelBody, RangeControl, Tooltip, TabPanel, SelectControl, Toolbar } = wp.components;
-const { Component, Fragment } = wp.element;
-const { InspectorControls, InnerBlocks, MediaUpload, ColorPalette, BlockControls } = wp.editor;
+import { __ } from '@wordpress/i18n';
+import { Button, ButtonGroup, Dashicon, PanelBody, RangeControl, Tooltip, TabPanel, SelectControl, Toolbar } from '@wordpress/components';
+import { Component, Fragment } from '@wordpress/element';
+import { InspectorControls, InnerBlocks, MediaUpload, ColorPalette, BlockControls } from '@wordpress/block-editor';
 
 const overlayOpacityOutput = memoize((opacity) => {
     if (opacity < 10) {

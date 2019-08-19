@@ -2,11 +2,11 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import LinkSelect from '../components/link-select/link-select';
 
-const { __ } = wp.i18n;
+import { __ } from '@wordpress/i18n';
 
-const { Component, Fragment } = wp.element;
-const { IconButton, PanelBody } = wp.components;
-const { InspectorControls, URLInput, RichText } = wp.editor;
+import { Component, Fragment } from '@wordpress/element';
+import { IconButton, PanelBody } from '@wordpress/components';
+import { InspectorControls, URLInput, RichText } from '@wordpress/block-editor';
 
 class GlutenblocksLinkEdit extends Component {
 

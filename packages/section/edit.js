@@ -2,10 +2,10 @@ import PropTypes from 'prop-types';
 import utils from '../globals/utils';
 import classnames from 'classnames';
 
-const { __ } = wp.i18n;
-const { PanelBody, SelectControl, TextControl } = wp.components;
-const { Component, Fragment } = wp.element;
-const { InspectorControls, InnerBlocks } = wp.editor;
+import { __ } from '@wordpress/i18n';
+import { PanelBody, SelectControl, TextControl } from '@wordpress/components';
+import { Component, Fragment } from '@wordpress/element';
+import { InspectorControls, InnerBlocks } from '@wordpress/block-editor';
 
 const TEMPLATE = [
     ['core/paragraph'],

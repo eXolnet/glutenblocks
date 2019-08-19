@@ -1,10 +1,10 @@
 import Hero from '../hero/edit';
 import classnames from 'classnames';
 
-const { __ } = wp.i18n;
-const { Fragment } = wp.element;
-const { RichText } = wp.editor;
-const { PanelBody, ToggleControl, TextControl } = wp.components;
+import { __ } from '@wordpress/i18n';
+import { Fragment } from '@wordpress/element';
+import { RichText } from '@wordpress/block-editor';
+import { PanelBody, ToggleControl, TextControl } from '@wordpress/components';
 
 class JumbotronEdit extends Hero {
     getHeroClassName() {
@@ -57,7 +57,7 @@ class JumbotronEdit extends Hero {
         return (
             <Fragment>
                 { super.renderHeroAfter() }
-            
+
                 {scrollTo && (
                     <div className={'gb-jumbotron__scroll-to'}>
                         <RichText

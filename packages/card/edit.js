@@ -2,10 +2,10 @@ import PropTypes from 'prop-types';
 import PostSelector from '../globals/PostSelector';
 import classnames from 'classnames';
 
-const { __ } = wp.i18n;
-const { PanelBody, SelectControl, ToggleControl } = wp.components;
-const { InspectorControls } = wp.editor;
-const { Component, Fragment } = wp.element;
+import { __ } from '@wordpress/i18n';
+import { PanelBody, SelectControl, ToggleControl } from '@wordpress/components';
+import { InspectorControls } from '@wordpress/block-editor';
+import { Component, Fragment } from '@wordpress/element';
 
 class GlutenblocksCardEdit extends Component {
     render() {
