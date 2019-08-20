@@ -8,17 +8,35 @@ import {
     TabPanel,
     TextareaControl,
     ExternalLink,
-    TextControl
+    TextControl,
+    ButtonGroup,
+    RangeControl
 } from '@wordpress/components';
 import { Component, Fragment } from '@wordpress/element';
 import { InspectorControls, MediaUpload } from '@wordpress/block-editor';
 import upperFirst from 'lodash/upperFirst';
+import radiusUnit from './radiusUnit';
+import icons from '../globals/icons';
 
 class GlutenblocksResponsiveImageEdit extends Component {
     constructor() {
         super(...arguments);
 
         this.onTabSelect = this.onTabSelect.bind(this);
+    }
+
+    static cornerRadiusMax(unit) {
+        if (unit === 'px') {
+            return 800;
+        }
+
+        if (unit === '%') {
+            return 100;
+        }
+
+        if (unit === 'em') {
+            return 15;
+        }
     }
 
     imageControls(size, attributes, isQuickView) {
@@ -45,7 +63,10 @@ class GlutenblocksResponsiveImageEdit extends Component {
         return (
             <div className={isQuickView ? 'edit-bg' : ''}>
                 {isQuickView && !attributes.url && <h3>Add {size} Image</h3>}
-                <img src={attributes.url} />
+                <img
+                    src={attributes.url}
+                    style={{ borderRadius: `${attributes.radius}${attributes.radiusUnit}` }}
+                />
                 <MediaUpload
                     onSelect={onSelectImage}
                     type="image"
@@ -113,6 +134,31 @@ class GlutenblocksResponsiveImageEdit extends Component {
                                     onChange={updateAttribute('height')}
                                 />
                             </div>
+                            <div className="block-library-image__dimensions__row">
+                                <ButtonGroup aria-label={ __('Radius Unit') }>
+                                    { radiusUnit.map(unit => (
+                                        <Button
+                                            key={ unit }
+                                            isSmall
+                                            isPrimary={ attributes.radiusUnit === unit }
+                                            aria-pressed={ attributes.radiusUnit === unit }
+                                            onClick={ () => updateAttribute('radiusUnit')(unit) }
+                                        >
+                                            { unit }
+                                        </Button>
+                                    )) }
+                                </ButtonGroup>
+                            </div>
+                            <div className="block-library-image__dimensions__row">
+                                <RangeControl
+                                    label={ icons.spacingTop }
+                                    value={ attributes.radius }
+                                    className={'gb-responsive-image__radius-range-control'}
+                                    onChange={ updateAttribute('radius') }
+                                    min={ 0 }
+                                    max={GlutenblocksResponsiveImageEdit.cornerRadiusMax(attributes.radiusUnit)}
+                                />
+                            </div>
                         </div>
                     </div>
                 )}
@@ -175,6 +221,7 @@ class GlutenblocksResponsiveImageEdit extends Component {
                         height={att.height}
                         width={att.width}
                         alt={att.alt}
+                        style={{ borderRadius: `${att.radius}${att.radiusUnit}` }}
                     />
                 );
             }
