@@ -2,6 +2,8 @@
  * BLOCK: Glutenblock responsive-image Attributes
  */
 
+import radiusUnit from './radiusUnit';
+
 const sizeObject = {
     url: {
         type: 'string',
@@ -26,7 +28,7 @@ const sizeObject = {
     radiusUnit: {
         type: 'string',
         default: 'px',
-        enum: ['px', '%', 'em']
+        enum: radiusUnit
     }
 };
 
