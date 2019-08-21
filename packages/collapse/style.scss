@@ -1,0 +1,45 @@
+.wp-block-glutenblocks-collapse {
+    .gb-collapse {
+        padding: 0 1rem;
+
+        input {
+            display: none;
+        }
+
+        &__bar {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+
+            &--title {
+                width: 93%;
+            }
+
+            &--arrow {
+                width: 20px;
+                height: 20px;
+                border-right: 5px solid black;
+                border-bottom: 5px solid black;
+                transform: rotate(-45deg);
+                transition: all 0.35s;
+            }
+        }
+
+        &__content {
+            transition: max-height 0.2s ease-out;
+            max-height: 0;
+            overflow: hidden;
+        }
+    }
+
+    input:checked {
+        + .gb-collapse__bar .gb-collapse__bar--arrow {
+            transform: rotate(45deg);
+        }
+
+        ~ .gb-collapse__content {
+            max-height: 100vh;
+            transition: max-height 0.4s ease-in;
+        }
+    }
+}
