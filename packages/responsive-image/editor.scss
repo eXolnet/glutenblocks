@@ -1,4 +1,14 @@
 // Put your styles that will only be applied in the editor.
-//.wp-block-glutenblocks-responsive-image {
-//
-//}
+.block-library-image__dimensions__row {
+    .components-button-group {
+        margin-bottom: 10px;
+    }
+
+    .gb-responsive-image__radius-range-control {
+        width: 100%;
+
+        label {
+            width: 30px;
+        }
+    }
+}

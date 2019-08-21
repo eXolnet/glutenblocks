@@ -25,24 +25,24 @@ class GlutenblocksResponsiveImageEdit extends Component {
         this.onTabSelect = this.onTabSelect.bind(this);
     }
 
-    static cornerRadiusMax(unit) {
-        if (unit === 'px') {
-            return 800;
-        }
-
-        if (unit === '%') {
-            return 100;
-        }
-
-        if (unit === 'em') {
-            return 15;
-        }
-    }
-
     imageControls(size, attributes, isQuickView) {
         const { setAttributes } = this.props;
         const updateAttribute = attribute => value => {
             setAttributes({ [size]: { ...attributes, [attribute]: value } });
+        };
+
+        const cornerRadiusMax = (unit) => {
+            if (unit === 'px') {
+                return Math.min(attributes.width, attributes.height) / 2;
+            }
+
+            if (unit === '%') {
+                return 100;
+            }
+
+            if (unit === 'em') {
+                return 15;
+            }
         };
 
         const onSelectImage = ({ url, height, width, alt }) => {
@@ -134,6 +134,9 @@ class GlutenblocksResponsiveImageEdit extends Component {
                                     onChange={updateAttribute('height')}
                                 />
                             </div>
+                            <p className="block-library-image__dimensions__row">
+                                {__('Corner Radius')}
+                            </p>
                             <div className="block-library-image__dimensions__row">
                                 <ButtonGroup aria-label={ __('Radius Unit') }>
                                     { radiusUnit.map(unit => (
@@ -151,12 +154,12 @@ class GlutenblocksResponsiveImageEdit extends Component {
                             </div>
                             <div className="block-library-image__dimensions__row">
                                 <RangeControl
-                                    label={ icons.spacingTop }
+                                    label={ icons.cornerRadius }
                                     value={ attributes.radius }
                                     className={'gb-responsive-image__radius-range-control'}
                                     onChange={ updateAttribute('radius') }
                                     min={ 0 }
-                                    max={GlutenblocksResponsiveImageEdit.cornerRadiusMax(attributes.radiusUnit)}
+                                    max={cornerRadiusMax(attributes.radiusUnit)}
                                 />
                             </div>
                         </div>
