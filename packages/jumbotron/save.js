@@ -1,7 +1,7 @@
 import Hero from '../hero/save';
 import classnames from 'classnames';
 
-const { Fragment } = wp.element;
+import { Fragment } from '@wordpress/element';
 
 class GlutenblocksJumbotronSave extends Hero {
     getHeroClassName() {
@@ -16,7 +16,7 @@ class GlutenblocksJumbotronSave extends Hero {
         return (
             <Fragment>
                 { super.renderHeroAfter() }
-            
+
                 {scrollTo && (
                     <footer className={'gb-jumbotron__footer'}>
                         {scrollTo && (

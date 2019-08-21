@@ -2,8 +2,8 @@ import classnames from 'classnames';
 import PropTypes from 'prop-types';
 import memoize from 'memize';
 
-const { Component, Fragment } = wp.element;
-const { InnerBlocks } = wp.editor;
+import { Component, Fragment } from '@wordpress/element';
+import { InnerBlocks } from '@wordpress/block-editor';
 
 const overlayOpacityOutput = memoize((opacity) => {
     if (opacity < 10) {

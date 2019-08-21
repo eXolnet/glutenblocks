@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import { parseUrl } from './util';
 
-const { Component } = wp.element;
+import { Component } from '@wordpress/element';
 
 class GlutenblocksYoutubeEmbedSave extends Component {
     render() {

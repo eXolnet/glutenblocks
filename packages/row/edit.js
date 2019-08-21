@@ -12,12 +12,12 @@ import PropTypes from 'prop-types';
  * WordPress dependencies
  */
 
-const { __ } = wp.i18n;
-const { Button, ButtonGroup, Dashicon, PanelBody, RangeControl, Toolbar, Tooltip, TabPanel } = wp.components;
-const { Component, Fragment } = wp.element;
-const { InspectorControls, InnerBlocks, BlockControls } = wp.editor;
-const { compose } = wp.compose;
-const { withSelect, withDispatch } = wp.data;
+import { __ } from '@wordpress/i18n';
+import { Button, ButtonGroup, Dashicon, PanelBody, RangeControl, Toolbar, Tooltip, TabPanel } from '@wordpress/components';
+import { Component, Fragment } from '@wordpress/element';
+import { InspectorControls, InnerBlocks, BlockControls } from '@wordpress/block-editor';
+import { compose } from '@wordpress/compose';
+import { withSelect, withDispatch, select } from '@wordpress/data';
 
 /**
  * Allowed blocks constant is passed to InnerBlocks precisely as specified here.
@@ -397,7 +397,7 @@ function setChildColumnsDeviceClasses(layout, columns, type, childColumns, dispa
 }
 
 function getChildColumns(clientId) {
-    const { getBlocksByClientId } = wp.data.select('core/editor');
+    const { getBlocksByClientId } = select('core/editor');
     const block = getBlocksByClientId(clientId)[0];
     return  block ? block.innerBlocks : DEFAULT_EMPTY_ARRAY;
 }

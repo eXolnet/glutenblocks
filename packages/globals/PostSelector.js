@@ -1,13 +1,13 @@
 import PropTypes from 'prop-types';
 
-const { Component, Fragment } = wp.element;
-const { decodeEntities } = wp.htmlEntities;
-const { UP, DOWN, ENTER } = wp.keycodes;
-const { Spinner, Popover, IconButton } = wp.components;
-const { withInstanceId } = wp.compose;
-const { withSelect } = wp.data;
+import { Component, Fragment }  from '@wordpress/element';
+import { decodeEntities } from '@wordpress/html-entities';
+import { UP, DOWN, ENTER } from '@wordpress/keycodes';
+import  { Spinner, Popover, IconButton } from '@wordpress/components';
+import { withInstanceId } from '@wordpress/compose';
+import { withSelect } from '@wordpress/data';
 const { apiFetch } = wp;
-const { addQueryArgs } = wp.url;
+import { addQueryArgs } from '@wordpress/url';
 
 const stopEventPropagation = event => event.stopPropagation();
 

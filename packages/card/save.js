@@ -5,11 +5,8 @@ import classnames from 'classnames';
  * BLOCK: Glutenblock card
  */
 
-const { __ } = wp.i18n;
-const {
-    Component,
-    Fragment
-} = wp.element;
+import { __ } from '@wordpress/i18n';
+import { Component, Fragment } from '@wordpress/element';
 
 class GlutenblocksCardSave extends Component {
     render() {

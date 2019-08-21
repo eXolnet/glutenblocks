@@ -1,9 +1,8 @@
-const CleanWebpackPlugin = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const mix = require('laravel-mix');
-const _escapeRegExp = require('lodash/escapeRegExp');
-const { sep } = require('path');
 const MergeIntoSingle = require('webpack-merge-and-include-globally');
+
+const externals = require('./config/externals');
 
 /*
  |--------------------------------------------------------------------------
@@ -18,46 +17,55 @@ const MergeIntoSingle = require('webpack-merge-and-include-globally');
 
 mix.setPublicPath('../glutenblocks');
 
-mix
-    .options({
-        processCssUrls: false,
-        lang: 'sass',
-    })
+mix.options({
+    processCssUrls: false,
+    lang: 'sass'
+})
     .webpackConfig({
         devtool: '#source-map',
+        externals,
         output: {
-            chunkFilename: 'build/[name].[chunkhash].js',
+            chunkFilename: 'build/[name].[chunkhash].js'
         },
         plugins: [
             new MergeIntoSingle({
                 files: {
                     './build/glutenblocks_registers.php': [
-                        './packages/**/index.php',
+                        './packages/**/index.php'
                     ]
                 },
                 transform: {
                     './build/glutenblocks_registers.php': code =>
-                        code.match(/^function [^\(]+/gm)
+                        code
+                            .match(/^function [^(]+/gm)
                             .reduce((result, functionName) => {
-                            // Trim leading "function " prefix from match.
-                            functionName = functionName.slice(9);
+                                // Trim leading "function " prefix from match.
+                                functionName = functionName.slice(9);
 
-                            // Prepend the Gutenberg prefix, substituting any
-                            // other core prefix (e.g. "wp_").
-                            return result.replace(
-                                new RegExp(functionName, 'g'),
-                                (match) => 'glutenblocks' + match.replace(/^wp_/, '')
-                            );
-                        }, code)
-                            .replace(/(add_action\(\s*'init',\s*'glutenblocks_register_block_[^']+'(?!,))/, '$1, 20')
+                                // Prepend the Gutenberg prefix, substituting any
+                                // other core prefix (e.g. "wp_").
+                                return result.replace(
+                                    new RegExp(functionName, 'g'),
+                                    match =>
+                                        'glutenblocks' +
+                                        match.replace(/^wp_/, '')
+                                );
+                            }, code)
+                            .replace(
+                                /(add_action\(\s*'init',\s*'glutenblocks_register_block_[^']+'(?!,))/,
+                                '$1, 20'
+                            )
                             .replace(/(?!^)<\?php/g, '')
                 }
             }),
-            new CopyWebpackPlugin([{
-                from: 'node_modules/@fonticonpicker/react-fonticonpicker/dist/assets',
-                to: 'build/assets'
-            }])
-        ],
+            new CopyWebpackPlugin([
+                {
+                    from:
+                        'node_modules/@fonticonpicker/react-fonticonpicker/dist/assets',
+                    to: 'build/assets'
+                }
+            ])
+        ]
     })
     .js('packages/index.js', 'build/glutenblocks.bundle.js')
     .sass('packages/style.scss', 'build/glutenblocks.style.css')
@@ -65,9 +73,10 @@ mix
     .version();
 
 if (process.env.ENABLE_BUNDLE_ANALYZER) {
-    const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+    const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
+        .BundleAnalyzerPlugin;
 
     mix.webpackConfig({
-        plugins: [new BundleAnalyzerPlugin()],
+        plugins: [new BundleAnalyzerPlugin()]
     });
 }

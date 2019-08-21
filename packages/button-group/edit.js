@@ -3,10 +3,10 @@ import classnames from 'classnames';
 import memoize from 'memize';
 import { times } from 'lodash';
 
-const { __ } = wp.i18n;
-const { PanelBody, RangeControl } = wp.components;
-const { Component, Fragment } = wp.element;
-const { InnerBlocks, InspectorControls } = wp.editor;
+import { __ } from '@wordpress/i18n';
+import { PanelBody, RangeControl } from '@wordpress/components';
+import { Component, Fragment } from '@wordpress/element';
+import { InnerBlocks, InspectorControls } from '@wordpress/block-editor';
 
 const ALLOWED_BLOCKS = ['glutenblocks/button', 'glutenblocks/button-extra'];
 

@@ -7,13 +7,15 @@ import get from 'lodash/get';
 /**
  * WordPress dependencies
  */
-const { __, _x } = wp.i18n;
-const { BlockControls,
+import { __, _x } from '@wordpress/i18n';
+import {
+    BlockControls,
     InnerBlocks,
-    InspectorControls } = wp.editor;
+    InspectorControls
+} from '@wordpress/block-editor';
 
-const { Component, Fragment } = wp.element;
-const {
+import { Component, Fragment } from '@wordpress/element';
+import {
     PanelBody,
     TextareaControl,
     ToggleControl,
@@ -23,7 +25,7 @@ const {
     ButtonGroup,
     TextControl,
     Tooltip
-} = wp.components;
+} from '@wordpress/components';
 /**
  * Internal dependencies
  */

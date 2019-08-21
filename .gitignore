@@ -8,3 +8,5 @@ Thumbs.db
 node_modules
 vendor
 mix-manifest.json
+yarn-error.log
+/wordpress

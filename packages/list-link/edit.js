@@ -2,11 +2,11 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import memoize from 'memize';
 import { times } from 'lodash';
-const { __ } = wp.i18n;
+import { __ } from '@wordpress/i18n';
 
-const { Component, Fragment } = wp.element;
-const { PanelBody, RangeControl } = wp.components;
-const { InspectorControls, InnerBlocks } = wp.editor;
+import { Component, Fragment } from '@wordpress/element';
+import { PanelBody, RangeControl } from '@wordpress/components';
+import { InspectorControls, InnerBlocks } from '@wordpress/block-editor';
 
 const ALLOWED_BLOCKS = ['glutenblocks/link'];
 

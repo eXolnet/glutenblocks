@@ -1,10 +1,10 @@
 import PropTypes from 'prop-types';
 const { apiFetch } = wp;
-const { addQueryArgs } = wp.url;
-const { __ } = wp.i18n;
+import { addQueryArgs } from '@wordpress/url';
+import { __ } from '@wordpress/i18n';
 
-const { Component, Fragment } = wp.element;
-const { SelectControl, ToggleControl } = wp.components;
+import { Component, Fragment } from '@wordpress/element';
+import { SelectControl, ToggleControl } from '@wordpress/components';
 
 class LinkSelect extends Component {
     typeOptions = [
@@ -242,8 +242,8 @@ class LinkSelect extends Component {
                         <ToggleControl
                             label={__('Set link to nofollow?')}
                             checked={undefined !== this.noFollow ? this.noFollow : false}
-                            onChange={value => { 
-                                this.handleNoFollow(value); 
+                            onChange={value => {
+                                this.handleNoFollow(value);
                             }}
                         />
                     </Fragment>

@@ -2,12 +2,12 @@ import classnames from 'classnames';
 import icons from '../globals/icons';
 import PropTypes from 'prop-types';
 
-const { __ } = wp.i18n;
-const { Component, Fragment } = wp.element;
-const { InnerBlocks, BlockControls, InspectorControls } = wp.editor;
-const { compose } = wp.compose;
-const { withSelect, withDispatch } = wp.data;
-const { Button, Toolbar, Tooltip, PanelBody, ToggleControl } = wp.components;
+import { __ } from '@wordpress/i18n';
+import { Component, Fragment } from '@wordpress/element';
+import { InnerBlocks, BlockControls, InspectorControls } from '@wordpress/block-editor';
+import { compose } from '@wordpress/compose';
+import { withSelect, withDispatch } from '@wordpress/data';
+import { Button, Toolbar, Tooltip, PanelBody, ToggleControl } from '@wordpress/components';
 
 /**
  * This allows for checking to see if the block needs to generate a new ID.
