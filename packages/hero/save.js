@@ -50,27 +50,13 @@ class GlutenblocksHeroSave extends Component {
         return null;
     }
 
-    renderHeroBackground() {
-        const { attributes: { bgImg, bgImgId, bgImgAlt, bgImgWidth,bgImgHeight, bgImgSize, overlay, overlayBgImg, currentOverlayTab, overlayBgImgSize, overlayBgImgPosition, overlayBgImgRepeat, overlayBgImgAttachment, overlayBlendMode, overlayOpacity, overlayGradType, overlayGradAngle, overlayGradLoc, overlaySecond, overlayGradLocSecond } } = this.props;
+    renderHeroBackgroundOverlay() {
+        const { attributes: { overlay, overlayBgImg, currentOverlayTab, overlayBgImgSize, overlayBgImgPosition, overlayBgImgRepeat, overlayBgImgAttachment, overlayBlendMode, overlayOpacity, overlayGradType, overlayGradAngle, overlayGradLoc, overlaySecond, overlayGradLocSecond } } = this.props;
 
         const overlayType = (!currentOverlayTab || 'grad' !== currentOverlayTab ? 'normal' : 'gradient');
 
         return (
             <Fragment>
-                {(bgImg !== '') && (
-                    <figure className={'gb-hero__background'}>
-                        <img
-                            src={ bgImg }
-                            alt={ bgImgAlt }
-                            width={ bgImgWidth }
-                            height={ bgImgHeight }
-                            style={{
-                                objectFit: bgImgSize,
-                            }}
-                            className={`gb-hero__background-image wp-image-${bgImgId}`}
-                        />
-                    </figure>
-                )}
                 {((overlay || overlayBgImg) && overlayType === 'normal') && (
                     <div className={`gb-hero__overlay gb-hero__overlay--${overlayType}`} style={{
                         backgroundColor: (overlay ? overlay : undefined),
@@ -90,6 +76,30 @@ class GlutenblocksHeroSave extends Component {
                         opacity: overlayOpacityOutput(overlayOpacity),
                     }}/>
                 )}
+            </Fragment>
+        );
+    }
+
+    renderHeroBackground() {
+        const { attributes: { bgImg, bgImgId, bgImgAlt, bgImgWidth,bgImgHeight, bgImgSize } } = this.props;
+
+        return (
+            <Fragment>
+                {(bgImg !== '') && (
+                    <figure className={'gb-hero__background'}>
+                        <img
+                            src={ bgImg }
+                            alt={ bgImgAlt }
+                            width={ bgImgWidth }
+                            height={ bgImgHeight }
+                            style={{
+                                objectFit: bgImgSize,
+                            }}
+                            className={`gb-hero__background-image wp-image-${bgImgId}`}
+                        />
+                    </figure>
+                )}
+                {this.renderHeroBackgroundOverlay()}
             </Fragment>
         );
     }

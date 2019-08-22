@@ -122,7 +122,7 @@ class GlutenblocksHeroEdit extends Component {
     }
 
     renderPanelBodyBackground() {
-        const { attributes: { bgColor, bgImg, bgImgId, bgImgSize }, setAttributes } = this.props;
+        const { attributes: { bgColor, bgImg, bgImgId }, setAttributes } = this.props;
 
         const onSelectImage = img => {
             setAttributes({
@@ -181,17 +181,25 @@ class GlutenblocksHeroEdit extends Component {
                         </Button>
                     </Tooltip>
                 ) }
-                <SelectControl
-                    label={ __('Background Image Size') }
-                    value={ bgImgSize }
-                    options={ [
-                        { value: 'cover', label: __('Cover') },
-                        { value: 'contain', label: __('Contain') },
-                        { value: 'auto', label: __('Auto') },
-                    ] }
-                    onChange={ value => setAttributes({ bgImgSize: value }) }
-                />
+                {this.renderBackgroundImageSize()}
             </PanelBody>
+        );
+    }
+
+    renderBackgroundImageSize() {
+        const { attributes: { bgImgSize }, setAttributes } = this.props;
+
+        return (
+            <SelectControl
+                label={ __('Background Image Size') }
+                value={ bgImgSize }
+                options={ [
+                    { value: 'cover', label: __('Cover') },
+                    { value: 'contain', label: __('Contain') },
+                    { value: 'auto', label: __('Auto') },
+                ] }
+                onChange={ value => setAttributes({ bgImgSize: value }) }
+            />
         );
     }
 
@@ -683,11 +691,11 @@ class GlutenblocksHeroEdit extends Component {
         );
     }
 
-    renderInspectorControls() {
+    renderInspectorControls(isCarousel = false) {
         return (
             <Fragment>
                 {this.renderPanelBodyAppearance()}
-                {this.renderPanelBodyBackground()}
+                {!isCarousel && this.renderPanelBodyBackground()}
                 {this.renderPanelBodyBackgroundOverlay()}
                 {this.renderPanelBodySizing()}
             </Fragment>

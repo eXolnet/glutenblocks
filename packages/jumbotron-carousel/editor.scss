@@ -1,0 +1,52 @@
+.gb-jumbotron {
+    position: relative;
+    height: auto;
+
+    > .editor-rich-text {
+        position: absolute;
+        bottom: 0;
+        z-index: 100;
+        transform: translateX(-50%);
+        left: 50%;
+        display: inline-block;
+    }
+
+    > .editor-inner-blocks > .editor-block-list__layout {
+        .wp-block-glutenblocks-hero {
+            padding-bottom: 15px;
+        }
+
+        > div > .editor-default-block-appender {
+            display: none;
+        }
+    }
+
+    &--light {
+        .gb-jumbotron__scroll-to {
+            color: #fff;
+        }
+    }
+
+    &--dark {
+        .gb-jumbotron__scroll-to {
+            color: #000;
+        }
+    }
+}
+
+.carousel-image-edit {
+    padding: 10px;
+    border: 1px dotted;
+    text-align: center;
+
+    &__nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    img {
+        height: 75px;
+        margin: auto;
+    }
+}
