@@ -7,6 +7,11 @@ import { RichText } from '@wordpress/block-editor';
 import { PanelBody, ToggleControl, TextControl } from '@wordpress/components';
 
 class JumbotronEdit extends Hero {
+
+    constructor() {
+        super(...arguments);
+    }
+
     getHeroClassName() {
         return classnames(super.getHeroClassName(), 'gb-jumbotron');
     }
@@ -15,7 +20,7 @@ class JumbotronEdit extends Hero {
         return null;
     }
 
-    renderInspectorControls() {
+    renderInspectorControls(isCarousel = false) {
         const {
             attributes: {
                 scrollTo,
@@ -26,7 +31,7 @@ class JumbotronEdit extends Hero {
 
         return (
             <Fragment>
-                {super.renderInspectorControls()}
+                {super.renderInspectorControls(isCarousel)}
 
                 <PanelBody title={ __('Scroll To') } initialOpen={ false }>
                     <ToggleControl
@@ -51,13 +56,11 @@ class JumbotronEdit extends Hero {
         );
     }
 
-    renderHeroAfter() {
+    renderJumbotronScrollComponent() {
         const { attributes: { scrollTo, scrollToText }, setAttributes } = this.props;
 
         return (
             <Fragment>
-                { super.renderHeroAfter() }
-
                 {scrollTo && (
                     <div className={'gb-jumbotron__scroll-to'}>
                         <RichText
@@ -72,6 +75,17 @@ class JumbotronEdit extends Hero {
                         />
                     </div>
                 )}
+            </Fragment>
+        );
+    }
+
+    renderHeroAfter() {
+        
+
+        return (
+            <Fragment>
+                { super.renderHeroAfter() }
+                { this.renderJumbotronScrollComponent()}
             </Fragment>
         );
     }
