@@ -12,7 +12,8 @@
             cursor: pointer;
 
             &--title {
-                width: 93%;
+                width: calc(100% - 30px);
+                padding-right: 15px;
             }
 
             &--arrow {
@@ -22,6 +23,17 @@
                 border-bottom: 5px solid black;
                 transform: rotate(-45deg);
                 transition: all 0.35s;
+            }
+
+            @media (max-width: 767px) {
+                &--title {
+                    font-size: 1.4rem;
+                }
+
+                &--arrow {
+                    width: 18px;
+                    height: 18px;
+                }
             }
         }
 
