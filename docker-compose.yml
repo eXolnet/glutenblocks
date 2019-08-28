@@ -12,6 +12,8 @@ services:
       WORDPRESS_DEBUG: 1
       WORDPRESS_CONFIG_EXTRA: |
         define( 'SCRIPT_DEBUG', true );
+        define('WP_SITEURL', 'http://' . $$_SERVER['HTTP_HOST']);
+        define('WP_HOME',    'http://' . $$_SERVER['HTTP_HOST']);
     volumes:
       - wordpress_data:/var/www/html
       - .:/var/www/html/wp-content/plugins/glutenblocks
