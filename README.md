@@ -67,6 +67,7 @@ If you discover any security related issues, please email security@exolnet.com i
 - [Martin Blanchette](https://github.com/martinblanchette)
 - [Maxime Mongeau](https://github.com/Maxador)
 - [Simon Gaudreau](https://github.com/Gandhi11)
+- [Alessandro Kreslin](https://github.com/Alessandro100)
 - [All Contributors](../../contributors)
 
 ## License
