@@ -1,16 +1,14 @@
 import PropTypes from 'prop-types';
 
 import { Component, Fragment } from '@wordpress/element';
-import { InnerBlocks } from '@wordpress/block-editor';
-
-const { PlainText } = wp.editor;
+import { InnerBlocks, PlainText } from '@wordpress/block-editor';
 
 const TEMPLATE = [
     ['core/paragraph'],
 ];
 
 class GlutenblocksCollapseEdit extends Component {
-    
+
     render() {
         const { attributes: { title }, className, setAttributes } = this.props;
 
@@ -24,7 +22,7 @@ class GlutenblocksCollapseEdit extends Component {
                     }}
                     placeholder="add collapse title..."
                 />
-                
+
                 <section>
                     <InnerBlocks templateLock={ false } template={TEMPLATE} />
                 </section>
