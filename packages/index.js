@@ -8,6 +8,7 @@ const buttonGroup = require('./button-group');
 const responsiveImage = require('./responsive-image');
 const card = require('./card');
 const column = require('./column');
+const collapse = require('./collapse');
 const hero = require('./hero');
 const jumbotron = require('./jumbotron');
 const link = require('./link');
@@ -47,6 +48,7 @@ const BLOCKS_TO_UNREGISTER = [
         jumbotron,
         card,
         column,
+        collapse,
         hero,
         link,
         listLink,

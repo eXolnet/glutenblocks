@@ -130,6 +130,27 @@ add_action( 'init', 'glutenblocksregister_block_glutenblocks_card' );
 
 
 /**
+ * Server-side rendering of the `glutenblocks/collapse` block.
+ * phpcs:disable
+ */
+
+/**
+ * Registers the `glutenblocks/collapse` block on server.
+ */
+function glutenblocksregister_block_glutenblocks_collapse() {
+   register_block_type(
+       'glutenblocks/collapse',
+       [
+           'style' => 'glutenblocks-style',
+           'editor_script' => 'glutenblocks',
+           'editor_style'  => 'glutenblocks-editor',
+       ]
+   );
+}
+add_action( 'init', 'glutenblocksregister_block_glutenblocks_collapse' );
+
+
+/**
  * Server-side rendering of the `glutenblocks/example` block.
  * phpcs:disable
  */
