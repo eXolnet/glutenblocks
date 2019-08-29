@@ -5,5 +5,11 @@
         "wp": true,
         "React": true
     },
-    "plugins": ["jest"]
+    "plugins": ["jest"],
+    "overrides": [{
+        "files": ["deprecated.js"],
+        "rules": {
+            "react/prop-types": "off"
+        }
+    }]
 }

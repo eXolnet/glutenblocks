@@ -72,13 +72,11 @@ export default [
 
         save(props) {
             const {
-                // eslint-disable-next-line react/prop-types
                 attributes: {
                     desktopImgURL, desktopImgHeight, desktopImgWidth, desktopImgAlt,
                     tabletImgURL, tabletImgHeight, tabletImgWidth, tabletImgAlt,
                     mobileImgURL, mobileImgHeight, mobileImgWidth, mobileImgAlt,
                 },
-                // eslint-disable-next-line react/prop-types
                 className,
             } = props;
 
