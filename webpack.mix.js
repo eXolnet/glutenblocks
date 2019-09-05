@@ -65,7 +65,10 @@ mix.options({
                     to: 'build/assets'
                 }
             ])
-        ]
+        ],
+        module: {
+            noParse: /node_modules\/lodash\/lodash\.js/,
+        }
     })
     .js('packages/index.js', 'build/glutenblocks.bundle.js')
     .sass('packages/style.scss', 'build/glutenblocks.style.css')

@@ -3,7 +3,7 @@
  */
 
 import memoize from 'memize';
-import { times } from 'lodash';
+import times from 'lodash/times';
 
 /**
  * Returns the layouts configuration for a given number of columns.
