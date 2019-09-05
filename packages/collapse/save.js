@@ -6,20 +6,18 @@ import PropTypes from 'prop-types';
 
 import { Component } from '@wordpress/element';
 import { InnerBlocks } from '@wordpress/block-editor';
-import { withInstanceId } from '@wordpress/compose';
-
 
 class GlutenblocksCollapseSave extends Component {
-
-
     render() {
-        const { attributes: { title }, className, instanceId } = this.props;
+        const { attributes: { title }, className } = this.props;
+
+        const uniqueConsistenId = title.replace(/ /g,'-').replace(/[^\w-]+/g,'').toLowerCase();
 
         return (
             <div className={ className } >
                 <div className="gb-collapse">
-                    <input type="checkbox" id={ `ck-${ instanceId }`}/>
-                    <label className="gb-collapse__bar" htmlFor={ `ck-${ instanceId }`}>
+                    <input type="checkbox" id={ `ck-${ uniqueConsistenId }`}/>
+                    <label className="gb-collapse__bar" htmlFor={ `ck-${ uniqueConsistenId }`}>
                         <h3 className = "gb-collapse__bar--title">{title}</h3>
                         <div className="gb-collapse__bar--arrow"></div>
                     </label>
@@ -35,6 +33,5 @@ class GlutenblocksCollapseSave extends Component {
 GlutenblocksCollapseSave.propTypes = {
     className: PropTypes.string,
     attributes: PropTypes.object,
-    instanceId: PropTypes.number,
 };
-export default withInstanceId(GlutenblocksCollapseSave);
+export default GlutenblocksCollapseSave;
