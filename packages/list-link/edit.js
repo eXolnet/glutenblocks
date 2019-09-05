@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import memoize from 'memize';
-import { times } from 'lodash';
+import times from 'lodash/times';
 import { __ } from '@wordpress/i18n';
 
 import { Component, Fragment } from '@wordpress/element';
