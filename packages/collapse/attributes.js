@@ -6,5 +6,9 @@ const attributes = {
         type: 'string',
         default: '',
     },
+    uniqueId : {
+        type: 'string',
+        default: null,
+    }
 };
 export default attributes;
