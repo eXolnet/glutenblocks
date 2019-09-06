@@ -9,6 +9,14 @@ const TEMPLATE = [
 
 class GlutenblocksCollapseEdit extends Component {
 
+    componentDidMount() {
+        const { attributes: { uniqueId }, setAttributes } = this.props;
+        if (!uniqueId) {
+            const time = '' + new Date().getTime();
+            setAttributes({ uniqueId: time });
+        }
+    }
+    
     render() {
         const { attributes: { title }, className, setAttributes } = this.props;
 

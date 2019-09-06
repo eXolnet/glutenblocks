@@ -9,15 +9,14 @@ import { InnerBlocks } from '@wordpress/block-editor';
 
 class GlutenblocksCollapseSave extends Component {
     render() {
-        const { attributes: { title }, className } = this.props;
-
-        const uniqueConsistenId = title.replace(/ /g,'-').replace(/[^\w-]+/g,'').toLowerCase();
+        const { attributes: { title, uniqueId }, className } = this.props;
+        const id = 'ck-' + uniqueId;
 
         return (
             <div className={ className } >
                 <div className="gb-collapse">
-                    <input type="checkbox" id={ `ck-${ uniqueConsistenId }`}/>
-                    <label className="gb-collapse__bar" htmlFor={ `ck-${ uniqueConsistenId }`}>
+                    <input type="checkbox" id={id}/>
+                    <label className="gb-collapse__bar" htmlFor={id}>
                         <h3 className = "gb-collapse__bar--title">{title}</h3>
                         <div className="gb-collapse__bar--arrow"></div>
                     </label>
