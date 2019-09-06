@@ -26835,9 +26835,9 @@ function (_Component) {
           setAttributes = _this$props.setAttributes;
 
       if (!uniqueId) {
-        var time = '' + new Date().getTime();
+        var uniqueNumber = '' + new Date().getTime() + Math.random();
         setAttributes({
-          uniqueId: time
+          uniqueId: uniqueNumber
         });
       }
     }

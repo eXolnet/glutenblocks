@@ -12,8 +12,8 @@ class GlutenblocksCollapseEdit extends Component {
     componentDidMount() {
         const { attributes: { uniqueId }, setAttributes } = this.props;
         if (!uniqueId) {
-            const time = '' + new Date().getTime();
-            setAttributes({ uniqueId: time });
+            const uniqueNumber = '' + new Date().getTime() + Math.random();
+            setAttributes({ uniqueId: uniqueNumber });
         }
     }
     
