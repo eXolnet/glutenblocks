@@ -22,7 +22,7 @@ class GlutenblocksCardSave extends Component {
             <Fragment>
                 { posts.length > 0 && (
                     <a href={posts[0].url} target={ (target ? target : undefined) } className={classname} rel={ relAttr }>
-                        { posts[0].featured_media && (
+                        { (posts[0].featured_media !== null && posts[0].featured_media !== 0) && (
                             <div className='gb-card__media-container'>
                                 <img src={posts[0].featured_media.source_url} className="gb-card__media" alt={posts[0].alt_text ? posts[0].alt_text : ''}/>
                             </div>
