@@ -123,8 +123,6 @@ MediaContainer.propTypes = {
     mediaAlt: PropTypes.string,
     setAttributes: PropTypes.func,
     onSelectMedia: PropTypes.func,
-    onWidthChange: PropTypes.func,
-    commitWidthChange: PropTypes.func,
 };
 
 export default MediaContainer;
