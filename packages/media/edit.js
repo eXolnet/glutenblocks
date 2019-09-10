@@ -46,8 +46,6 @@ class MediaEdit extends Component {
         super(...arguments);
 
         this.onSelectMedia = this.onSelectMedia.bind(this);
-        this.onWidthChange = this.onWidthChange.bind(this);
-        this.commitWidthChange = this.commitWidthChange.bind(this);
         this.updateWidth = this.updateWidth.bind(this);
         this.updateHeight = this.updateHeight.bind(this);
         this.updateDimensions = this.updateDimensions.bind(this);
@@ -93,23 +91,6 @@ class MediaEdit extends Component {
         });
     }
 
-    onWidthChange(width) {
-        this.setState({
-            mediaWidth: width,
-        });
-    }
-
-    commitWidthChange(width) {
-        const { setAttributes } = this.props;
-
-        setAttributes({
-            mediaWidth: width,
-        });
-        this.setState({
-            mediaWidth: null,
-        });
-    }
-
     renderMediaArea() {
         const { attributes } = this.props;
         const { mediaAlt, mediaId, mediaPosition, mediaType, mediaUrl, mediaWidth, width, height } = attributes;
@@ -118,8 +99,6 @@ class MediaEdit extends Component {
             <MediaContainer
                 className="block-library-media-text__media-container"
                 onSelectMedia={ this.onSelectMedia }
-                onWidthChange={ this.onWidthChange }
-                commitWidthChange={ this.commitWidthChange }
                 { ...{ mediaAlt, mediaId, mediaType, mediaUrl, mediaPosition, mediaWidth, width, height } }
             />
         );
@@ -135,7 +114,8 @@ class MediaEdit extends Component {
 
     updateDimensions(width = this.props.attributes.mediaWidth, height = this.props.attributes.mediaHeight) {
         return () => {
-            this.props.setAttributes({ width: width, height: height });
+            this.updateWidth(width);
+            this.updateHeight(height);
         };
     }
 
