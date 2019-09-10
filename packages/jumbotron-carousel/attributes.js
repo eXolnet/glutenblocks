@@ -16,7 +16,10 @@ const attributes = {
 
     carouselImages: {
         type: 'array',
-        properties: imagesProperties,
+        items: {
+            type: 'object',
+            properties: imagesProperties,
+        },
         default: [],
     },
     uniqueId: {

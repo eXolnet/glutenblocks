@@ -29,16 +29,16 @@ class JumbotronCarouselEdit extends Jumbotron {
 
     setHeroBackground() {
         const { attributes: { carouselImages } } = this.props;
-        var elements = document.getElementsByClassName('gb-hero__background');
-        var image = carouselImages[0] ? carouselImages[0].url : '';
-        [].forEach.call(elements, el =>{
-            el.style.backgroundImage = 'url(\'' + image + '\')';
+        let elements = document.getElementsByClassName('gb-hero__background');
+        let image = carouselImages[0] ? carouselImages[0].url : '';
+        [].forEach.call(elements, el => {
+            el.style.backgroundImage = `url('${image}')`;
         });
     }
 
     onRemoveImage(key) {
         const { attributes: { carouselImages }, setAttributes } = this.props;
-        var images = carouselImages;
+        let images = carouselImages;
         setAttributes({
             carouselImages: images.filter(u => u.key !== key)
         });
@@ -46,20 +46,19 @@ class JumbotronCarouselEdit extends Jumbotron {
 
     onSelectImage(img) {
         const { attributes: { carouselImages }, setAttributes } = this.props;
-        var images = carouselImages;
+        let images = carouselImages;
 
         setAttributes({ carouselImages: images.concat([{ key: img.id, url: img.url }]) });
     }
 
     renderSelectedCarouselImages() {
         const { attributes: { carouselImages } } = this.props;
-        const elements = [];
-        carouselImages.forEach(image => {
-            if (image['url']) {
-                elements.push(
+
+        return carouselImages.map((image, index) => {
+                return (
                     <div key={image['key']} className="carousel-image-edit">
                         <div className="carousel-image-edit__nav">
-                            <label>{(elements.length + 1) + '.'}</label>
+                            <label>{(index + 1) + '.'}</label>
                             <Tooltip text={ __('Remove Image') }>
                                 <Button
                                     className={ 'components-button components-icon-button gb-hero__remove-img gb-hero__cta-upload-btn' }
@@ -72,9 +71,7 @@ class JumbotronCarouselEdit extends Jumbotron {
                         <img src={image['url']} ></img>
                     </div>
                 );
-            }
         });
-        return elements;
     }
 
     renderPanelCarouselImages() {
