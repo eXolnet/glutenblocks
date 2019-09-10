@@ -31360,7 +31360,10 @@ var imagesProperties = {
 var attributes = _babel_runtime_helpers_objectSpread__WEBPACK_IMPORTED_MODULE_0___default()({}, _jumbotron_attributes__WEBPACK_IMPORTED_MODULE_1__["default"], {
   carouselImages: {
     type: 'array',
-    properties: imagesProperties,
+    items: {
+      type: 'object',
+      properties: imagesProperties
+    },
     "default": []
   },
   uniqueId: {
@@ -31477,7 +31480,7 @@ function (_Jumbotron) {
       var elements = document.getElementsByClassName('gb-hero__background');
       var image = carouselImages[0] ? carouselImages[0].url : '';
       [].forEach.call(elements, function (el) {
-        el.style.backgroundImage = 'url(\'' + image + '\')';
+        el.style.backgroundImage = "url('".concat(image, "')");
       });
     }
   }, {
@@ -31513,29 +31516,25 @@ function (_Jumbotron) {
       var _this2 = this;
 
       var carouselImages = this.props.attributes.carouselImages;
-      var elements = [];
-      carouselImages.forEach(function (image) {
-        if (image['url']) {
-          elements.push(Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_7__["createElement"])("div", {
-            key: image['key'],
-            className: "carousel-image-edit"
-          }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_7__["createElement"])("div", {
-            className: "carousel-image-edit__nav"
-          }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_7__["createElement"])("label", null, elements.length + 1 + '.'), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_7__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_11__["Tooltip"], {
-            text: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_10__["__"])('Remove Image')
-          }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_7__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_11__["Button"], {
-            className: 'components-button components-icon-button gb-hero__remove-img gb-hero__cta-upload-btn',
-            onClick: function onClick() {
-              return _this2.onRemoveImage(image['key']);
-            }
-          }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_7__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_11__["Dashicon"], {
-            icon: "no-alt"
-          })))), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_7__["createElement"])("img", {
-            src: image['url']
-          })));
-        }
+      return carouselImages.map(function (image, index) {
+        return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_7__["createElement"])("div", {
+          key: image['key'],
+          className: "carousel-image-edit"
+        }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_7__["createElement"])("div", {
+          className: "carousel-image-edit__nav"
+        }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_7__["createElement"])("label", null, index + 1 + '.'), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_7__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_11__["Tooltip"], {
+          text: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_10__["__"])('Remove Image')
+        }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_7__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_11__["Button"], {
+          className: 'components-button components-icon-button gb-hero__remove-img gb-hero__cta-upload-btn',
+          onClick: function onClick() {
+            return _this2.onRemoveImage(image['key']);
+          }
+        }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_7__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_11__["Dashicon"], {
+          icon: "no-alt"
+        })))), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_7__["createElement"])("img", {
+          src: image['url']
+        }));
       });
-      return elements;
     }
   }, {
     key: "renderPanelCarouselImages",
