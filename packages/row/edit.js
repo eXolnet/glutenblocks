@@ -507,6 +507,10 @@ export default compose(
             },
 
             updateTabletLayout(layout, columns, childColumns) {
+                if (!childColumns) {
+                    childColumns = getChildColumns(clientId);
+                }
+
                 // Update self...
                 dispatch('core/editor').updateBlockAttributes(clientId, {
                     tabletLayout: layout,
@@ -516,6 +520,10 @@ export default compose(
             },
 
             updateMobileLayout(layout, columns, childColumns) {
+                if (!childColumns) {
+                    childColumns = getChildColumns(clientId);
+                }
+
                 // Update self...
                 dispatch('core/editor').updateBlockAttributes(clientId, {
                     mobileLayout: layout,
