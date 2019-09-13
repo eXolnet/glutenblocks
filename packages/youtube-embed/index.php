@@ -18,3 +18,14 @@ function register_block_glutenblocks_youtube_embed() {
     );
 }
 add_action( 'init', 'register_block_glutenblocks_youtube_embed' );
+
+function add_frontend_assets() {
+    if (has_block('glutenblocks/youtube-embed')) {
+        wp_enqueue_script(
+            'glutenblocks-youtube-embed',
+            plugins_url() . '/glutenblocks/packages/youtube-embed/customButton.js'
+        );
+    }
+}
+
+add_action('wp_enqueue_scripts', 'add_frontend_assets');
