@@ -47,7 +47,7 @@ mix.options({
                                 return result.replace(
                                     new RegExp(functionName, 'g'),
                                     match =>
-                                        'glutenblocks' +
+                                        'glutenblocks_' +
                                         match.replace(/^wp_/, '')
                                 );
                             }, code)
