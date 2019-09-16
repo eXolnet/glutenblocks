@@ -82,6 +82,10 @@ function glutenblocks_glutenblocks_button_render_callback( $attributes, $content
 
     $classString = implode(' ', $classes);
 
+    if (isset($attributes['className'])) {
+        $classString .= ' ' . $attributes['className'];
+    }
+
     return <<<HTML
     <div class='wp-block-glutenblocks-button gb-button-wrapper {$alignClass}'>
                 <a href="{$displayLink}" target="{$target}" rel="{$relAttr}" class="{$classString}">
