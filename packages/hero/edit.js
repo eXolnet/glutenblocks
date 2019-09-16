@@ -696,7 +696,7 @@ class GlutenblocksHeroEdit extends Component {
             <Fragment>
                 {this.renderPanelBodyAppearance()}
                 {!isCarousel && this.renderPanelBodyBackground()}
-                {this.renderPanelBodyBackgroundOverlay()}
+                {!isCarousel && this.renderPanelBodyBackgroundOverlay()}
                 {this.renderPanelBodySizing()}
             </Fragment>
         );

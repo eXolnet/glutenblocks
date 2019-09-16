@@ -7,7 +7,7 @@
 /**
  * Registers the `glutenblocks/button-group` block on server.
  */
-function glutenblocksglutenblocksregister_block_glutenblocks_button_group() {
+function glutenblocks_glutenblocks_register_block_glutenblocks_button_group() {
     register_block_type(
         'glutenblocks/button-group',
         [
@@ -17,7 +17,7 @@ function glutenblocksglutenblocksregister_block_glutenblocks_button_group() {
         ]
     );
 }
-add_action( 'init', 'glutenblocksglutenblocksregister_block_glutenblocks_button_group' );
+add_action( 'init', 'glutenblocks_glutenblocks_register_block_glutenblocks_button_group' );
 
 
 /**
@@ -25,7 +25,7 @@ add_action( 'init', 'glutenblocksglutenblocksregister_block_glutenblocks_button_
  * phpcs:disable
  */
 
-function glutenblocksglutenblocks_button_render_callback( $attributes, $content ) {
+function glutenblocks_glutenblocks_button_render_callback( $attributes, $content ) {
 
     $type = isset($attributes['type']) ? $attributes['type'] : 'visit' ;
     $text = isset($attributes['text']) ? $attributes['text'] : '';
@@ -98,18 +98,18 @@ HTML;
 /**
  * Registers the `glutenblocks/button` block on server.
  */
-function glutenblocksregister_block_glutenblocks_button() {
+function glutenblocks_register_block_glutenblocks_button() {
     register_block_type(
         'glutenblocks/button',
         [
             'style' => 'glutenblocks-style',
             'editor_script' => 'glutenblocks',
             'editor_style'  => 'glutenblocks-editor',
-            'render_callback' => 'glutenblocksglutenblocks_button_render_callback'
+            'render_callback' => 'glutenblocks_glutenblocks_button_render_callback'
         ]
     );
 }
-add_action( 'init', 'glutenblocksregister_block_glutenblocks_button' );
+add_action( 'init', 'glutenblocks_register_block_glutenblocks_button', 20 );
 
 
 /**
@@ -120,7 +120,7 @@ add_action( 'init', 'glutenblocksregister_block_glutenblocks_button' );
 /**
  * Registers the `glutenblocks/card` block on server.
  */
-function glutenblocksregister_block_glutenblocks_card() {
+function glutenblocks_register_block_glutenblocks_card() {
     register_block_type(
         'glutenblocks/card',
         [
@@ -130,7 +130,7 @@ function glutenblocksregister_block_glutenblocks_card() {
         ]
     );
 }
-add_action( 'init', 'glutenblocksregister_block_glutenblocks_card' );
+add_action( 'init', 'glutenblocks_register_block_glutenblocks_card' );
 
 
 /**
@@ -141,7 +141,7 @@ add_action( 'init', 'glutenblocksregister_block_glutenblocks_card' );
 /**
  * Registers the `glutenblocks/collapse` block on server.
  */
-function glutenblocksregister_block_glutenblocks_collapse() {
+function glutenblocks_register_block_glutenblocks_collapse() {
    register_block_type(
        'glutenblocks/collapse',
        [
@@ -151,7 +151,7 @@ function glutenblocksregister_block_glutenblocks_collapse() {
        ]
    );
 }
-add_action( 'init', 'glutenblocksregister_block_glutenblocks_collapse' );
+add_action( 'init', 'glutenblocks_register_block_glutenblocks_collapse' );
 
 
 /**
@@ -183,7 +183,7 @@ add_action( 'init', 'glutenblocksregister_block_glutenblocks_collapse' );
 /**
  * Registers the `glutenblocks/hero` block on server.
  */
-function glutenblocksregister_block_glutenblocks_hero() {
+function glutenblocks_register_block_glutenblocks_hero() {
     register_block_type(
         'glutenblocks/hero',
         [
@@ -193,7 +193,7 @@ function glutenblocksregister_block_glutenblocks_hero() {
         ]
     );
 }
-add_action( 'init', 'glutenblocksregister_block_glutenblocks_hero' );
+add_action( 'init', 'glutenblocks_register_block_glutenblocks_hero' );
 
 
 /**
@@ -204,7 +204,7 @@ add_action( 'init', 'glutenblocksregister_block_glutenblocks_hero' );
 /**
  * Registers the `glutenblocks/jumbotron-carousel` block on server.
  */
-function glutenblocksglutenblocksregister_block_glutenblocks_jumbotron_carousel() {
+function glutenblocks_glutenblocks_register_block_glutenblocks_jumbotron_carousel() {
     register_block_type(
         'glutenblocks/jumbotron-carousel',
         [
@@ -214,7 +214,7 @@ function glutenblocksglutenblocksregister_block_glutenblocks_jumbotron_carousel(
         ]
     );
 }
-add_action( 'init', 'glutenblocksglutenblocksregister_block_glutenblocks_jumbotron_carousel' );
+add_action( 'init', 'glutenblocks_glutenblocks_register_block_glutenblocks_jumbotron_carousel' );
 
 
 /**
@@ -225,7 +225,7 @@ add_action( 'init', 'glutenblocksglutenblocksregister_block_glutenblocks_jumbotr
 /**
  * Registers the `glutenblocks/jumbotron` block on server.
  */
-function glutenblocksregister_block_glutenblocks_jumbotron() {
+function glutenblocks_register_block_glutenblocks_jumbotron() {
     register_block_type(
         'glutenblocks/jumbotron',
         [
@@ -235,7 +235,7 @@ function glutenblocksregister_block_glutenblocks_jumbotron() {
         ]
     );
 }
-add_action( 'init', 'glutenblocksregister_block_glutenblocks_jumbotron' );
+add_action( 'init', 'glutenblocks_register_block_glutenblocks_jumbotron' );
 
 
 /**
@@ -243,7 +243,7 @@ add_action( 'init', 'glutenblocksregister_block_glutenblocks_jumbotron' );
  * phpcs:disable
  */
 
-function glutenblocksglutenblocks_register_link_render_callback( $attributes, $content ) {
+function glutenblocks_glutenblocks_register_link_render_callback( $attributes, $content ) {
     $type = isset($attributes['type']) ? $attributes['type'] : 'visit' ;
     $text = isset($attributes['text']) ? $attributes['text'] : '';
     $target = isset($attributes['target']) ? $attributes['target'] : null;
@@ -280,18 +280,18 @@ HTML;
 /**
  * Registers the `glutenblocks/link` block on server.
  */
-function glutenblocksregister_block_glutenblocks_link() {
+function glutenblocks_register_block_glutenblocks_link() {
     register_block_type(
         'glutenblocks/link',
         [
             'style' => 'glutenblocks-style',
             'editor_script' => 'glutenblocks',
             'editor_style'  => 'glutenblocks-editor',
-            'render_callback' => 'glutenblocksglutenblocks_register_link_render_callback'
+            'render_callback' => 'glutenblocks_glutenblocks_register_link_render_callback'
         ]
     );
 }
-add_action( 'init', 'glutenblocksregister_block_glutenblocks_link' );
+add_action( 'init', 'glutenblocks_register_block_glutenblocks_link' );
 
 
 /**
@@ -302,7 +302,7 @@ add_action( 'init', 'glutenblocksregister_block_glutenblocks_link' );
 /**
  * Registers the `glutenblocks/listlink` block on server.
  */
-function glutenblocksregister_block_glutenblocks_listlink() {
+function glutenblocks_register_block_glutenblocks_listlink() {
     register_block_type(
         'glutenblocks/listlink',
         [
@@ -312,7 +312,7 @@ function glutenblocksregister_block_glutenblocks_listlink() {
         ]
     );
 }
-add_action( 'init', 'glutenblocksregister_block_glutenblocks_listlink' );
+add_action( 'init', 'glutenblocks_register_block_glutenblocks_listlink' );
 
 
 /**
@@ -323,7 +323,7 @@ add_action( 'init', 'glutenblocksregister_block_glutenblocks_listlink' );
 /**
  * Registers the `glutenblocks/media` block on server.
  */
-function glutenblocksregister_block_glutenblocks_media() {
+function glutenblocks_register_block_glutenblocks_media() {
     register_block_type(
         'glutenblocks/media',
         [
@@ -333,7 +333,7 @@ function glutenblocksregister_block_glutenblocks_media() {
         ]
     );
 }
-add_action( 'init', 'glutenblocksregister_block_glutenblocks_media' );
+add_action( 'init', 'glutenblocks_register_block_glutenblocks_media' );
 
 
 /**
@@ -344,7 +344,7 @@ add_action( 'init', 'glutenblocksregister_block_glutenblocks_media' );
 /**
  * Registers the `glutenblocks/example` block on server.
  */
-function glutenblocksregister_block_glutenblocks_responsive_image()
+function glutenblocks_register_block_glutenblocks_responsive_image()
 {
     register_block_type(
         'glutenblocks/responsive-image',
@@ -356,7 +356,7 @@ function glutenblocksregister_block_glutenblocks_responsive_image()
     );
 }
 
-add_action('init', 'glutenblocksregister_block_glutenblocks_responsive_image');
+add_action('init', 'glutenblocks_register_block_glutenblocks_responsive_image');
 
 
 /**
@@ -367,7 +367,7 @@ add_action('init', 'glutenblocksregister_block_glutenblocks_responsive_image');
 /**
  * Registers the `glutenblocks/row` block on server.
  */
-function glutenblocksregister_block_glutenblocks_row()
+function glutenblocks_register_block_glutenblocks_row()
 {
     register_block_type(
         'glutenblocks/row',
@@ -379,7 +379,7 @@ function glutenblocksregister_block_glutenblocks_row()
     );
 }
 
-add_action('init', 'glutenblocksregister_block_glutenblocks_row');
+add_action('init', 'glutenblocks_register_block_glutenblocks_row');
 
 
 /**
@@ -390,7 +390,7 @@ add_action('init', 'glutenblocksregister_block_glutenblocks_row');
 /**
  * Registers the `glutenblocks/section` block on server.
  */
-function glutenblocksregister_block_glutenblocks_section() {
+function glutenblocks_register_block_glutenblocks_section() {
     register_block_type(
         'glutenblocks/section',
         [
@@ -400,7 +400,7 @@ function glutenblocksregister_block_glutenblocks_section() {
         ]
     );
 }
-add_action( 'init', 'glutenblocksregister_block_glutenblocks_section' );
+add_action( 'init', 'glutenblocks_register_block_glutenblocks_section' );
 
 
 /**
@@ -411,7 +411,7 @@ add_action( 'init', 'glutenblocksregister_block_glutenblocks_section' );
 /**
  * Registers the `glutenblocks/example` block on server.
  */
-function glutenblocksregister_block_glutenblocks_youtube_embed() {
+function glutenblocks_register_block_glutenblocks_youtube_embed() {
     register_block_type(
         'glutenblocks/youtube-embed',
         [
@@ -421,9 +421,9 @@ function glutenblocksregister_block_glutenblocks_youtube_embed() {
         ]
     );
 }
-add_action( 'init', 'glutenblocksregister_block_glutenblocks_youtube_embed' );
+add_action( 'init', 'glutenblocks_register_block_glutenblocks_youtube_embed' );
 
-function glutenblocksadd_frontend_assets() {
+function glutenblocks_add_frontend_assets() {
     if (has_block('glutenblocks/youtube-embed')) {
         wp_enqueue_script(
             'glutenblocks-youtube-embed',
@@ -432,4 +432,4 @@ function glutenblocksadd_frontend_assets() {
     }
 }
 
-add_action('wp_enqueue_scripts', 'glutenblocksadd_frontend_assets');
+add_action('wp_enqueue_scripts', 'glutenblocks_add_frontend_assets');

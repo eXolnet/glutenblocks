@@ -23,14 +23,11 @@
     * Control & indicator mixin
     */
     .gb-carousel {
+        width: 100%;
+
         &__container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
             overflow: auto;
-            height: $carouselHeight;
+            height: auto;
             width: $carouselWidth;
             min-height: 150px;
             scrollbar-width: none; /* Firefox */
@@ -97,12 +94,12 @@
             }
 
             &--backward {
-                left: 10px;
+                left: 40px;
                 transform: rotate(-135deg);
             }
 
             &--forward {
-                right: 10px;
+                right: 40px;
                 transform: rotate(45deg);
             }
         }
@@ -112,7 +109,7 @@
         */
         &__indicators {
             position: absolute;
-            bottom: 20px;
+            bottom: 40px;
             width: 100%;
             text-align: center;
             z-index: 3;
@@ -144,20 +141,22 @@
             background-size: cover;
             background-position: center;
             overflow: hidden;
+            padding: 45px;
         }
 
         /**
         * Where slide content is
         */
         &__track {
-            position: absolute;
-            top: 0;
-            right: 0;
-            bottom: 0;
-            left: 0;
             padding: 0;
             margin: 0;
             transition: transform $slideTransition ease 0s;
+
+            &--scale {
+                .gb-carousel__slide {
+                    transform: scale(0);
+                }
+            }
 
             .gb-carousel__slide {
                 display: block;
@@ -172,11 +171,15 @@
                     }
                 }
             }
-        }
 
-        &--scale {
-            .gb-carousel__slide {
-                transform: scale(0);
+            .gb-height-calculator {
+                opacity: 0;
+                display: flex;
+
+                .gb-carousel__slide {
+                    position: unset;
+                    min-width: 100%;
+                }
             }
         }
 
