@@ -1,18 +1,28 @@
 import Jumbotron from '../jumbotron/edit';
 import classnames from 'classnames';
+import { getColumnsTemplate } from './utils';
 
 import { __ } from '@wordpress/i18n';
 import { Fragment } from '@wordpress/element';
-import { Button, Dashicon, PanelBody, Tooltip } from '@wordpress/components';
-import { MediaUpload } from '@wordpress/block-editor';
+import { TextControl } from '@wordpress/components';
+import { InspectorControls, InnerBlocks } from '@wordpress/block-editor';
+
+/**
+ * Allowed blocks constant is passed to InnerBlocks precisely as specified here.
+ * The contents of the array should never change.
+ * The array should contain the name of each block that is allowed.
+ * In carousel block, the only block we allow is 'glutenblocks/carousel-block'.
+ *
+ * @constant
+ * @type {string[]}
+ */
+const ALLOWED_BLOCKS = ['glutenblocks/carousel-block'];
 
 class JumbotronCarouselEdit extends Jumbotron {
 
     constructor() {
         super(...arguments);
 
-        this.onRemoveImage = this.onRemoveImage.bind(this);
-        this.onSelectImage = this.onSelectImage.bind(this);
     }
 
     componentDidMount() {
@@ -27,101 +37,32 @@ class JumbotronCarouselEdit extends Jumbotron {
         return classnames(super.getHeroClassName(), 'gb-jumbotron');
     }
 
-    setHeroBackground() {
-        const { attributes: { carouselImages } } = this.props;
-        let elements = document.getElementsByClassName('gb-hero__background');
-        let image = carouselImages[0] ? carouselImages[0].url : '';
-        [].forEach.call(elements, el => {
-            el.style.backgroundImage = `url('${image}')`;
-        });
-    }
-
-    onRemoveImage(key) {
-        const { attributes: { carouselImages }, setAttributes } = this.props;
-        let images = carouselImages;
-        setAttributes({
-            carouselImages: images.filter(u => u.key !== key)
-        });
-    }
-
-    onSelectImage(img) {
-        const { attributes: { carouselImages }, setAttributes } = this.props;
-        let images = carouselImages;
-
-        setAttributes({ carouselImages: images.concat([{ key: img.id, url: img.url }]) });
-    }
-
-    renderSelectedCarouselImages() {
-        const { attributes: { carouselImages } } = this.props;
-
-        return carouselImages.map((image, index) => {
-                return (
-                    <div key={image['key']} className="carousel-image-edit">
-                        <div className="carousel-image-edit__nav">
-                            <label>{(index + 1) + '.'}</label>
-                            <Tooltip text={ __('Remove Image') }>
-                                <Button
-                                    className={ 'components-button components-icon-button gb-hero__remove-img gb-hero__cta-upload-btn' }
-                                    onClick={ () => this.onRemoveImage(image['key']) }
-                                >
-                                    <Dashicon icon="no-alt" />
-                                </Button>
-                            </Tooltip>
-                        </div>
-                        <img src={image['url']} ></img>
-                    </div>
-                );
-        });
-    }
-
-    renderPanelCarouselImages() {
-        return (
-            <PanelBody
-                title={ __('Carousel Images') }
-                initialOpen={ false }
-                className={'gb-hero__panel-body'}
-            >
-                <p>{ __('Image') }</p>
-                <MediaUpload
-                    onSelect={ (img) => this.onSelectImage(img) }
-                    type="image"
-                    render={ ({ open }) => (
-                        <Button
-                            className={ 'components-button components-icon-button gb-hero__cta-upload-btn' }
-                            onClick={ open }
-                        >
-                            <Dashicon icon="format-image" />
-                            { __('Select Image') }
-                        </Button>
-                    ) }
-                />
-                {this.renderSelectedCarouselImages()}
-
-                {super.renderBackgroundImageSize()}
-            </PanelBody>
-        );
-    }
-
     renderPanelBodySizing() {
         return null;
     }
 
-    renderInspectorControls() {
-        this.setHeroBackground();
-
+    render() {
+        const { attributes: { numberOfSlides }, setAttributes } = this.props;
+        
         return (
             <Fragment>
-                {super.renderInspectorControls(true)}
-                {this.renderPanelCarouselImages()}
-            </Fragment>
-        );
-    }
+                <InspectorControls>
+                    <TextControl
+                        type="number"
+                        label={__('Number of Slides')}
+                        value={numberOfSlides}
+                        min={1}
+                        onChange={value => setAttributes({ numberOfSlides: value })}
+                    />
+                </InspectorControls>
 
-    renderHeroAfter() {
-        return (
-            <Fragment>
-                { super.renderHeroAfter() }
-                { super.renderJumbotronScrollComponent() }
+                <div>
+                    <InnerBlocks
+                        template={getColumnsTemplate(numberOfSlides)}
+                        templateLock="all"
+                        allowedBlocks={ALLOWED_BLOCKS}
+                    />
+                </div>
             </Fragment>
         );
     }

@@ -25,6 +25,10 @@ const attributes = {
     uniqueId: {
         type: 'string',
         default: null,
+    },
+    numberOfSlides: {
+        type: 'number',
+        default: 2,
     }
 };
 

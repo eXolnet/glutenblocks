@@ -1,5 +1,7 @@
 import Jumbotron from '../jumbotron/save';
 import classnames from 'classnames';
+import { InnerBlocks } from '@wordpress/block-editor';
+import { Fragment } from '@wordpress/element';
 
 class GlutenblocksJumbotronCarouselSave extends Jumbotron {
 
@@ -18,9 +20,9 @@ class GlutenblocksJumbotronCarouselSave extends Jumbotron {
     }
 
     createCarouselActivators = () => {
-        const { attributes: { carouselImages } } = this.props;
+        const { attributes: { numberOfSlides } } = this.props;
         const elements = [];
-        for (let i = 0; i < carouselImages.length; i++) {
+        for (let i = 0; i < numberOfSlides; i++) {
             const id = this.getUniqueId() + (i + 1);
             elements.push(<input className="gb-carousel__activator" type="radio" name="carousel" id={id} checked={i === 0} />);
         }
@@ -28,11 +30,11 @@ class GlutenblocksJumbotronCarouselSave extends Jumbotron {
     }
 
     createCarouselControls = () => {
-        const { attributes: { carouselImages } } = this.props;
+        const { attributes: { numberOfSlides } } = this.props;
         const elements = [];
-        for (let i = 0; i < carouselImages.length; i++) {
-            const forwardId =  (i + 2 > carouselImages.length) ? (this.getUniqueId() + '1') : this.getUniqueId() + (i + 2);
-            const reverseId = (i < 1) ? this.getUniqueId() + carouselImages.length : this.getUniqueId() + i;
+        for (let i = 0; i < numberOfSlides; i++) {
+            const forwardId =  (i + 2 > numberOfSlides) ? (this.getUniqueId() + '1') : this.getUniqueId() + (i + 2);
+            const reverseId = (i < 1) ? this.getUniqueId() + 2 : this.getUniqueId() + i;
             elements.push(
                 <div className="gb-carousel__controls">
                     <label className="gb-carousel__control gb-carousel__control--backward" htmlFor={reverseId}></label>
@@ -44,18 +46,20 @@ class GlutenblocksJumbotronCarouselSave extends Jumbotron {
     }
 
     createCarouselContent = () => {
-        const { attributes: { carouselImages, bgImgSize } } = this.props;
-        const elements = [];
-        for (let i = 0; i < carouselImages.length; i++) {
-            elements.push(<li className="gb-carousel__slide" style={'background-image: url(\'' + carouselImages[i].url + '\'); background-size: ' + bgImgSize + ';'}></li>);
-        }
-        return elements;
+        return (
+            <Fragment>
+                <div className="gb-height-calculator">
+                    <InnerBlocks.Content/>;
+                </div>
+                <InnerBlocks.Content/>;
+            </Fragment>
+        );
     }
 
     createCarouselIndicators = () => {
-        const { attributes: { carouselImages } } = this.props;
+        const { attributes: { numberOfSlides } } = this.props;
         const elements = [];
-        for (let i = 0; i < carouselImages.length; i++) {
+        for (let i = 0; i < numberOfSlides; i++) {
             elements.push(<label className="gb-carousel__indicator" htmlFor={this.getUniqueId() + (i + 1)}></label>);
         }
         return elements;
@@ -63,10 +67,8 @@ class GlutenblocksJumbotronCarouselSave extends Jumbotron {
 
 
     renderHeroAfter() {
-        const { className } = this.props;
-
         return (
-            <div className={className}>
+            <Fragment>
                 
                 <div className="gb-carousel">
                     {super.renderHeroBackgroundOverlay()}
@@ -91,7 +93,7 @@ class GlutenblocksJumbotronCarouselSave extends Jumbotron {
                 </div>
 
                 { super.renderJumbotronScrollComponent() }
-            </div>
+            </Fragment>
         );
     }
 }
