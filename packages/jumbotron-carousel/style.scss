@@ -24,6 +24,7 @@
     */
     .gb-carousel {
         width: 100%;
+        position: relative;
 
         &__container {
             overflow: auto;
@@ -94,12 +95,12 @@
             }
 
             &--backward {
-                left: 40px;
+                left: 15px;
                 transform: rotate(-135deg);
             }
 
             &--forward {
-                right: 40px;
+                right: 15px;
                 transform: rotate(45deg);
             }
         }
@@ -109,7 +110,7 @@
         */
         &__indicators {
             position: absolute;
-            bottom: 40px;
+            bottom: 10px;
             width: 100%;
             text-align: center;
             z-index: 3;
