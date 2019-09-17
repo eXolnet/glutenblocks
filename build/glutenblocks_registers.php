@@ -216,6 +216,17 @@ function glutenblocks_glutenblocks_register_block_glutenblocks_jumbotron_carouse
 }
 add_action( 'init', 'glutenblocks_glutenblocks_register_block_glutenblocks_jumbotron_carousel' );
 
+function glutenblocks_add_jumbotron_carousel_frontend_assets() {
+    if (has_block('glutenblocks/jumbotron-carousel')) {
+        wp_enqueue_script(
+            'glutenblocks-jumbotron-carousel',
+            plugins_url() . '/glutenblocks/packages/jumbotron-carousel/carouselTimer.js'
+        );
+    }
+}
+
+add_action('wp_enqueue_scripts', 'glutenblocks_add_jumbotron_carousel_frontend_assets');
+
 
 /**
  * Server-side rendering of the `glutenblocks/jumbotron` block.

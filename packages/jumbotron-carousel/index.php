@@ -18,3 +18,14 @@ function register_block_glutenblocks_jumbotron_carousel() {
     );
 }
 add_action( 'init', 'register_block_glutenblocks_jumbotron_carousel' );
+
+function add_jumbotron_carousel_frontend_assets() {
+    if (has_block('glutenblocks/jumbotron-carousel')) {
+        wp_enqueue_script(
+            'glutenblocks-jumbotron-carousel',
+            plugins_url() . '/glutenblocks/packages/jumbotron-carousel/carouselTimer.js'
+        );
+    }
+}
+
+add_action('wp_enqueue_scripts', 'add_jumbotron_carousel_frontend_assets');

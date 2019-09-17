@@ -66,10 +66,10 @@ class GlutenblocksJumbotronCarouselSave extends Jumbotron {
     }
 
 
-    renderHeroAfter() {
+    render() {
+        const { className } = this.props;
         return (
-            <Fragment>
-                
+            <div className={className}>
                 <div className="gb-carousel">
                     {super.renderHeroBackgroundOverlay()}
                     <div className="gb-carousel__container">
@@ -93,7 +93,7 @@ class GlutenblocksJumbotronCarouselSave extends Jumbotron {
                 </div>
 
                 { super.renderJumbotronScrollComponent() }
-            </Fragment>
+            </div>
         );
     }
 }
