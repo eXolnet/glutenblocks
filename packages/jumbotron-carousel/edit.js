@@ -52,13 +52,13 @@ class JumbotronCarouselEdit extends Jumbotron {
                         label={__('Number of Slides')}
                         value={numberOfSlides}
                         min={1}
-                        onChange={value => setAttributes({ numberOfSlides: value })}
+                        onChange={value => setAttributes({ numberOfSlides: parseInt(value) })}
                     />
                     <TextControl
                         type="number"
                         label={__('Delay for Autoplay (s)')}
                         value={autoplayDelay}
-                        onChange={value => setAttributes({ autoplayDelay: value })}
+                        onChange={value => setAttributes({ autoplayDelay: parseInt(value) })}
                     />
                     Note: Input 0 or less to remove autoplay
                 </InspectorControls>
