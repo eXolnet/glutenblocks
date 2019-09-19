@@ -1,6 +1,6 @@
 import Jumbotron from '../jumbotron/edit';
 import classnames from 'classnames';
-import { getColumnsTemplate } from './utils';
+import { getCarouselBlockTemplate } from './utils';
 
 import { __ } from '@wordpress/i18n';
 import { Fragment } from '@wordpress/element';
@@ -42,7 +42,7 @@ class JumbotronCarouselEdit extends Jumbotron {
     }
 
     render() {
-        const { attributes: { numberOfSlides }, setAttributes } = this.props;
+        const { attributes: { numberOfSlides, autoplayDelay }, setAttributes } = this.props;
         
         return (
             <Fragment>
@@ -54,11 +54,18 @@ class JumbotronCarouselEdit extends Jumbotron {
                         min={1}
                         onChange={value => setAttributes({ numberOfSlides: value })}
                     />
+                    <TextControl
+                        type="number"
+                        label={__('Delay for Autoplay (s)')}
+                        value={autoplayDelay}
+                        onChange={value => setAttributes({ autoplayDelay: value })}
+                    />
+                    Note: Input 0 or less to remove autoplay
                 </InspectorControls>
 
                 <div>
                     <InnerBlocks
-                        template={getColumnsTemplate(numberOfSlides)}
+                        template={getCarouselBlockTemplate(numberOfSlides)}
                         templateLock="all"
                         allowedBlocks={ALLOWED_BLOCKS}
                     />

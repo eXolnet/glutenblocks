@@ -1,6 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
     const checkboxes = document.querySelectorAll('.gb-carousel__activator');
-    callTimer();
+    const autoplayDelay = document.getElementById('autoplay-value').value * 1000;
+    if (autoplayDelay && autoplayDelay > 0) {
+        callTimer();
+    }
 
     document.querySelectorAll('.gb-carousel__manual-next').forEach(element => {
         element.addEventListener('click', (event) => {
@@ -20,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(_=>{
             checkboxes[getNextArrayId()].checked = true;
             callTimer();
-        }, 5000);
+        }, autoplayDelay);
     }
 
     function getCurrentArrayId() {
