@@ -34,7 +34,7 @@ class GlutenblocksJumbotronCarouselSave extends Jumbotron {
         const elements = [];
         for (let i = 0; i < numberOfSlides; i++) {
             const forwardId =  (i + 2 > numberOfSlides) ? (this.getUniqueId() + '1') : this.getUniqueId() + (i + 2);
-            const reverseId = (i < 1) ? this.getUniqueId() + 2 : this.getUniqueId() + i;
+            const reverseId = (i < 1) ? this.getUniqueId() + numberOfSlides : this.getUniqueId() + i;
             elements.push(
                 <div className="gb-carousel__controls">
                     <label className="gb-carousel__control gb-carousel__control--backward" htmlFor={reverseId}></label>
@@ -49,9 +49,9 @@ class GlutenblocksJumbotronCarouselSave extends Jumbotron {
         return (
             <Fragment>
                 <div className="gb-height-calculator">
-                    <InnerBlocks.Content/>;
+                    <InnerBlocks.Content/>
                 </div>
-                <InnerBlocks.Content/>;
+                <InnerBlocks.Content/>
             </Fragment>
         );
     }
@@ -67,9 +67,10 @@ class GlutenblocksJumbotronCarouselSave extends Jumbotron {
 
 
     render() {
-        const { className } = this.props;
+        const { attributes: { autoplayDelay }, className } = this.props;
         return (
             <div className={className}>
+                <input id="autoplay-value" type="hidden" value={autoplayDelay}></input>
                 <div className="gb-carousel">
                     {super.renderHeroBackgroundOverlay()}
                     <div className="gb-carousel__container">

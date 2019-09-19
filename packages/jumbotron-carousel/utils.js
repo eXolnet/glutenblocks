@@ -13,6 +13,6 @@ import times from 'lodash/times';
  * @return {Object[]} Columns layout configuration.
  */
 
-export const getColumnsTemplate = memoize((columns) => {
-    return times(columns, () => ['glutenblocks/carousel-block']);
+export const getCarouselBlockTemplate = memoize((blocks) => {
+    return times(blocks, () => ['glutenblocks/carousel-block']);
 });
