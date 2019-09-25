@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }
 
-        return null;
+        return -1;
     }
 
     function getNextArrayId() {
