@@ -4,6 +4,7 @@
 import edit from './edit';
 import save from './save';
 import attributes from './attributes';
+import deprecated from './deprecated';
 
 /**
  * WordPress dependencies
@@ -17,7 +18,8 @@ export const settings = {
     description: __('Glutenblocks collapse component'),
     icon: 'slides',
     category: 'glutenblocks',
-    attributes: attributes,
+    attributes,
+    deprecated,
     edit,
     save,
 };

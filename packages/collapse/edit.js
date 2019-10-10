@@ -1,22 +1,16 @@
 import PropTypes from 'prop-types';
 
 import { Component, Fragment } from '@wordpress/element';
-import { InnerBlocks, PlainText } from '@wordpress/block-editor';
+import { InnerBlocks, PlainText  } from '@wordpress/block-editor';
+import { InspectorControls } from '@wordpress/block-editor';
+import { __ } from '@wordpress/i18n';
+import { TextControl } from '@wordpress/components';
 
 const TEMPLATE = [
     ['core/paragraph'],
 ];
 
 class GlutenblocksCollapseEdit extends Component {
-
-    componentDidMount() {
-        const { attributes: { uniqueId }, setAttributes } = this.props;
-        if (!uniqueId) {
-            const uniqueNumber = '' + new Date().getTime() + Math.random();
-            setAttributes({ uniqueId: uniqueNumber });
-        }
-    }
-    
     render() {
         const { attributes: { title }, className, setAttributes } = this.props;
 
@@ -25,9 +19,7 @@ class GlutenblocksCollapseEdit extends Component {
                 <PlainText
                     className={ className }
                     value={ title }
-                    onChange={value => {
-                        setAttributes({ title: value });
-                    }}
+                    onChange={ title => setAttributes({ title }) }
                     placeholder="add collapse title..."
                 />
 

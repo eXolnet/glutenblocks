@@ -1,14 +1,9 @@
 /**
  * BLOCK: Glutenblock Collapse Attributes
  */
-const attributes = {
+export default {
     title: {
         type: 'string',
         default: '',
-    },
-    uniqueId : {
-        type: 'string',
-        default: null,
     }
 };
-export default attributes;
