@@ -1,10 +1,7 @@
 import PropTypes from 'prop-types';
 
 import { Component, Fragment } from '@wordpress/element';
-import { InnerBlocks, PlainText  } from '@wordpress/block-editor';
-import { InspectorControls } from '@wordpress/block-editor';
-import { __ } from '@wordpress/i18n';
-import { TextControl } from '@wordpress/components';
+import { InnerBlocks, PlainText } from '@wordpress/block-editor';
 
 const TEMPLATE = [
     ['core/paragraph'],
