@@ -46,13 +46,7 @@ function glutenblocks_pre_init()
 }
 
 function gb_get_post_types() {
-    $args = array(
-        'public'   => true,
-        '_builtin' => false
-     );
-     $output = 'names'; // 'names' or 'objects' (default: 'names')
-     $operator = 'and'; // 'and' or 'or' (default: 'and')
-     $post_types = get_post_types( $args, $output, $operator );
+     $post_types = get_post_types( ['glutenblock_rest' => true]);
      return array_keys($post_types);
 }
 
