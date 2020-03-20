@@ -6,6 +6,8 @@ import { __ } from '@wordpress/i18n';
 import { Component, Fragment } from '@wordpress/element';
 import { SelectControl, ToggleControl } from '@wordpress/components';
 
+const POST_ATTIBUTES_DEFAULT = [{ value: '', label: __('Select Attribute') }];
+const POST_FIELDS_DEFAULT = [{ value: '', label: __('Select Field') }];
 class LinkSelect extends Component {
     typeOptions = [
         { value: 'visit', label: __('Visit') },
@@ -13,7 +15,8 @@ class LinkSelect extends Component {
     ];
     mediaObjects = [];
     postFiles = [];
-    postAttibutes = [{ value: '', label: __('Select Post Attribute') }];
+    postAttibutes = POST_ATTIBUTES_DEFAULT;
+    postFields = POST_FIELDS_DEFAULT;
     loaded = false;
 
     type = 'custom';
@@ -21,6 +24,7 @@ class LinkSelect extends Component {
     noFollow;
     customPostType = '';
     customPostObjectID = '';
+    customPostField = 'file';
     customPostAttribute = '';
 
     constructor(props) {
@@ -64,6 +68,9 @@ class LinkSelect extends Component {
     getCustomPostObjects(postType) {
         const { onCustomPostTypeChange } = this.props;
 
+        this.postFields = POST_FIELDS_DEFAULT;
+        this.postAttibutes = POST_ATTIBUTES_DEFAULT;
+
         apiFetch({
             path: addQueryArgs(
                 '/glutenblocks/v1/gb_get_field_types/field=' + postType
@@ -76,38 +83,65 @@ class LinkSelect extends Component {
                 });
                 this.postFiles = options;
                 this.customPostType = postType;
+                console.log('this.customPostType', this.customPostType)
                 onCustomPostTypeChange(postType);
                 this.forceUpdate();
             })
             .catch(err => {
+                console.log('getCustomPostObjects error', err)
                 this.customPostType = '';
                 this.forceUpdate();
             });
     }
 
-    getCustomPostAttributes(postId) {
-        const { onCustomPostIdChange } = this.props;
+    getCustomPostFields(postId) {
+        this.postAttibutes = POST_ATTIBUTES_DEFAULT;
+
+        const { onCustomPostIdChange, onCustomPostFieldChange } = this.props;
         apiFetch({
             path: addQueryArgs(
                 '/glutenblocks/v1/gb_get_post_attributes/id=' + postId
             )
         })
             .then(objects => {
+                console.log('gb_get_post_attributes', this.customPostType, objects);
                 var options = [
-                    { value: '', label: __('Select Post Attribute') }
+                    { value: '', label: __('Select Field') }
                 ];
-                Object.keys(objects[this.customPostType]).forEach(key => {
+                Object.keys(objects).forEach(key => {
                     options.push({ value: key, label: __(key) });
                 });
-                this.postAttibutes = options;
+                console.log(options);
+                this.postFields= options;
+                this.postFieldsObject= objects;
                 this.customPostObjectID = postId;
                 onCustomPostIdChange(postId);
+                this.handleCustomPostFieldChange(null);
                 this.forceUpdate();
+
+
+                // var options = [
+                //     { value: '', label: __('Select Post Attribute') }
+                // ];
+
+                // Object.keys(objects[this.customPostType]).forEach(key => {
+                //     options.push({ value: key, label: __(key) });
+                // });
+                // console.log(options)
+                // this.postAttibutes = options;
+                // this.customPostObjectID = postId;
+                // onCustomPostIdChange(postId);
+                // this.forceUpdate();
             })
             .catch(err => {
+                console.log('getCustomPostFields error', err)
                 this.customPostObjectID = '';
                 this.forceUpdate();
             });
+    }
+
+    getCustomPostAttributes(postId) {
+
     }
 
     handleTypeChange(value) {
@@ -131,6 +165,33 @@ class LinkSelect extends Component {
 
         this.noFollow = value;
         onNoFollowChange(value);
+        this.forceUpdate();
+    }
+
+    handleCustomPostFieldChange(value) {
+        console.log(value, this.postFieldsObject, this.postFieldsObject[this.customPostType])
+        if(!value && this.postFieldsObject[this.customPostType]) {
+            value = this.customPostType;
+        }
+
+        this.customPostField = value;
+
+        console.log('handleCustomPostFieldChange', value);
+
+        var options = [
+            { value: '', label: __('Select Attribute') }
+        ];
+
+        if(Array.isArray(this.postFieldsObject[value])) {
+            Object.keys(this.postFieldsObject[value]).forEach(key => {
+                options.push({ value: key, label: __(key) });
+            });
+        } else if(this.postFieldsObject[value]) {
+            this.handleCustomAttributeChange(this.customPostField);
+        }
+
+        this.postAttibutes = options;
+
         this.forceUpdate();
     }
 
@@ -175,7 +236,7 @@ class LinkSelect extends Component {
                 this.getCustomPostObjects(this.customPostType);
             }
             if (this.customPostObjectID) {
-                this.getCustomPostAttributes(this.customPostObjectID);
+                this.getCustomPostFields(this.customPostObjectID);
             }
         }
 
@@ -222,14 +283,28 @@ class LinkSelect extends Component {
                                 value={this.customPostObjectID}
                                 options={this.postFiles}
                                 onChange={value =>
-                                    this.getCustomPostAttributes(value)
+                                    this.getCustomPostFields(value)
                                 }
                             />
                         )}
 
                         {this.type === 'custom' &&
-                            this.customPostType &&
-                            this.customPostObjectID && (
+                        this.customPostType &&
+                        this.customPostObjectID && (
+                            <SelectControl
+                                label={__('Field')}
+                                value={this.customPostField}
+                                options={this.postFields}
+                                onChange={value => {
+                                    this.handleCustomPostFieldChange(value);
+                                }}
+                            />
+                        )}
+
+                        {this.type === 'custom' &&
+                        this.customPostType &&
+                        this.customPostObjectID &&
+                        this.customPostField && (
                             <SelectControl
                                 label={__('Attribute')}
                                 value={this.customPostAttribute}
@@ -260,12 +335,14 @@ LinkSelect.propTypes = {
     noFollow: PropTypes.string,
     customPostType: PropTypes.string,
     customPostObjectID: PropTypes.string,
+    customPostField: PropTypes.string,
     customPostAttribute: PropTypes.string,
     onLinkTypeChange: PropTypes.func,
     onTargetChange: PropTypes.func,
     onNoFollowChange: PropTypes.func,
     onCustomPostTypeChange: PropTypes.func,
     onCustomPostIdChange: PropTypes.func,
+    onCustomPostFieldChange: PropTypes.func,
     onCustomPostAttributeChange: PropTypes.func
 };
 
