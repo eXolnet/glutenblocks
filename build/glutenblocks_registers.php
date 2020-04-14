@@ -279,9 +279,11 @@ function glutenblocks_glutenblocks_register_link_render_callback( $attributes, $
         $displayLink = '#';
     }
 
+    $text = str_replace(['&lt;', '&rt;'], ['<', '>'], $text);
+
     return <<<HTML
     <a href="{$displayLink}" target="{$target}" rel="{$relAttr}">
-        {$text}
+        <span class='gb-list-links__text'>{$text}</span>
         <span class='gb-list-links__action gb-list-links--{$type}'>{$actionText}</span>
     </a>  
 HTML;

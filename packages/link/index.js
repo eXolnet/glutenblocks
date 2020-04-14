@@ -20,6 +20,9 @@ export const settings = {
     icon: icons.link,
     category: 'glutenblocks',
     attributes: attributes,
+    supports: {
+        html: false,
+    },
     edit,
     save({ attributes, className }) {
         return null;
