@@ -1,3 +1,16 @@
 // Put your styles that will only be applied in the editor.
-// .wp-block-glutenblocks-collapse {
-// }
+.wp-block-glutenblocks-collapse {
+    border-bottom-left-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+    border: 1px solid #ccc !important;
+    font-weight: bold;
+    height: auto !important;
+    padding: 10px 15px !important;
+
+    + section {
+        border: 1px dashed #ccc;
+        border-top: 0;
+        margin-top: -8px;
+        padding: 5px 15px;
+    }
+}
