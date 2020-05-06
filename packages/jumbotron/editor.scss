@@ -2,7 +2,7 @@
     position: relative;
     height: auto;
 
-    > .editor-rich-text {
+    > .block-editor-rich-text__editable {
         position: absolute;
         bottom: 0;
         z-index: 100;
@@ -11,12 +11,12 @@
         display: inline-block;
     }
 
-    > .editor-inner-blocks > .editor-block-list__layout {
+    > .block-editor-inner-blocks > .block-editor-block-list__layout {
         .wp-block-glutenblocks-hero {
             padding-bottom: 15px;
         }
 
-        > div > .editor-default-block-appender {
+        > div > .block-editor-default-block-appender {
             display: none;
         }
     }

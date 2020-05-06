@@ -55,30 +55,15 @@
         grid-area: resizer;
     }
 
-    .editor-media-container__resizer {
+    .block-editor-media-container__resizer {
         grid-area: media-text-media;
         align-self: center;
         width: 100% !important;
     }
 
-    .is-image-fill .editor-media-container__resizer {
+    .is-image-fill .block-editor-media-container__resizer {
         // The resizer sets an inline height but for the image fill we set it to full height.
         height: 100% !important;
-    }
-
-    .editor-inner-blocks {
-        word-break: break-word;
-        grid-area: media-text-content;
-        text-align: initial;
-        padding: 0 8% 0 8%;
-    }
-
-    & > .editor-inner-blocks > .editor-block-list__layout > .editor-block-list__block {
-        max-width: unset;
-    }
-
-    & > .block-editor-inner-blocks > .block-editor-block-list__layout > .block-editor-block-list__block {
-        max-width: unset;
     }
 
     .block-editor-inner-blocks {
@@ -86,6 +71,10 @@
         grid-area: media-text-content;
         text-align: initial;
         padding: 0 8% 0 8%;
+    }
+
+    & > .block-editor-inner-blocks > .block-editor-block-list__layout > .block-editor-block-list__block {
+        max-width: unset;
     }
 
     .block-library-media-text__media-container video {
