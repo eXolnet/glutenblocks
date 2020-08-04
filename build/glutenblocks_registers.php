@@ -42,11 +42,22 @@ function glutenblocks_glutenblocks_button_render_callback( $attributes, $content
     $iconSide = $attributes['iconSide'] ?? '';
 
 
+    $gated_download = false;
+    $gated_download_data = [];
     if($type == 'custom' && isset($attributes['customPostObjectID']) && isset($attributes['customPostType']) && isset($attributes['customPostAttribute']) ){
         $post_id = $attributes['customPostObjectID'];
         $post_type = $attributes['customPostType'];
         $post_attribute = $attributes['customPostAttribute'];
-        $custom_file_url = get_fields($post_id)[$post_type][$post_attribute];
+
+
+        $custom_fields = get_fields($post_id);
+        $custom_field = $custom_fields[$post_type];
+        $custom_field_attribute = $custom_field[$post_attribute];
+
+        $gated_download = $custom_fields['gated_download'] ?? false;
+        $gated_download_data = [
+            'fileId' => $post_id,
+        ];
     }
 
     $relAttr = 'noopener noreferrer';
@@ -55,8 +66,8 @@ function glutenblocks_glutenblocks_button_render_callback( $attributes, $content
         $relAttr = $relAttr . ' nofollow';
     }
 
-    if(isset($attributes['link']) || isset($custom_file_url)){
-        $displayLink = ($type == 'custom' ? $custom_file_url : $attributes['link'] );
+    if(isset($attributes['link']) || isset($custom_field_attribute)){
+        $displayLink = ($type == 'custom' ? $custom_field_attribute : $attributes['link'] );
     }else{
         $displayLink = '#';
     }
@@ -86,9 +97,15 @@ function glutenblocks_glutenblocks_button_render_callback( $attributes, $content
         $classString .= ' ' . $attributes['className'];
     }
 
+    $linkTag = '<a href="' . $displayLink . '" target="' . $target . '" rel="' . $relAttr . '" class="' . $classString .'">';
+
+    if ($gated_download) {
+        $linkTag = "<a href='#' v-gated-download='" . json_encode($gated_download_data) . "' class='" . $classString ."'>";
+    }
+
     return <<<HTML
     <div class='wp-block-glutenblocks-button gb-button-wrapper {$alignClass}'>
-                <a href="{$displayLink}" target="{$target}" rel="{$relAttr}" class="{$classString}">
+                {$linkTag}
                     {$text}
                 </a>
             </div>
@@ -260,11 +277,21 @@ function glutenblocks_glutenblocks_register_link_render_callback( $attributes, $
     $target = isset($attributes['target']) ? $attributes['target'] : null;
     $actionText = isset($attributes['actionText']) ? $attributes['actionText'] : '';
 
+    $gated_download = false;
+    $gated_download_data = [];
     if($type == 'custom' && isset($attributes['customPostObjectID']) && isset($attributes['customPostType']) && isset($attributes['customPostAttribute']) ){
         $post_id = $attributes['customPostObjectID'];
         $post_type = $attributes['customPostType'];
         $post_attribute = $attributes['customPostAttribute'];
-        $custom_file_url = get_fields($post_id)[$post_type][$post_attribute];
+
+        $custom_fields = get_fields($post_id);
+        $custom_field = $custom_fields[$post_type];
+        $custom_field_attribute = $custom_field[$post_attribute];
+
+        $gated_download = $custom_fields['gated_download'] ?? false;
+        $gated_download_data = [
+            'fileId' => $post_id,
+        ];
     }
 
     $relAttr = 'noopener noreferrer';
@@ -273,19 +300,25 @@ function glutenblocks_glutenblocks_register_link_render_callback( $attributes, $
         $relAttr = $relAttr . ' nofollow';
     }
 
-    if(isset($attributes['link']) || isset($custom_file_url)){
-        $displayLink = ($type == 'custom' ? $custom_file_url : $attributes['link'] );
+    if(isset($attributes['link']) || isset($custom_field_attribute)){
+        $displayLink = ($type == 'custom' ? $custom_field_attribute : $attributes['link'] );
     }else{
         $displayLink = '#';
     }
 
     $text = str_replace(['&lt;', '&rt;'], ['<', '>'], $text);
 
+    $linkTag = '<a href="' . $displayLink . '" target="' . $target . '" rel="' . $relAttr . '">';
+
+    if ($gated_download) {
+        $linkTag = "<a href='#' v-gated-download='" . json_encode($gated_download_data) . "'>";
+    }
+
     return <<<HTML
-    <a href="{$displayLink}" target="{$target}" rel="{$relAttr}">
+    {$linkTag}
         <span class='gb-list-links__text'>{$text}</span>
         <span class='gb-list-links__action gb-list-links--{$type}'>{$actionText}</span>
-    </a>  
+    </a>
 HTML;
 }
 
