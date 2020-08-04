@@ -45,7 +45,7 @@
         "eslint-plugin-jest": "^22.15.1",
         "jest": "^24.8.0",
         "laravel-mix": "^4.0.15",
-        "lodash": "^4.17.15",
+        "lodash": "^4.17.19",
         "memize": "^1.0.5",
         "node-sass": "^4.11.0",
         "path": "^0.12.7",
