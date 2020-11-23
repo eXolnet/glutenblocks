@@ -72,21 +72,25 @@ add_action( 'rest_api_init', function () {
     register_rest_route( 'glutenblocks/v1', '/wp_get_post_types', array(
       'methods' => 'GET',
       'callback' => 'gb_get_post_types',
+      'permission_callback' => '__return_true',
     ) );
 
     register_rest_route( 'glutenblocks/v1', '/gb_get_field_types/field=(?P<field>[a-zA-Z0-9-]+)', array(
         'methods' => 'GET',
         'callback' => 'gb_get_field_types',
+        'permission_callback' => '__return_true',
     ) );
 
     register_rest_route( 'glutenblocks/v1', '/gb_get_post_attributes/id=(?P<id>[a-zA-Z0-9-]+)', array(
         'methods' => 'GET',
         'callback' => 'gb_get_post_attributes',
+        'permission_callback' => '__return_true',
     ) );
 
     register_rest_route( 'glutenblocks/v1', '/gb_is_acf_plugin_active', array(
         'methods' => 'GET',
         'callback' => 'gb_is_acf_plugin_active',
+        'permission_callback' => '__return_true',
     ) );
 });
 
