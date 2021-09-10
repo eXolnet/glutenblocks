@@ -30,7 +30,7 @@
         "@babel/preset-env": "^7.4.2",
         "@babel/preset-react": "^7.0.0",
         "@exolnet/eslint-config-react": "^1.0.6",
-        "@exolnet/stylelint-config": "^1.0.2",
+        "@exolnet/stylelint-config": "^2.0.0",
         "@fonticonpicker/react-fonticonpicker": "^1.2.0",
         "@wordpress/jest-preset-default": "^4.3.0",
         "autoprefixer": "~8.2.0",
