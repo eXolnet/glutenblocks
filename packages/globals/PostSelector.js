@@ -180,7 +180,7 @@ class PostSelector extends Component {
             let reachOutToApi = false;
             const returnData = {};
             for (const prop of this.props.data) {
-                if (!post.hasOwnProperty(prop)) {
+                if (! Object.prototype.hasOwnProperty.call(post, prop)) {
                     reachOutToApi = true;
                     return;
                 }
@@ -348,7 +348,6 @@ class PostSelector extends Component {
         const inputDisabled = !!limit && this.props.posts.length >= limit;
         this.resolvePostTypes(sourcePostTypes);
 
-        /* eslint-disable jsx-a11y/no-autofocus */
         return (
             <Fragment>
                 {this.renderSelectedPosts()}
@@ -405,7 +404,6 @@ class PostSelector extends Component {
                 )}
             </Fragment>
         );
-    /* eslint-enable jsx-a11y/no-autofocus */
     }
 }
 
