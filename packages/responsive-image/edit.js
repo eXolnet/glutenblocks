@@ -236,7 +236,7 @@ class GlutenblocksResponsiveImageEdit extends Component {
                 <div className={className}>
                     {['mobile', 'tablet', 'desktop'].map(size =>
                         // eslint-disable-next-line react/jsx-key
-                        <div className={`gb-responsive-image gb-responsive-image--${size}`}>
+                        <div key={size} className={`gb-responsive-image gb-responsive-image--${size}`}>
                             {display(size, attributes[size])}
                         </div>
                     )}

@@ -9,20 +9,33 @@ import { shallow } from 'enzyme';
  */
 import '../../../tests/matchMedia.mock';
 import GlutenblocksResponsiveImageEdit from '../edit';
+import radiusUnit from '../radiusUnit';
 
 const attributes = {
-    desktopImgURL: '',
-    desktopImgAlt: '',
-    desktopImgWidth: 0,
-    desktopImgHeight: 0,
-    tabletImgURL: '',
-    tabletImgAlt: '',
-    tabletImgWidth: 0,
-    tabletImgHeight: 0,
-    mobileImgURL: '',
-    mobileImgAlt: '',
-    mobileImgWidth: 0,
-    mobileImgHeight: 0
+    desktop: {
+        url: '',
+        alt: '',
+        width: 0,
+        height: 0,
+        radius: 0,
+        radiusUnit: 'px'
+    },
+    tablet: {
+        url: '',
+        alt: '',
+        width: 0,
+        height: 0,
+        radius: 0,
+        radiusUnit: 'px'
+    },
+    mobile: {
+        url: '',
+        alt: '',
+        width: 0,
+        height: 0,
+        radius: 0,
+        radiusUnit: 'px'
+    },
 };
 
 const setAttributes = jest.fn(() => {});

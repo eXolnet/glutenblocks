@@ -34,8 +34,8 @@ jobs:
         run: |
           composer update --no-interaction --prefer-dist -vvv
 
-      #- name: Execute tests
-      #  run: yarn test
+      - name: Execute tests
+        run: yarn test
 
       - name: Execute lint
         run: |
