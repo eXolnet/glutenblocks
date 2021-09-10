@@ -33,7 +33,7 @@
         "@exolnet/stylelint-config": "^2.0.0",
         "@fonticonpicker/react-fonticonpicker": "^1.2.0",
         "@wordpress/jest-preset-default": "^4.3.0",
-        "autoprefixer": "~8.2.0",
+        "autoprefixer": "^10.3.4",
         "babel-jest": "^24.8.0",
         "babel-plugin-lodash": "^3.3.4",
         "cache-loader": "^2.0.1",
