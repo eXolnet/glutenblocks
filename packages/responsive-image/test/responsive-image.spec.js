@@ -2,7 +2,7 @@
  * External dependencies
  */
 import TestRenderer from 'react-test-renderer';
-import {shallow} from 'enzyme';
+import { shallow } from 'enzyme';
 
 /**
  * Internal dependencies
@@ -59,7 +59,7 @@ describe('responsive-image', () => {
             const instance = testRenderer.getInstance();
 
             instance.onTabSelect('mobile');
-            expect(setAttributes).toHaveBeenCalledWith({currentTab: 'mobile'});
+            expect(setAttributes).toHaveBeenCalledWith({ currentTab: 'mobile' });
         });
     });
 });
