@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-const { apiFetch } = wp;
+import { apiFetch } from '@wordpress/data-controls';
 import { addQueryArgs } from '@wordpress/url';
 import { __ } from '@wordpress/i18n';
 
@@ -257,7 +257,7 @@ LinkSelect.propTypes = {
     attributes: PropTypes.object,
     type: PropTypes.string,
     target: PropTypes.string,
-    noFollow: PropTypes.string,
+    noFollow: PropTypes.bool,
     customPostType: PropTypes.string,
     customPostObjectID: PropTypes.string,
     customPostAttribute: PropTypes.string,

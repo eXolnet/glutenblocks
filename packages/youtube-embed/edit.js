@@ -221,7 +221,7 @@ GlutenblocksYoutubeEmbedEdit.propTypes = {
     className: PropTypes.string,
     attributes: PropTypes.object,
     setAttributes: PropTypes.func,
-    instanceId: PropTypes.string
+    instanceId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
 
 export default (
