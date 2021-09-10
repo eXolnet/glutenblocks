@@ -10,3 +10,4 @@ vendor
 mix-manifest.json
 yarn-error.log
 /wordpress
+/coverage

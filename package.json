@@ -18,7 +18,8 @@
         "lint": "npm run -s lint:scripts && npm run -s lint:styles",
         "lint:scripts": "eslint packages/",
         "lint:styles": "stylelint \"packages/**/*.{css,sass,scss,sss,less}\"",
-        "test": "jest"
+        "test": "jest",
+        "test:coverage": "jest --coverage --coverageDirectory coverage/js --collectCoverageFrom 'packages/**/*.js'"
     },
     "devDependencies": {
         "@babel/core": "^7.0.0",
