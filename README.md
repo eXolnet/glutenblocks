@@ -34,23 +34,17 @@ docker-compose down
 
 ## Testing
 
+### Component Tests
+To run your components tests, please use:
+``` bash
+yarn test
+```
+
 ### Lint
 To run linter tests (project guidelines), please use: 
 ``` bash
 yarn lint
 composer lint
-```
-### Unit Tests
-To run the phpUnit tests, please use:
-
-``` bash
-composer test
-```
-
-### Component Tests
-To run your components tests, please use:
-``` bash
-yarn test
 ```
 
 ## Contributing
