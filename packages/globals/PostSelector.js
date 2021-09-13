@@ -391,7 +391,7 @@ class PostSelector extends Component {
 
                                         {
                                             /* render the post type if we have the data to support it */
-                                            this.hasPostTypeData() && <div style={subtypeStyle}>{this.getPostTypeData(post.subtype).displayName}</div>
+                                            this.hasPostTypeData() && this.getPostTypeData(post.subtype) && <div style={subtypeStyle}>{this.getPostTypeData(post.subtype).displayName}</div>
                                         }
 
                                         <div>{decodeEntities(post.title) || '(no title)'}</div>
