@@ -41,9 +41,9 @@ function glutenblocks_glutenblocks_button_render_callback( $attributes, $content
     $icon = $attributes['icon'] ?? '';
     $iconSide = $attributes['iconSide'] ?? '';
 
-
     $gated_download = false;
     $gated_download_data = [];
+
     if($type == 'custom' && isset($attributes['customPostObjectID']) && isset($attributes['customPostType']) && isset($attributes['customPostAttribute']) ){
         $post_id = $attributes['customPostObjectID'];
         $post_type = $attributes['customPostType'];
@@ -279,6 +279,7 @@ function glutenblocks_glutenblocks_register_link_render_callback( $attributes, $
 
     $gated_download = false;
     $gated_download_data = [];
+
     if($type == 'custom' && isset($attributes['customPostObjectID']) && isset($attributes['customPostType']) && isset($attributes['customPostAttribute']) ){
         $post_id = $attributes['customPostObjectID'];
         $post_type = $attributes['customPostType'];
