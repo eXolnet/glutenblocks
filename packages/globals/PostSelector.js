@@ -6,7 +6,7 @@ import { UP, DOWN, ENTER } from '@wordpress/keycodes';
 import  { Spinner, Popover, IconButton } from '@wordpress/components';
 import { withInstanceId } from '@wordpress/compose';
 import { withSelect } from '@wordpress/data';
-import { apiFetch } from '@wordpress/data-controls';
+import apiFetch from '@wordpress/api-fetch';
 import { addQueryArgs } from '@wordpress/url';
 
 const stopEventPropagation = event => event.stopPropagation();

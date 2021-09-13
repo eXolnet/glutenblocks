@@ -55,6 +55,7 @@ function glutenblocks_enqueue_block_editor_assets()
             'wp-editor',
             'wp-element',
             'wp-i18n',
+            'wp-api-fetch',
         ],
         filemtime(plugin_dir_path(__FILE__) . $script)
     );
