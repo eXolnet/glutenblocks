@@ -24,7 +24,7 @@
     "scripts": {
         "lint": "vendor/bin/phpcs -p --standard=PSR2 --extensions=php packages/",
         "lint-fix": "vendor/bin/phpcbf -p --standard=PSR2 --extensions=php packages/",
-        "build-plugin-assets" : "yarn install && yarn production",
+        "build-plugin-assets" : "yarn install --pure-lockfile && yarn production",
         "post-update-cmd": [
             "composer run-script build-plugin-assets"
         ],
