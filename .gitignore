@@ -11,3 +11,12 @@ mix-manifest.json
 yarn-error.log
 /wordpress
 /coverage
+
+# Yarn
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions

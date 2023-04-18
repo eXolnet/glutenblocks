@@ -30,6 +30,11 @@ jobs:
           extensions: json, dom, curl, libxml, mbstring
           coverage: none
 
+      - name: Setup Yarn
+        run: |
+          corepack enable yarn
+          corepack prepare yarn@stable --activate
+
       - name: Install dependencies
         run: |
           composer update --no-interaction --prefer-dist -vvv
