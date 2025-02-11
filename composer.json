@@ -19,7 +19,7 @@
         "php": "^8.1"
     },
     "require-dev": {
-        "squizlabs/php_codesniffer": "^3.6.0"
+        "squizlabs/php_codesniffer": "^3.11.3"
     },
     "scripts": {
         "lint": "vendor/bin/phpcs -p --standard=PSR2 --extensions=php packages/",
