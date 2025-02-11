@@ -3,7 +3,7 @@
  * Plugin Name: Glutenblocks
  * Plugin URI: https://github.com/eXolnet/glutenblocks
  * Description: Collection of Wordpress blocks for the Gutenberg editor.
- * Version: 1.0.0
+ * Version: 1.3.0
  * Author: eXolnet
  * Text Domain: glutenblocks
  *
