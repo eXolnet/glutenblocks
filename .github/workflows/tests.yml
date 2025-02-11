@@ -9,19 +9,13 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        php: [8.0, 8.1, 8.2]
+        php: [8.1, 8.2, 8.3]
 
     name: P${{ matrix.php }}
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Cache dependencies
-        uses: actions/cache@v2
-        with:
-          path: ~/.composer/cache/files
-          key: dependencies-php-${{ matrix.php }}-composer-${{ hashFiles('composer.json') }}
+        uses: actions/checkout@v4
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
@@ -33,7 +27,7 @@ jobs:
       - name: Setup Yarn
         run: |
           corepack enable yarn
-          corepack prepare yarn@stable --activate
+          corepack prepare yarn@4.2.1 --activate
 
       - name: Install dependencies
         run: |
